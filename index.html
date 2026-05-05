@@ -206,6 +206,64 @@ body {
 .part-btn .title { font-size:15px; font-weight:700; margin-top:4px; }
 .part-btn .desc { font-size:11px; color:var(--text-light); margin-top:6px; line-height:1.4; }
 
+/* ======= Study Guide (Part 선택 화면 가이드) ======= */
+.study-guide {
+  display:flex;
+  align-items:flex-start;
+  gap:12px;
+  margin-top:20px;
+  padding:14px 16px;
+  background:linear-gradient(135deg, #fffbeb, #fef3c7);
+  border:1px solid #fcd34d;
+  border-radius:12px;
+  box-shadow:0 1px 3px rgba(245,158,11,0.1);
+}
+.study-guide .guide-icon {
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  flex-shrink:0;
+  width:36px; height:36px;
+  background:#f59e0b;
+  color:#fff;
+  border-radius:10px;
+  box-shadow:0 2px 6px rgba(245,158,11,0.3);
+}
+.study-guide .guide-body { flex:1; min-width:0; }
+.study-guide .guide-title {
+  font-size:12px;
+  font-weight:800;
+  color:#92400e;
+  letter-spacing:0.5px;
+  text-transform:uppercase;
+  margin-bottom:4px;
+}
+.study-guide .guide-body p {
+  font-size:14px;
+  color:#7c2d12;
+  line-height:1.6;
+  margin:0;
+}
+.study-guide .guide-body b {
+  color:#c2410c;
+  font-weight:800;
+}
+.study-guide .guide-pill {
+  display:inline-flex;
+  align-items:center;
+  gap:4px;
+  padding:2px 9px;
+  background:#fff;
+  border:1px solid #fcd34d;
+  border-radius:99px;
+  font-size:12px;
+  font-weight:700;
+  color:#92400e;
+  vertical-align:middle;
+  margin:0 1px;
+  white-space:nowrap;
+}
+
 /* ======= Section Title ======= */
 .section-title { font-size:13px; font-weight:700; color:var(--text-light); letter-spacing:1px; }
 .section-heading { font-size:18px; font-weight:800; margin-top:4px; }
@@ -585,6 +643,18 @@ body {
     <div class="section-title" id="part-lesson-label">LESSON</div>
     <div class="section-heading" id="part-lesson-title">제목</div>
     <p style="color:var(--text-light); font-size:13px; margin-top:6px;" id="part-lesson-desc"></p>
+
+    <!-- 학습 가이드 -->
+    <div class="study-guide">
+      <div class="guide-icon">
+        <svg viewBox="0 0 20 20" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 2v4M10 14v4M2 10h4M14 10h4M4.93 4.93l2.83 2.83M12.24 12.24l2.83 2.83M4.93 15.07l2.83-2.83M12.24 7.76l2.83-2.83"/></svg>
+      </div>
+      <div class="guide-body">
+        <div class="guide-title">학습 팁</div>
+        <p>막막할 땐 화면 안의 <span class="guide-pill"><svg viewBox="0 0 16 16" width="11" height="11" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="3,6 8,11 13,6"/></svg> 파생 과정 보기</span> 버튼을 <b>꼭 눌러보세요!</b><br>어원의 흐름을 따라가면 단어가 훨씬 쉽게 외워져요.</p>
+      </div>
+    </div>
+
     <div class="part-grid" style="margin-top:18px;">
       <button class="part-btn" onclick="startPart(1)">
         <div class="label">PART 01</div>
@@ -999,18 +1069,18 @@ const VOCA_DATA = {
       { sentence: "The new system is more ____ and saves a lot of time.", answer: "efficient", translation: "새로운 시스템은 더 효율적이고 많은 시간을 절약한다.", extraHint: "<b>effic</b> '밖으로 만들어내다' → 형용사형" },
       { sentence: "The success of the project is ____ on timely delivery.", answer: "dependent", translation: "프로젝트의 성공은 적시 배송에 달려 있다.", extraHint: "<b>depend</b> '의존하다' → 형용사형" },
       { sentence: "The material is designed to ____ extreme temperatures.", answer: "resist", translation: "이 소재는 극한의 온도에 견디도록 설계되었다." },
-      { sentence: "She values her ____ and enjoys making her own decisions.", answer: "independence", translation: "그녀는 자신의 독립성을 중요시하며 스스로 결정하는 것을 즐긴다." },
+      { sentence: "She values her ____ and enjoys making her own decisions.", answer: "independence", translation: "그녀는 자신의 독립성을 중요시하며 스스로 결정하는 것을 즐긴다.", extraHint: "<b>in</b> '부정' + <b>depend</b> '의존하다': 의존하지 않다, 독립적이다 → 명사형" },
       { sentence: "She worked hard to ____ in her studies and earned top grades.", answer: "excel", translation: "그녀는 학업에서 뛰어나기 위해 열심히 노력했고 최고 성적을 얻었다.", extraHint: "<b>e(x)</b> '밖으로 (out)' + '솟은, 나온' → 동사 = outstand" },
       { sentence: "There were 200 people ____ at the meeting.", answer: "present", translation: "회의에는 200명의 참석자가 있었다.", extraHint: "<b>pre</b> '앞에' + <b>esse (is)</b> '존재하다' → 형용사형" },
-      { sentence: "Her ____ in multiple languages made her highly competent.", answer: "proficiency", translation: "그녀의 다양한 언어 능숙함은 그녀를 매우 유능하게 만들었다." },
+      { sentence: "Her ____ in multiple languages made her highly competent.", answer: "proficiency", translation: "그녀의 다양한 언어 능숙함은 그녀를 매우 유능하게 만들었다.", extraHint: "<b>pro</b> + <b>fic/fac/fect</b> '앞으로 만들어나가는, 진보된, 숙련된' → 명사형" },
       { sentence: "Successful ____ for this job will receive notification within the week.", answer: "applicant", translation: "이 일자리에 합격한 지원자는 한 주 내로 통보받을 것이다.", extraHint: "<b>apply</b> '적용, 지원하다' + ~하는 주체 → 명사형" },
-      { sentence: "The invention would have a wide range of ____s in industry.", answer: "applications", translation: "그 발명품은 산업에서 광범위한 응용 분야를 갖게 될 것이다." },
-      { sentence: "____ at these lectures is not compulsory.", answer: "Attendance", translation: "이 강의의 출석은 의무가 아니다." },
+      { sentence: "The invention would have a wide range of ____s in industry.", answer: "application", translation: "그 발명품은 산업에서 광범위한 응용 분야를 갖게 될 것이다." },
+      { sentence: "____ at these lectures is not compulsory.", answer: "Attendance", translation: "이 강의의 출석은 의무가 아니다.", extraHint: "<b>attend</b> '~(물리적, 정신적으로) 향하다, 참석/출석하다' → 명사형" },
       { sentence: "I tried not to draw ____ to the weak points in my argument.", answer: "attention", translation: "나는 내 주장의 약점들에 주의가 쏠리지 않게 하려고 노력했다.", extraHint: "<b>attend</b> '~(물리적, 정신적으로) 향하다, 참석/출석하다' → 명사형" },
       { sentence: "Strict ____ of the rules is required at all times.", answer: "observance", translation: "규칙의 엄격한 준수가 항상 요구된다.", extraHint: "<b>observe</b> '지키다, 준수하다' → 명사형" },
       { sentence: "In hospital she'll be under ____ all the time.", answer: "observation", translation: "병원에서 그녀는 항상 관찰 대상이 될 것이다.", extraHint: "<b>observe</b> '관찰하다' → 명사형" },
       { sentence: "The ____ of new technologies is changing our lives.", answer: "emergence", translation: "새로운 기술들의 출현이 우리의 삶을 바꾸고 있다.", extraHint: "<b>emerge</b> '물 밖으로 갑자기 나오다, 등장/출현하다' → 명사형" },
-      { sentence: "The government has declared a state of ____ following the earthquake.", answer: "emergency", translation: "정부는 지진 후 비상사태를 선포했다." },
+      { sentence: "The government has declared a state of ____ following the earthquake.", answer: "emergency", translation: "정부는 지진 후 비상사태를 선포했다.", extraHint: "<b>emerge</b> '물 밖으로 갑자기 나오다, 예측하지 못한 긴급상황' → 명사형" },
       { sentence: "The state spends taxpayers' money and should be held ____.", answer: "accountable", translation: "국가는 납세자의 돈을 사용하므로 책임을 져야 한다.", extraHint: "<b>account</b> '(출납을) 기록, 책임지다' + ~할 수 있는 → 형용사형" },
       { sentence: "An ____ is a person whose job is to keep financial records.", answer: "accountant", translation: "회계사는 재정 기록을 관리하는 직업을 가진 사람이다.", extraHint: "<b>account</b> '(출납을) 기록하다' + ~하는 주체 → 명사형" }
     ]
