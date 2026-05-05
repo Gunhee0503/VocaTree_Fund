@@ -243,48 +243,71 @@ body {
   letter-spacing:1px; margin:0 2px; font-size:14px;
 }
 .hint-box .image { font-size:14px; color:#78350f; margin-top:6px; }
-.hint-box .extra-hint-btn {
-  background:rgba(146,64,14,0.1);
+.hint-box .extra-hint-btn,
+.extra-hint-btn {
+  display:inline-flex;
+  align-items:center;
+  gap:6px;
+  background:#fffbeb;
   color:#92400e;
-  border:1px dashed #d97706;
-  padding:7px 12px;
-  border-radius:8px;
+  border:1px solid #fcd34d;
+  padding:7px 14px;
+  border-radius:99px;
   font-size:12px;
   font-weight:700;
   cursor:pointer;
   margin-top:10px;
   font-family:inherit;
-  transition:all 0.2s;
+  transition:all 0.2s ease;
+  letter-spacing:-0.2px;
 }
-.hint-box .extra-hint-btn:hover {
-  background:rgba(146,64,14,0.18);
+.hint-box .extra-hint-btn:hover,
+.extra-hint-btn:hover {
+  background:#fef3c7;
+  border-color:#f59e0b;
+  transform:translateY(-1px);
+  box-shadow:0 2px 6px rgba(245,158,11,0.2);
 }
-.hint-box .extra-hint-btn.opened {
-  background:#fbbf24;
+.extra-hint-btn .icon {
+  display:inline-flex;
+  width:14px; height:14px;
+  align-items:center; justify-content:center;
+  transition:transform 0.25s ease;
+}
+.extra-hint-btn.opened {
+  background:#f59e0b;
   color:#fff;
-  border-style:solid;
   border-color:#d97706;
+  box-shadow:0 2px 8px rgba(245,158,11,0.35);
 }
-.hint-box .extra-hint {
+.extra-hint-btn.opened .icon {
+  transform:rotate(180deg);
+}
+.hint-box .extra-hint,
+.extra-hint {
   margin-top:10px;
-  padding:10px 14px;
-  background:#fff7ed;
-  border-left:3px solid #ea580c;
-  border-radius:8px;
+  padding:12px 16px;
+  background:linear-gradient(135deg, #fff7ed, #ffedd5);
+  border:1px solid #fed7aa;
+  border-left:4px solid #ea580c;
+  border-radius:10px;
   font-size:14px;
   color:#7c2d12;
-  line-height:1.5;
-  animation:fadeIn 0.25s ease;
+  line-height:1.6;
+  animation:fadeInDown 0.25s ease;
+  box-shadow:0 1px 3px rgba(124,45,18,0.08);
 }
-.hint-box .extra-hint b {
+.hint-box .extra-hint b,
+.extra-hint b {
   color:#c2410c;
   background:#fed7aa;
-  padding:1px 6px;
+  padding:1px 8px;
   border-radius:4px;
   font-weight:800;
+  letter-spacing:-0.2px;
 }
-@keyframes fadeIn {
-  from { opacity:0; transform:translateY(-4px); }
+@keyframes fadeInDown {
+  from { opacity:0; transform:translateY(-6px); }
   to { opacity:1; transform:translateY(0); }
 }
 
@@ -594,7 +617,8 @@ body {
         <div class="roots" id="bridge-roots"></div>
         <div class="image" id="bridge-image"></div>
         <button type="button" class="extra-hint-btn hidden" id="extra-hint-btn" onclick="toggleExtraHint()">
-          🔍 어원 힌트 더 보기
+          <span class="icon"><svg viewBox="0 0 16 16" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="3,6 8,11 13,6"/></svg></span>
+          <span class="label-text">파생 과정 보기</span>
         </button>
         <div class="extra-hint hidden" id="extra-hint"></div>
       </div>
@@ -618,7 +642,8 @@ body {
       <div class="translation-box" id="example-translation"></div>
       <div class="word-slots" id="example-slots"></div>
       <button type="button" class="extra-hint-btn hidden" id="example-extra-hint-btn" onclick="toggleExampleExtraHint()" style="margin-top:10px;">
-        🔍 어원 힌트 보기
+        <span class="icon"><svg viewBox="0 0 16 16" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="3,6 8,11 13,6"/></svg></span>
+        <span class="label-text">파생 과정 보기</span>
       </button>
       <div class="extra-hint hidden" id="example-extra-hint" style="margin-top:10px;"></div>
       <input type="text" class="answer-input" id="example-input"
@@ -939,55 +964,55 @@ const VOCA_DATA = {
       { word: "confidence", roots: "confident의 명사형", hint: "강하게 믿는 상태", meaning: "자신감", pos: "n." },
       { word: "equivalent", roots: "equi (같은) + val (가치) + ent", hint: "같은 가치를 가지는", meaning: "(가치가) 같은, 등가물", pos: "adj./n." },
       { word: "obedient", roots: "ob (~에) + ed(audi) (듣다) + ient", hint: "(말을) 잘 듣고 있는", meaning: "순종하는", pos: "adj." },
-      { word: "constant", roots: "con (함께) + st (서다) + ant", hint: "굳게 변하지 않고 서있는", meaning: "끊임없는, 변함없는", pos: "adj." },
+      { word: "constant", roots: "consta- '변함없는, 일관된' + [?] 형용사형 어미", hint: "굳게 변하지 않고 서있는", meaning: "끊임없는, 변함없는", pos: "adj.", extraHint: "<b>con</b> '함께, 강조' + <b>sta-</b> '서있다' → 단단히 고정된, 변함없는" },
       { word: "pleasant", roots: "pleas (기쁘게 하다) + ant", hint: "기쁘게 하고 있는", meaning: "유쾌한, 기분좋은", pos: "adj." },
-      { word: "vacant", roots: "vac (빈) + ant", hint: "비어 있는", meaning: "비어 있는, 공석의", pos: "adj." },
+      { word: "vacant", roots: "vac '비어있는' + [?] 형용사형 어미", hint: "비어 있는", meaning: "비어 있는, 공석의", pos: "adj." },
       { word: "tolerant", roots: "toler (참다) + ant", hint: "참아내고 있는", meaning: "잘 견디는, 관대한", pos: "adj." },
       { word: "dominant", roots: "domin (지배) + ant", hint: "지배하고 있는", meaning: "지배적인, 우세한", pos: "adj." },
       { word: "resistant", roots: "re (다시) + sist (서다) + ant", hint: "맞서 서 있는", meaning: "저항하는", pos: "adj." },
-      { word: "resistance", roots: "resistant의 명사형", hint: "맞서 서있는 상태", meaning: "저항(력)", pos: "n." },
-      { word: "persistent", roots: "per (계속) + sist (서다) + ent", hint: "계속 서 있는", meaning: "끊임없이 지속하는", pos: "adj." },
-      { word: "persistence", roots: "persistent의 명사형", hint: "계속 서있는 상태", meaning: "고집, 지속(성)", pos: "n." },
-      { word: "efficient", roots: "ef (밖으로) + fic (만들다) + ient", hint: "밖으로 잘 만들어 내는", meaning: "효율적인", pos: "adj." },
+      { word: "resistance", roots: "resist '저항하다' + [?] 명사형 어미", hint: "맞서 서있는 상태", meaning: "저항(력)", pos: "n." },
+      { word: "persistent", roots: "persist- '계속 존재하다' + [?] 형용사형 어미", hint: "계속 서 있는", meaning: "끊임없이 지속하는", pos: "adj.", extraHint: "<b>per</b> '계속, 영구적' + <b>sta-</b> '서있다' → 끊임없이 고정된, 영구적인" },
+      { word: "persistence", roots: "persist- '계속 존재하다' + [?] 명사형 어미", hint: "계속 서있는 상태", meaning: "고집, 지속(성)", pos: "n.", extraHint: "<b>per</b> '계속, 영구적' + <b>sta-</b> '서있다' → 고집, 끈기, 인내" },
+      { word: "efficient", roots: "e(x) '밖으로' + fac/fec/fic '만들어내다' + [?] 형용사형 어미", hint: "밖으로 잘 만들어 내는", meaning: "효율적인", pos: "adj.", extraHint: "<b>e(x)</b> '밖으로' + <b>fac/fec/fic</b> '만들어내다' → (성과를) 내는, 효율적인" },
       { word: "efficiency", roots: "efficient의 명사형 (-ency)", hint: "효율적인 상태", meaning: "효율(성)", pos: "n." },
-      { word: "independence", roots: "in (아닌) + dependence", hint: "의존하지 않는 상태", meaning: "독립(성)", pos: "n." },
-      { word: "excellent", roots: "ex (밖으로) + cel (높은) + lent", hint: "밖으로 두드러지게 뛰어난", meaning: "뛰어난, 훌륭한", pos: "adj." },
-      { word: "excellence", roots: "excellent의 명사형", hint: "뛰어난 상태", meaning: "뛰어남, 우수성", pos: "n." },
+      { word: "independence", roots: "in '부정' + depend '의존하다' + [?] 명사형 어미", hint: "의존하지 않는 상태", meaning: "독립(성)", pos: "n.", extraHint: "<b>in</b> '부정' + <b>depend</b> '의존하다' → 의존하지 않음, 독립(성)" },
+      { word: "excellent", roots: "excel '뛰어나다' + [?] 형용사형 어미", hint: "밖으로 두드러지게 뛰어난", meaning: "뛰어난, 훌륭한", pos: "adj." },
+      { word: "excellence", roots: "excel '뛰어나다' + [?] 명사형 어미", hint: "뛰어난 상태", meaning: "뛰어남, 우수성", pos: "n." },
       { word: "presence", roots: "pre (앞에) + s(es) (있다) + ence", hint: "앞에 있는 상태", meaning: "참석, 존재", pos: "n." },
-      { word: "proficient", roots: "pro (앞으로) + fic (만들다) + ient", hint: "앞서서 잘 만들어 내는", meaning: "능숙한, 유창한", pos: "adj." },
+      { word: "proficient", roots: "profic + [?] 형용사형 어미", hint: "앞서서 잘 만들어 내는", meaning: "능숙한, 유창한", pos: "adj.", extraHint: "<b>pro</b> '앞으로' + <b>fic/fac/fect</b> '만들다' → 앞으로 만들어나가는 → 진보된, 숙련된, 유창한" },
       { word: "proficiency", roots: "proficient의 명사형", hint: "능숙한 상태", meaning: "능숙함, 숙련", pos: "n." },
       { word: "applicant", roots: "apply의 행위자 (-ant)", hint: "지원하고 있는 사람", meaning: "지원자", pos: "n." },
-      { word: "application", roots: "apply의 명사형 (-tion)", hint: "지원하는 행위/적용 사례", meaning: "지원(서), 적용, 응용", pos: "n." },
+      { word: "application", roots: "apply '지원, 적용하다' + [?] 명사형 어미", hint: "지원하는 행위/적용 사례", meaning: "지원(서), 적용, 응용", pos: "n.", extraHint: "<b>ap(ad)</b> '파생 접두어' + <b>ple</b> '접다, 붙이다, 적용하다' cf. fold (P&F의 관계) → 지원, 적용" },
       { word: "attendance", roots: "attend + ance", hint: "참석하고 있는 상태", meaning: "참석, 출석(률)", pos: "n." },
       { word: "attention", roots: "attend의 명사형 (-tion)", hint: "주의를 기울이는 상태", meaning: "주의, 관심", pos: "n." },
-      { word: "observance", roots: "observe + ance", hint: "지키는 행위", meaning: "(법·규칙의) 준수", pos: "n." },
-      { word: "observation", roots: "observe + ation", hint: "관찰하는 행위", meaning: "관찰", pos: "n." },
-      { word: "emergence", roots: "emerge + ence", hint: "(밖으로) 나타나는 것", meaning: "출현, 등장", pos: "n." },
-      { word: "emergency", roots: "emerge + ency", hint: "갑자기 나타나는 상황", meaning: "비상(사태)", pos: "n." },
+      { word: "observance", roots: "observe '지켜보다' + [?] 명사형 어미", hint: "지키는 행위", meaning: "(법·규칙의) 준수", pos: "n.", extraHint: "<b>observe</b> '지키다 + 보다' → (법, 규칙 등을) 지키다, 준수하다" },
+      { word: "observation", roots: "observe '지켜보다' + [?] 명사형 어미", hint: "관찰하는 행위", meaning: "관찰", pos: "n.", extraHint: "<b>observe</b> '지키다 + 보다' → 보는 행위, 관찰" },
+      { word: "emergence", roots: "emerge + [?] 명사형 어미", hint: "(밖으로) 나타나는 것", meaning: "출현, 등장", pos: "n.", extraHint: "<b>e(x)</b> '밖으로' + <b>merge</b> '물에 들어가 섞이다' → 물 밖으로 갑자기 나오다 → (예측하지 못한) 등장, 출현" },
+      { word: "emergency", roots: "emerge + [?] 명사형 어미", hint: "갑자기 나타나는 상황", meaning: "비상(사태)", pos: "n.", extraHint: "<b>e(x)</b> '밖으로' + <b>merge</b> '물에 들어가 섞이다' → 물 밖으로 갑자기 나오다 → 준비/예측되지 않은 상황" },
       { word: "accountable", roots: "account + able", hint: "(상황을) 설명할 수 있는", meaning: "(설명할) 책임이 있는", pos: "adj." },
-      { word: "accountant", roots: "account + ant", hint: "장부를 다루는 사람", meaning: "회계사", pos: "n." }
+      { word: "accountant", roots: "account '(출납 등을) 세다, 기록하다' + [?] ~하는 주체", hint: "장부를 다루는 사람", meaning: "회계사", pos: "n.", extraHint: "<b>ac(ad)</b> '파생 접두어' + <b>account</b> '(출납 등을) 세다, 기록하다' → 회계사" }
     ],
     examples: [
-      { sentence: "AIDS lowers the body's ____ to infection.", answer: "resistance", translation: "에이즈는 감염에 대한 몸의 저항력을 낮춘다." },
+      { sentence: "AIDS lowers the body's ____ to infection.", answer: "resistance", translation: "에이즈는 감염에 대한 몸의 저항력을 낮춘다.", extraHint: "<b>resist</b> '저항하다' → 명사형" },
       { sentence: "His ____ grew as he practiced more for the speech.", answer: "confidence", translation: "연설을 위해 연습할수록 그의 자신감은 커졌다." },
-      { sentence: "Her ____ efforts eventually paid off with a promotion.", answer: "persistent", translation: "그녀의 끈질긴 노력은 결국 승진으로 결실을 맺었다." },
-      { sentence: "The new system is more ____ and saves a lot of time.", answer: "efficient", translation: "새로운 시스템은 더 효율적이고 많은 시간을 절약한다." },
-      { sentence: "The success of the project is ____ on timely delivery.", answer: "dependent", translation: "프로젝트의 성공은 적시 배송에 달려 있다." },
+      { sentence: "Her ____ efforts eventually paid off with a promotion.", answer: "persistent", translation: "그녀의 끈질긴 노력은 결국 승진으로 결실을 맺었다.", extraHint: "<b>persist</b> '계속 존재하다, 버티다' → 형용사형" },
+      { sentence: "The new system is more ____ and saves a lot of time.", answer: "efficient", translation: "새로운 시스템은 더 효율적이고 많은 시간을 절약한다.", extraHint: "<b>effic</b> '밖으로 만들어내다' → 형용사형" },
+      { sentence: "The success of the project is ____ on timely delivery.", answer: "dependent", translation: "프로젝트의 성공은 적시 배송에 달려 있다.", extraHint: "<b>depend</b> '의존하다' → 형용사형" },
       { sentence: "The material is designed to ____ extreme temperatures.", answer: "resist", translation: "이 소재는 극한의 온도에 견디도록 설계되었다." },
       { sentence: "She values her ____ and enjoys making her own decisions.", answer: "independence", translation: "그녀는 자신의 독립성을 중요시하며 스스로 결정하는 것을 즐긴다." },
-      { sentence: "She worked hard to ____ in her studies and earned top grades.", answer: "excel", translation: "그녀는 학업에서 뛰어나기 위해 열심히 노력했고 최고 성적을 얻었다." },
-      { sentence: "There were 200 people ____ at the meeting.", answer: "present", translation: "회의에는 200명의 참석자가 있었다." },
+      { sentence: "She worked hard to ____ in her studies and earned top grades.", answer: "excel", translation: "그녀는 학업에서 뛰어나기 위해 열심히 노력했고 최고 성적을 얻었다.", extraHint: "<b>e(x)</b> '밖으로 (out)' + '솟은, 나온' → 동사 = outstand" },
+      { sentence: "There were 200 people ____ at the meeting.", answer: "present", translation: "회의에는 200명의 참석자가 있었다.", extraHint: "<b>pre</b> '앞에' + <b>esse (is)</b> '존재하다' → 형용사형" },
       { sentence: "Her ____ in multiple languages made her highly competent.", answer: "proficiency", translation: "그녀의 다양한 언어 능숙함은 그녀를 매우 유능하게 만들었다." },
-      { sentence: "Successful ____s for this job will receive notification within the week.", answer: "applicants", translation: "이 일자리에 합격한 지원자들은 한 주 내로 통보받을 것이다." },
+      { sentence: "Successful ____ for this job will receive notification within the week.", answer: "applicant", translation: "이 일자리에 합격한 지원자는 한 주 내로 통보받을 것이다.", extraHint: "<b>apply</b> '적용, 지원하다' + ~하는 주체 → 명사형" },
       { sentence: "The invention would have a wide range of ____s in industry.", answer: "applications", translation: "그 발명품은 산업에서 광범위한 응용 분야를 갖게 될 것이다." },
       { sentence: "____ at these lectures is not compulsory.", answer: "Attendance", translation: "이 강의의 출석은 의무가 아니다." },
-      { sentence: "I tried not to draw ____ to the weak points in my argument.", answer: "attention", translation: "나는 내 주장의 약점들에 주의가 쏠리지 않게 하려고 노력했다." },
-      { sentence: "Strict ____ of the rules is required at all times.", answer: "observance", translation: "규칙의 엄격한 준수가 항상 요구된다." },
-      { sentence: "In hospital she'll be under ____ all the time.", answer: "observation", translation: "병원에서 그녀는 항상 관찰 대상이 될 것이다." },
-      { sentence: "The ____ of new technologies is changing our lives.", answer: "emergence", translation: "새로운 기술들의 출현이 우리의 삶을 바꾸고 있다." },
+      { sentence: "I tried not to draw ____ to the weak points in my argument.", answer: "attention", translation: "나는 내 주장의 약점들에 주의가 쏠리지 않게 하려고 노력했다.", extraHint: "<b>attend</b> '~(물리적, 정신적으로) 향하다, 참석/출석하다' → 명사형" },
+      { sentence: "Strict ____ of the rules is required at all times.", answer: "observance", translation: "규칙의 엄격한 준수가 항상 요구된다.", extraHint: "<b>observe</b> '지키다, 준수하다' → 명사형" },
+      { sentence: "In hospital she'll be under ____ all the time.", answer: "observation", translation: "병원에서 그녀는 항상 관찰 대상이 될 것이다.", extraHint: "<b>observe</b> '관찰하다' → 명사형" },
+      { sentence: "The ____ of new technologies is changing our lives.", answer: "emergence", translation: "새로운 기술들의 출현이 우리의 삶을 바꾸고 있다.", extraHint: "<b>emerge</b> '물 밖으로 갑자기 나오다, 등장/출현하다' → 명사형" },
       { sentence: "The government has declared a state of ____ following the earthquake.", answer: "emergency", translation: "정부는 지진 후 비상사태를 선포했다." },
-      { sentence: "The state spends taxpayers' money and should be held ____.", answer: "accountable", translation: "국가는 납세자의 돈을 사용하므로 책임을 져야 한다." },
-      { sentence: "An ____ is a person whose job is to keep financial records.", answer: "accountant", translation: "회계사는 재정 기록을 관리하는 직업을 가진 사람이다." }
+      { sentence: "The state spends taxpayers' money and should be held ____.", answer: "accountable", translation: "국가는 납세자의 돈을 사용하므로 책임을 져야 한다.", extraHint: "<b>account</b> '(출납을) 기록, 책임지다' + ~할 수 있는 → 형용사형" },
+      { sentence: "An ____ is a person whose job is to keep financial records.", answer: "accountant", translation: "회계사는 재정 기록을 관리하는 직업을 가진 사람이다.", extraHint: "<b>account</b> '(출납을) 기록하다' + ~하는 주체 → 명사형" }
     ]
   },
 
@@ -1648,7 +1673,8 @@ function renderBridge() {
   const extraBox = $('extra-hint');
   if (q.extraHint) {
     extraBtn.classList.remove('hidden', 'opened');
-    extraBtn.textContent = '🔍 어원 힌트 더 보기';
+    const lbl = extraBtn.querySelector('.label-text');
+    if (lbl) lbl.textContent = '파생 과정 보기';
     extraBox.classList.add('hidden');
     extraBox.innerHTML = q.extraHint;
   } else {
@@ -1763,7 +1789,8 @@ function renderExample() {
   const exExtraBox = $('example-extra-hint');
   if (q.extraHint) {
     exExtraBtn.classList.remove('hidden', 'opened');
-    exExtraBtn.textContent = '🔍 어원 힌트 보기';
+    const exLbl = exExtraBtn.querySelector('.label-text');
+    if (exLbl) exLbl.textContent = '파생 과정 보기';
     exExtraBox.classList.add('hidden');
     exExtraBox.innerHTML = q.extraHint;
   } else {
@@ -1857,15 +1884,16 @@ function nextQuestion() {
 function toggleExtraHint() {
   const btn = $('extra-hint-btn');
   const box = $('extra-hint');
+  const lbl = btn.querySelector('.label-text');
   const isOpen = !box.classList.contains('hidden');
   if (isOpen) {
     box.classList.add('hidden');
     btn.classList.remove('opened');
-    btn.textContent = '🔍 어원 힌트 더 보기';
+    if (lbl) lbl.textContent = '파생 과정 보기';
   } else {
     box.classList.remove('hidden');
     btn.classList.add('opened');
-    btn.textContent = '🔼 힌트 닫기';
+    if (lbl) lbl.textContent = '닫기';
   }
 }
 
@@ -1873,15 +1901,16 @@ function toggleExtraHint() {
 function toggleExampleExtraHint() {
   const btn = $('example-extra-hint-btn');
   const box = $('example-extra-hint');
+  const lbl = btn.querySelector('.label-text');
   const isOpen = !box.classList.contains('hidden');
   if (isOpen) {
     box.classList.add('hidden');
     btn.classList.remove('opened');
-    btn.textContent = '🔍 어원 힌트 보기';
+    if (lbl) lbl.textContent = '파생 과정 보기';
   } else {
     box.classList.remove('hidden');
     btn.classList.add('opened');
-    btn.textContent = '🔼 힌트 닫기';
+    if (lbl) lbl.textContent = '닫기';
   }
 }
 

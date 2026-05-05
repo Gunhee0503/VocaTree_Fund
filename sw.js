@@ -1,6 +1,6 @@
 // VOCA TREE Service Worker
 // 캐시 버전 (앱 업데이트 시 이 숫자를 올리세요)
-const CACHE_VERSION = 'v1.9.0';
+const CACHE_VERSION = 'v2.1.0';
 const CACHE_NAME = 'vocatree-' + CACHE_VERSION;
 
 // 오프라인에서도 작동하게 미리 캐시할 파일들
