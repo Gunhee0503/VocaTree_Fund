@@ -61,6 +61,51 @@ body {
   width:auto;
 }
 
+/* Footer */
+.app-footer {
+  text-align:center;
+  margin-top:36px;
+  padding:24px 16px 8px;
+  border-top:1px solid rgba(255,255,255,0.08);
+}
+.footer-tagline {
+  margin-bottom:18px;
+}
+.footer-tagline .tagline-main {
+  font-size:15px;
+  font-weight:700;
+  color:#cbd5e1;
+  letter-spacing:-0.3px;
+  margin-bottom:4px;
+}
+.footer-tagline .tagline-sub {
+  font-size:12px;
+  color:#94a3b8;
+  letter-spacing:0.2px;
+}
+.footer-info {
+  display:flex;
+  flex-direction:column;
+  gap:3px;
+  font-size:11px;
+  color:#94a3b8;
+  line-height:1.6;
+}
+.footer-info .copyright {
+  font-weight:600;
+  color:#cbd5e1;
+  margin-bottom:4px;
+}
+.footer-info .address { letter-spacing:0.1px; }
+.footer-info .phone a {
+  color:#94a3b8;
+  text-decoration:none;
+  letter-spacing:0.5px;
+}
+.footer-info .phone a:hover {
+  color:#cbd5e1;
+}
+
 /* Mode toggle */
 .mode-toggle {
   display:flex; gap:6px; background:rgba(255,255,255,0.1); padding:4px;
@@ -198,6 +243,50 @@ body {
   letter-spacing:1px; margin:0 2px; font-size:14px;
 }
 .hint-box .image { font-size:14px; color:#78350f; margin-top:6px; }
+.hint-box .extra-hint-btn {
+  background:rgba(146,64,14,0.1);
+  color:#92400e;
+  border:1px dashed #d97706;
+  padding:7px 12px;
+  border-radius:8px;
+  font-size:12px;
+  font-weight:700;
+  cursor:pointer;
+  margin-top:10px;
+  font-family:inherit;
+  transition:all 0.2s;
+}
+.hint-box .extra-hint-btn:hover {
+  background:rgba(146,64,14,0.18);
+}
+.hint-box .extra-hint-btn.opened {
+  background:#fbbf24;
+  color:#fff;
+  border-style:solid;
+  border-color:#d97706;
+}
+.hint-box .extra-hint {
+  margin-top:10px;
+  padding:10px 14px;
+  background:#fff7ed;
+  border-left:3px solid #ea580c;
+  border-radius:8px;
+  font-size:14px;
+  color:#7c2d12;
+  line-height:1.5;
+  animation:fadeIn 0.25s ease;
+}
+.hint-box .extra-hint b {
+  color:#c2410c;
+  background:#fed7aa;
+  padding:1px 6px;
+  border-radius:4px;
+  font-weight:800;
+}
+@keyframes fadeIn {
+  from { opacity:0; transform:translateY(-4px); }
+  to { opacity:1; transform:translateY(0); }
+}
 
 .meaning-box {
   background: linear-gradient(135deg,#dbeafe,#bfdbfe);
@@ -398,6 +487,7 @@ body {
   .data-table { font-size:12px; }
   .data-table th, .data-table td { padding:8px 6px; }
   .brand-logo svg { height:26px; }
+  .footer-tagline .tagline-main { font-size:14px; }
 }
 </style>
 </head>
@@ -503,6 +593,10 @@ body {
         <div class="label">🌱 어원 힌트</div>
         <div class="roots" id="bridge-roots"></div>
         <div class="image" id="bridge-image"></div>
+        <button type="button" class="extra-hint-btn hidden" id="extra-hint-btn" onclick="toggleExtraHint()">
+          🔍 어원 힌트 더 보기
+        </button>
+        <div class="extra-hint hidden" id="extra-hint"></div>
       </div>
       <div class="meaning-box">
         <div class="label">💡 의미</div>
@@ -765,6 +859,19 @@ body {
       <button class="btn btn-secondary" style="padding:6px 12px; font-size:12px;" onclick="showStudentExportInstructions()">📦 학생 배포용 파일 만들기</button>
     </div>
   </div>
+
+  <!-- ============ 푸터 ============ -->
+  <footer class="app-footer">
+    <div class="footer-tagline">
+      <div class="tagline-main">영단어가 나무처럼 자라나는 보카트리</div>
+      <div class="tagline-sub">한 단어를 알면 열 단어가 보이는 어휘학습</div>
+    </div>
+    <div class="footer-info">
+      <div class="copyright">© PIF Education</div>
+      <div class="address">서울 송파구 석촌호수로 106 5층</div>
+      <div class="phone"><a href="tel:02-555-7229">02-555-7229</a></div>
+    </div>
+  </footer>
 </div>
 
 <script>
@@ -783,18 +890,18 @@ const VOCA_DATA = {
       ]
     },
     bridge: [
-      { word: "income", roots: "in (안으로) + come (들어오다)", hint: "안으로 들어오는 것", meaning: "소득, 수입", pos: "n." },
+      { word: "income", roots: "in (안으로) + come (들어오다)", hint: "안으로 들어오는 것", meaning: "소득, 수입", pos: "n.", extraHint: "<b>come</b> '들어오다'" },
       { word: "intake", roots: "in (안으로) + take (취하다)", hint: "안으로 취하는 것", meaning: "섭취, 흡입(량)", pos: "n." },
-      { word: "infect", roots: "in (안으로) + fect (만들다)", hint: "안으로 (병을) 집어넣다", meaning: "감염시키다", pos: "v." },
+      { word: "infect", roots: "in (안으로) + fect (만들다)", hint: "안으로 (병을) 집어넣다", meaning: "감염시키다", pos: "v.", extraHint: "<b>fect/fact</b> '(영향을) 만들다 (factory)'" },
       { word: "insight", roots: "in (안을) + sight (보기)", hint: "내면을 들여다보는 것", meaning: "통찰력", pos: "n." },
       { word: "invest", roots: "in (안에) + vest (옷 입히다)", hint: "안에 옷을 입히다 → 새 가치를 부여하다", meaning: "투자하다", pos: "v." },
       { word: "include", roots: "in (안에) + clude (닫다)", hint: "안에 가두어 두다", meaning: "포함하다", pos: "v." },
-      { word: "install", roots: "in (안에) + stall (자리)", hint: "안에 자리잡게 하다", meaning: "설치하다", pos: "v." },
+      { word: "install", roots: "in (안에) + stall (자리)", hint: "안에 자리잡게 하다", meaning: "설치하다", pos: "v.", extraHint: "<b>sta-</b> '세우다, 자리잡다 (stand)'" },
       { word: "empire", roots: "em (안에) + pire (명령)", hint: "황제의 통치 안에 두다", meaning: "제국", pos: "n." },
       { word: "imply", roots: "im (안에) + ply (접다, 붙이다) cf. P&F의 관계 'fold'", hint: "(표현 안에) 안에 붙어있다, 들어있다", meaning: "암시하다, 시사하다", pos: "v." },
       { word: "employ", roots: "em (안에) + ploy (담다)", hint: "(조직) 안에 담다", meaning: "고용하다, 이용하다", pos: "v." },
-      { word: "embargo", roots: "em (안으로) + bargo (막다)", hint: "안으로 들어오는 것을 막음", meaning: "통상(운송) 금지령", pos: "n." },
-      { word: "engine", roots: "en (안에서) + gine (생긴 힘)", hint: "안에서 생긴 힘", meaning: "엔진, 기관", pos: "n." },
+      { word: "embargo", roots: "em (안으로) + bargo (막다)", hint: "안으로 들어오는 것을 막음", meaning: "통상(운송) 금지령", pos: "n.", extraHint: "<b>bar</b> '막대기로 막다'" },
+      { word: "engine", roots: "en (안에서) + gine (생긴 힘)", hint: "안에서 생긴 힘", meaning: "엔진, 기관", pos: "n.", extraHint: "<b>gen/gin</b> '생산하다 (generate)'" },
       { word: "engage", roots: "en (안에) + gage (약속)", hint: "약속 안에 있다 → 깊이 관여하다", meaning: "관여하다, 사로잡다, 고용하다", pos: "v." },
       { word: "enter", roots: "ent (안으로) + er (향하다)", hint: "안으로 향하다", meaning: "들어가다", pos: "v." },
       { word: "internal", roots: "intr (안쪽) + nal (~의)", hint: "안쪽의", meaning: "내부의, 내적인", pos: "adj." },
@@ -806,14 +913,14 @@ const VOCA_DATA = {
       { word: "exit", roots: "ex (밖으로) + it (가다)", hint: "밖으로 나가는 곳", meaning: "출구, 나가다", pos: "n./v." },
       { word: "export", roots: "ex (밖으로) + port (항구)", hint: "항구 밖으로 보내다", meaning: "수출하다", pos: "v." },
       { word: "express", roots: "ex (밖으로) + press (누르다)", hint: "(생각을) 밖으로 짜내다", meaning: "표현하다", pos: "v." },
-      { word: "exceed", roots: "ex (밖으로) + ceed (가다)", hint: "(한계) 밖으로 나가다", meaning: "초과하다, 넘어서다", pos: "v." },
+      { word: "exceed", roots: "ex (밖으로) + ceed (가다)", hint: "(한계) 밖으로 나가다", meaning: "초과하다, 넘어서다", pos: "v.", extraHint: "<b>cess/ceed</b> '가다 (go)'" },
       { word: "exaggerate", roots: "ex (밖으로) + ag + gerate (쌓다)", hint: "(실제) 밖으로 부풀리다", meaning: "과장하다", pos: "v." },
-      { word: "extend", roots: "ex (밖으로) + tend (뻗다)", hint: "밖으로 뻗어나가다", meaning: "확장하다, 연장하다", pos: "v." },
+      { word: "extend", roots: "ex (밖으로) + tend (뻗다)", hint: "밖으로 뻗어나가다", meaning: "확장하다, 연장하다", pos: "v.", extraHint: "<b>tend/tens</b> '뻗다 (stretch)'" },
       { word: "exhaust", roots: "ex (밖으로) + haust (끌어내다)", hint: "(에너지를) 밖으로 다 빼내다", meaning: "지치게 하다, 다 써버리다", pos: "v." },
       { word: "escape", roots: "e (밖으로) + scape (덮개)", hint: "(덮개) 밖으로 빠져나가다", meaning: "탈출하다", pos: "v." },
-      { word: "evaporate", roots: "e (밖으로) + vapor (수증기)", hint: "수증기 밖으로 날리다", meaning: "증발시키다, 증발하다", pos: "v." },
+      { word: "evaporate", roots: "e (밖으로) + vapor (수증기)", hint: "수증기 밖으로 날리다", meaning: "증발시키다, 증발하다", pos: "v.", extraHint: "<b>vapor</b> '수증기'" },
       { word: "evacuate", roots: "e (밖으로) + vac (빈)", hint: "(공간을) 밖으로 비우다", meaning: "대피시키다, 비우다", pos: "v." },
-      { word: "enormous", roots: "e (밖으로) + norm (보통)", hint: "보통 밖으로 벗어난", meaning: "거대한, 엄청난", pos: "adj." }
+      { word: "enormous", roots: "e (밖으로) + norm (보통)", hint: "보통 밖으로 벗어난", meaning: "거대한, 엄청난", pos: "adj.", extraHint: "<b>normal</b> '보통'" }
     ],
     examples: [
       { sentence: "People on low ____s often struggle to afford basic necessities.", answer: "income", translation: "소득이 낮은 사람들은 종종 기본 필수품을 구입하는 데 어려움을 겪는다." },
@@ -1596,6 +1703,19 @@ function renderBridge() {
   $('bridge-pos').textContent = q.pos;
   $('bridge-meaning').textContent = q.meaning;
 
+  // 추가 어원 힌트 (해당 단어에만 있음)
+  const extraBtn = $('extra-hint-btn');
+  const extraBox = $('extra-hint');
+  if (q.extraHint) {
+    extraBtn.classList.remove('hidden', 'opened');
+    extraBtn.textContent = '🔍 어원 힌트 더 보기';
+    extraBox.classList.add('hidden');
+    extraBox.innerHTML = q.extraHint;
+  } else {
+    extraBtn.classList.add('hidden');
+    extraBox.classList.add('hidden');
+  }
+
   const slots = $('bridge-slots');
   slots.innerHTML = '';
   const word = q.word;
@@ -1778,6 +1898,22 @@ function nextQuestion() {
   state.current++;
   if (state.current >= state.questions.length) showResult();
   else renderQuestion();
+}
+
+// 어원 힌트 더 보기 토글
+function toggleExtraHint() {
+  const btn = $('extra-hint-btn');
+  const box = $('extra-hint');
+  const isOpen = !box.classList.contains('hidden');
+  if (isOpen) {
+    box.classList.add('hidden');
+    btn.classList.remove('opened');
+    btn.textContent = '🔍 어원 힌트 더 보기';
+  } else {
+    box.classList.remove('hidden');
+    btn.classList.add('opened');
+    btn.textContent = '🔼 힌트 닫기';
+  }
 }
 
 // ======= Result =======
