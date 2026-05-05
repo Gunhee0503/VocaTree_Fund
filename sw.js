@@ -1,6 +1,6 @@
 // VOCA TREE Service Worker
 // 캐시 버전 (앱 업데이트 시 이 숫자를 올리세요)
-const CACHE_VERSION = 'v1.2.0';
+const CACHE_VERSION = 'v1.3.0';
 const CACHE_NAME = 'vocatree-' + CACHE_VERSION;
 
 // 오프라인에서도 작동하게 미리 캐시할 파일들
@@ -11,7 +11,7 @@ const PRECACHE_URLS = [
   './icon.svg',
   './icon-192.png',
   './icon-512.png',
-  './pif_logo.jpg'
+  './pif_logo.png'
 ];
 
 // === 설치: 핵심 파일 미리 캐시 ===
