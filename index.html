@@ -51,35 +51,14 @@ body {
 .app-header p { color:#cbd5e1; margin-top:4px; font-size:14px; }
 
 .brand-logo {
-  display:inline-block;
-  background: rgba(255,255,255,0.25);
-  border:1px solid rgba(255,255,255,0.20);
-  padding:10px 22px;
-  border-radius:10px;
+  display:inline-flex;
+  align-items:center;
   margin-bottom:14px;
 }
-.brand-logo img {
-  height:30px; width:auto; display:block;
-}
-
-.app-footer {
-  text-align:center;
-  margin-top:30px;
-  padding:20px 0 10px;
-}
-.footer-logo {
-  display:inline-block;
-  background: rgba(255,255,255,0.18);
-  border:1px solid rgba(255,255,255,0.15);
-  padding:6px 16px;
-  border-radius:8px;
-  margin-bottom:10px;
-}
-.footer-logo img {
-  height:18px; width:auto; display:block;
-}
-.app-footer p {
-  color:#94a3b8; font-size:11px; letter-spacing:0.3px;
+.brand-logo svg {
+  display:block;
+  height:32px;
+  width:auto;
 }
 
 /* Mode toggle */
@@ -418,16 +397,21 @@ body {
   .app-header h1 { font-size:22px; }
   .data-table { font-size:12px; }
   .data-table th, .data-table td { padding:8px 6px; }
-  .brand-logo img { height:24px; }
-  .brand-logo { padding:6px 14px; }
+  .brand-logo svg { height:26px; }
 }
 </style>
 </head>
 <body>
 <div class="container">
   <div class="app-header">
-    <div class="brand-logo">
-      <img src="pif_logo.png" alt="PiF EDUCATION" />
+    <div class="brand-logo" aria-label="PIF EDUCATION">
+      <svg viewBox="0 0 920 144" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" role="img" aria-label="PIF EDUCATION">
+        <image href="p_symbol.png" x="0" y="0" width="144" height="144"/>
+        <text x="180" y="100" font-family="-apple-system, 'SF Pro Display', 'Helvetica Neue', Arial, sans-serif" font-weight="900" font-size="105" fill="#ffffff" letter-spacing="-3">PIF</text>
+        <line x1="410" y1="22" x2="910" y2="22" stroke="#ffffff" stroke-width="5"/>
+        <text x="425" y="100" font-family="-apple-system, 'SF Pro Display', 'Helvetica Neue', Arial, sans-serif" font-weight="900" font-size="78" fill="#ffffff" letter-spacing="-1">EDUCATION</text>
+        <line x1="410" y1="122" x2="910" y2="122" stroke="#ffffff" stroke-width="5"/>
+      </svg>
     </div>
     <h1>VOCA <span class="accent">TREE</span> 어휘테스트</h1>
     <p>Fundamental 1~4강 · 단어혁명</p>
@@ -780,17 +764,6 @@ body {
       <br><br>
       <button class="btn btn-secondary" style="padding:6px 12px; font-size:12px;" onclick="showStudentExportInstructions()">📦 학생 배포용 파일 만들기</button>
     </div>
-  </div>
-
-  <!-- ============ 푸터 ============ -->
-  <div class="app-footer">
-    <div class="footer-logo">
-      <img src="pif_logo.png" alt="PiF EDUCATION" />
-    </div>
-    <p style="line-height:1.7;">
-      <span style="display:block; font-weight:600; color:#cbd5e1;">영단어가 나무처럼 자란다</span>
-      <span style="display:block; font-size:11px; color:#94a3b8; margin-top:2px;">한 단어를 알면 열 단어가 보이는 어휘학습</span>
-    </p>
   </div>
 </div>
 
