@@ -50,6 +50,37 @@ body {
 .app-header h1 .accent { background: linear-gradient(135deg,#34d399,#60a5fa); -webkit-background-clip:text; background-clip:text; color:transparent; }
 .app-header p { color:#cbd5e1; margin-top:4px; font-size:14px; }
 
+.brand-logo {
+  display:inline-block;
+  background:#fff;
+  padding:8px 18px;
+  border-radius:10px;
+  margin-bottom:14px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+}
+.brand-logo img {
+  height:28px; width:auto; display:block;
+}
+
+.app-footer {
+  text-align:center;
+  margin-top:30px;
+  padding:20px 0 10px;
+}
+.footer-logo {
+  display:inline-block;
+  background:rgba(255,255,255,0.95);
+  padding:6px 14px;
+  border-radius:8px;
+  margin-bottom:10px;
+}
+.footer-logo img {
+  height:18px; width:auto; display:block; opacity:0.85;
+}
+.app-footer p {
+  color:#94a3b8; font-size:11px; letter-spacing:0.3px;
+}
+
 /* Mode toggle */
 .mode-toggle {
   display:flex; gap:6px; background:rgba(255,255,255,0.1); padding:4px;
@@ -386,12 +417,17 @@ body {
   .app-header h1 { font-size:22px; }
   .data-table { font-size:12px; }
   .data-table th, .data-table td { padding:8px 6px; }
+  .brand-logo img { height:24px; }
+  .brand-logo { padding:6px 14px; }
 }
 </style>
 </head>
 <body>
 <div class="container">
   <div class="app-header">
+    <div class="brand-logo">
+      <img src="pif_logo.jpg" alt="PiF EDUCATION" />
+    </div>
     <h1>VOCA <span class="accent">TREE</span> 어휘테스트</h1>
     <p>Fundamental 1~4강 · 단어혁명</p>
     <div class="mode-toggle">
@@ -549,7 +585,7 @@ body {
         <label>비밀번호</label>
         <input type="password" id="teacher-password" placeholder="비밀번호 입력" maxlength="20">
       </div>
-      <p style="font-size:12px; color:var(--text-light); text-align:center;">
+      <p id="teacher-password-hint" style="font-size:12px; color:var(--text-light); text-align:center;">
         💡 기본 비밀번호는 <code style="background:#f1f5f9; padding:2px 6px; border-radius:4px;">vocatree2024</code> 입니다
       </p>
       <button class="btn btn-purple" onclick="loginTeacher()">로그인</button>
@@ -584,6 +620,33 @@ body {
           <button class="btn btn-secondary" style="padding:10px 16px; font-size:13px;" onclick="testConnection()">🔌 연결 테스트</button>
         </div>
         <div id="settings-status" style="margin-top:10px; font-size:13px;"></div>
+      </div>
+    </details>
+
+    <!-- 비밀번호 변경 패널 -->
+    <details style="background:#f8fafc; border-radius:10px; padding:10px 14px; margin:14px 0;">
+      <summary style="cursor:pointer; font-weight:700; font-size:13px;">🔒 선생님 비밀번호 변경</summary>
+      <div style="margin-top:12px;">
+        <div style="background:#e0f2fe; border-left:4px solid #0284c7; padding:10px 14px; border-radius:8px; margin-bottom:10px; font-size:12px; color:#075985;">
+          💡 변경된 비밀번호는 이 브라우저(기기)에만 저장됩니다. 다른 기기에서 로그인하려면 그 기기에서도 변경하거나 기본 비밀번호를 사용해야 합니다.
+        </div>
+        <div class="input-group" style="margin-bottom:8px;">
+          <label>현재 비밀번호</label>
+          <input type="password" id="pwd-current" placeholder="현재 비밀번호 입력" maxlength="30">
+        </div>
+        <div class="input-group" style="margin-bottom:8px;">
+          <label>새 비밀번호</label>
+          <input type="password" id="pwd-new" placeholder="4자 이상 입력" maxlength="30">
+        </div>
+        <div class="input-group" style="margin-bottom:8px;">
+          <label>새 비밀번호 확인</label>
+          <input type="password" id="pwd-new2" placeholder="새 비밀번호 다시 입력" maxlength="30">
+        </div>
+        <div style="display:flex; gap:8px;">
+          <button class="btn btn-primary" style="padding:10px 16px; font-size:13px;" onclick="changePassword()">변경하기</button>
+          <button class="btn btn-secondary" style="padding:10px 16px; font-size:13px;" onclick="resetPassword()">기본값으로 초기화</button>
+        </div>
+        <div id="pwd-status" style="margin-top:10px; font-size:13px;"></div>
       </div>
     </details>
 
@@ -717,6 +780,17 @@ body {
       <button class="btn btn-secondary" style="padding:6px 12px; font-size:12px;" onclick="showStudentExportInstructions()">📦 학생 배포용 파일 만들기</button>
     </div>
   </div>
+
+  <!-- ============ 푸터 ============ -->
+  <div class="app-footer">
+    <div class="footer-logo">
+      <img src="pif_logo.jpg" alt="PiF EDUCATION" />
+    </div>
+    <p style="line-height:1.7;">
+      <span style="display:block; font-weight:600; color:#cbd5e1;">영단어가 나무처럼 자란다</span>
+      <span style="display:block; font-size:11px; color:#94a3b8; margin-top:2px;">한 단어를 알면 열 단어가 보이는 어휘학습</span>
+    </p>
+  </div>
 </div>
 
 <script>
@@ -728,10 +802,10 @@ const VOCA_DATA = {
       headline: "단어 속 in과 ex의 변형을 알아두자",
       points: [
         { label: "in (안)", desc: "기본 의미는 '안으로'. 시간이 지나면서 발음이 변해 <b>in / en / em / im / ent / intr- / int-</b> 등으로 다양하게 변형됨" },
-        { label: "예시", desc: "in·come, em·ploy, im·ply, en·gage, ent·er, intro·duce, inti·mate" },
+        { label: "예시", desc: "<b>in</b>·come, <b>em</b>·ploy, <b>im</b>·ply, <b>en</b>·gage, <b>ent</b>·er, <b>intro</b>·duce, <b>inti</b>·mate<br><span style='display:inline-block; margin-top:8px; padding:6px 10px; background:#fef08a; color:#dc2626; font-weight:800; border-radius:6px; border-left:3px solid #dc2626;'>→ 모두 '안쪽'이라는 이미지를 가지고 있음</span>" },
         { label: "ex (밖)", desc: "기본 의미는 '밖으로'. 변형 형태로 <b>ex / e</b>가 있음" },
-        { label: "예시", desc: "ex·port, ex·tend, e·scape, e·vacuate, e·normous" },
-        { label: "핵심", desc: "단어를 통째로 외우기보다 <b>접두어(in/ex) + 어근</b>으로 쪼개서 이미지로 이해하면 새 단어도 추론 가능" }
+        { label: "예시", desc: "<b>ex</b>·it, <b>ex</b>·port, <b>ex</b>·tend, <b>e</b>·scape, <b>e</b>·vacuate, <b>e</b>·normous<br><span style='display:inline-block; margin-top:8px; padding:6px 10px; background:#fef08a; color:#dc2626; font-weight:800; border-radius:6px; border-left:3px solid #dc2626;'>→ e, ex는 모두 '바깥쪽'이라는 이미지를 가지고 있음</span>" },
+        { label: "핵심", desc: "단어를 <span style='color:#dc2626; font-weight:800;'>통째로 외우기보다</span>, <span style='background:#fef08a; color:#dc2626; font-weight:800; padding:1px 4px; border-radius:3px;'>접두어(in-, ex-)와 어근으로 쪼개서 핵심 이미지</span>를 잡으면 <b>처음 보는 단어도 충분히 의미를 추론</b>할 수 있어요.<br><br>이 방식은 어휘를 <span style='color:#dc2626; font-weight:800;'>훨씬 효율적으로 확장</span>시키고, 파생까지 자연스럽게 이어지게 만드는 <span style='background:#fef08a; color:#dc2626; font-weight:800; padding:1px 4px; border-radius:3px;'>매우 강력한 단어 학습법</span>입니다!" }
       ]
     },
     bridge: [
@@ -1003,7 +1077,18 @@ const VOCA_DATA = {
 //  VOCA TREE - 학생 응시 + 선생님 관리 통합
 // ============================================================
 
-const TEACHER_PASSWORD = 'vocatree2024';   // 기본 비밀번호 (선생님이 코드 수정 가능)
+const DEFAULT_TEACHER_PASSWORD = 'vocatree2024';  // 초기 기본 비밀번호
+const TEACHER_PASSWORD_KEY = 'voca_teacher_password';  // localStorage 키
+
+function getTeacherPassword() {
+  try {
+    return localStorage.getItem(TEACHER_PASSWORD_KEY) || DEFAULT_TEACHER_PASSWORD;
+  } catch(e) { return DEFAULT_TEACHER_PASSWORD; }
+}
+function setTeacherPassword(pw) {
+  try { localStorage.setItem(TEACHER_PASSWORD_KEY, pw); }
+  catch(e) {}
+}
 
 // ====================================================================
 // 학생 배포용 URL (선생님용 가이드를 따라 입력)
@@ -1289,7 +1374,23 @@ function switchMode(mode) {
     else showScreen('screen-login');
   } else {
     if (state.teacherAuthed) showTeacherDash();
-    else showScreen('screen-teacher-login');
+    else {
+      updateTeacherPasswordHint();
+      showScreen('screen-teacher-login');
+    }
+  }
+}
+
+function updateTeacherPasswordHint() {
+  const hint = $('teacher-password-hint');
+  if (!hint) return;
+  // 사용자가 변경한 비밀번호가 있는지 확인
+  let hasCustom = false;
+  try { hasCustom = !!localStorage.getItem(TEACHER_PASSWORD_KEY); } catch(e) {}
+  if (hasCustom) {
+    hint.innerHTML = '🔒 변경한 비밀번호로 로그인하세요';
+  } else {
+    hint.innerHTML = '💡 기본 비밀번호는 <code style="background:#f1f5f9; padding:2px 6px; border-radius:4px;">vocatree2024</code> 입니다';
   }
 }
 
@@ -1317,7 +1418,7 @@ function logoutStudent() {
 function loginTeacher() {
   const pw = $('teacher-password').value;
   const err = $('teacher-login-error');
-  if (pw === TEACHER_PASSWORD) {
+  if (pw === getTeacherPassword()) {
     state.teacherAuthed = true;
     err.textContent = '';
     $('teacher-password').value = '';
@@ -2053,6 +2154,49 @@ async function testConnection() {
 
 async function refreshData() {
   await showTeacherDash();
+}
+
+// ======= 비밀번호 변경 =======
+function changePassword() {
+  const cur = $('pwd-current').value;
+  const newPw = $('pwd-new').value;
+  const newPw2 = $('pwd-new2').value;
+  const status = $('pwd-status');
+
+  if (!cur) {
+    status.innerHTML = '<span style="color:var(--error);">현재 비밀번호를 입력하세요.</span>';
+    return;
+  }
+  if (cur !== getTeacherPassword()) {
+    status.innerHTML = '<span style="color:var(--error);">현재 비밀번호가 일치하지 않습니다.</span>';
+    return;
+  }
+  if (!newPw || newPw.length < 4) {
+    status.innerHTML = '<span style="color:var(--error);">새 비밀번호는 4자 이상이어야 합니다.</span>';
+    return;
+  }
+  if (newPw !== newPw2) {
+    status.innerHTML = '<span style="color:var(--error);">새 비밀번호 확인이 일치하지 않습니다.</span>';
+    return;
+  }
+  if (newPw === DEFAULT_TEACHER_PASSWORD) {
+    status.innerHTML = '<span style="color:var(--error);">기본 비밀번호로는 변경할 수 없습니다. (초기화하려면 "기본값으로 초기화" 사용)</span>';
+    return;
+  }
+  setTeacherPassword(newPw);
+  $('pwd-current').value = '';
+  $('pwd-new').value = '';
+  $('pwd-new2').value = '';
+  status.innerHTML = '<span style="color:var(--accent-dark);">✅ 비밀번호가 변경되었습니다. 다음 로그인부터 새 비밀번호를 사용하세요.</span>';
+}
+
+function resetPassword() {
+  if (!confirm('비밀번호를 기본값(' + DEFAULT_TEACHER_PASSWORD + ')으로 초기화하시겠어요?')) return;
+  try { localStorage.removeItem(TEACHER_PASSWORD_KEY); } catch(e) {}
+  $('pwd-current').value = '';
+  $('pwd-new').value = '';
+  $('pwd-new2').value = '';
+  $('pwd-status').innerHTML = '<span style="color:var(--accent-dark);">✅ 기본 비밀번호로 초기화되었습니다.</span>';
 }
 
 function showSetupGuide() {
