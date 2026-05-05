@@ -401,6 +401,33 @@ body {
 .answer-input.correct { background:#d1fae5; border-color: var(--accent); color: var(--accent-dark); }
 .answer-input.wrong { background:#fee2e2; border-color: var(--error); color: var(--error); }
 
+/* 입력 안내 (첫 글자 포함) */
+.input-hint {
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:6px;
+  margin: 12px 0 8px;
+  padding: 8px 14px;
+  background:#eff6ff;
+  border:1px solid #bfdbfe;
+  border-radius:8px;
+  color:#1e40af;
+  font-size:12.5px;
+  line-height:1.4;
+}
+.input-hint svg {
+  flex-shrink:0;
+  color:#2563eb;
+}
+.input-hint b {
+  color:#1d4ed8;
+  font-weight:800;
+  background:#dbeafe;
+  padding:1px 6px;
+  border-radius:4px;
+}
+
 /* ======= Example sentence (Part 02) ======= */
 .sentence-box {
   background: #f8fafc; border:2px solid var(--border);
@@ -651,7 +678,7 @@ body {
       </div>
       <div class="guide-body">
         <div class="guide-title">학습 팁</div>
-        <p>막막할 땐 화면 안의 <span class="guide-pill"><svg viewBox="0 0 16 16" width="11" height="11" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="3,6 8,11 13,6"/></svg> 파생 과정 보기</span> 버튼을 <b>꼭 눌러보세요!</b><br>어원의 흐름을 따라가면 단어가 훨씬 쉽게 외워져요.</p>
+        <p>막막할 땐 화면 안의 <span class="guide-pill"><svg viewBox="0 0 16 16" width="11" height="11" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="3,6 8,11 13,6"/></svg> 파생 과정 보기</span> 버튼을 <b>꼭 눌러보세요!</b><br>어원의 흐름을 따라가면 단어가 훨씬 쉽게 외워져요.<br><span style="display:inline-block; margin-top:6px; color:#1d4ed8; background:#dbeafe; padding:2px 8px; border-radius:6px; font-weight:700; font-size:12.5px;">📌 답안 입력은 <b>첫 글자부터 단어 전체</b>를 써주세요</span></p>
       </div>
     </div>
 
@@ -697,8 +724,12 @@ body {
         <div class="meaning"><span class="pos" id="bridge-pos"></span><span id="bridge-meaning"></span></div>
       </div>
       <div class="word-slots" id="bridge-slots"></div>
+      <div class="input-hint">
+        <svg viewBox="0 0 20 20" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="10" cy="10" r="8"/><path d="M10 6v4M10 14h.01"/></svg>
+        <span><b>첫 글자를 포함</b>해서 단어 전체를 입력하세요</span>
+      </div>
       <input type="text" class="answer-input" id="bridge-input"
-             placeholder="단어를 입력하세요" autocomplete="off"
+             placeholder="첫 글자부터 단어 전체를 입력" autocomplete="off"
              autocapitalize="off" spellcheck="false">
       <div id="bridge-feedback"></div>
       <button class="btn btn-primary" id="bridge-submit" style="margin-top:14px;">제출하기</button>
@@ -716,8 +747,12 @@ body {
         <span class="label-text">파생 과정 보기</span>
       </button>
       <div class="extra-hint hidden" id="example-extra-hint" style="margin-top:10px;"></div>
+      <div class="input-hint">
+        <svg viewBox="0 0 20 20" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="10" cy="10" r="8"/><path d="M10 6v4M10 14h.01"/></svg>
+        <span><b>첫 글자를 포함</b>해서 빈칸에 들어갈 단어 전체를 입력하세요</span>
+      </div>
       <input type="text" class="answer-input" id="example-input"
-             placeholder="빈칸에 들어갈 단어를 입력" autocomplete="off"
+             placeholder="첫 글자부터 단어 전체를 입력" autocomplete="off"
              autocapitalize="off" spellcheck="false">
       <div id="example-feedback"></div>
       <button class="btn btn-primary" id="example-submit" style="margin-top:14px;">제출하기</button>
@@ -1027,39 +1062,39 @@ const VOCA_DATA = {
       ]
     },
     bridge: [
-      { word: "dependent", roots: "de (아래로) + pend (매달다) + ent", hint: "아래로 매달려 있는", meaning: "의존하는", pos: "adj." },
-      { word: "dependence", roots: "dependent의 명사형 (-ence)", hint: "의존하는 상태", meaning: "의존(성)", pos: "n." },
-      { word: "apparent", roots: "ap (~로) + par (나타나다) + ent", hint: "밖으로 나타나고 있는", meaning: "분명한, 명백한", pos: "adj." },
-      { word: "confident", roots: "con (강하게) + fid (믿다) + ent", hint: "강하게 믿고 있는", meaning: "자신감 있는", pos: "adj." },
-      { word: "confidence", roots: "confident의 명사형", hint: "강하게 믿는 상태", meaning: "자신감", pos: "n." },
-      { word: "equivalent", roots: "equi (같은) + val (가치) + ent", hint: "같은 가치를 가지는", meaning: "(가치가) 같은, 등가물", pos: "adj./n." },
-      { word: "obedient", roots: "ob (~에) + ed(audi) (듣다) + ient", hint: "(말을) 잘 듣고 있는", meaning: "순종하는", pos: "adj." },
+      { word: "dependent", roots: "depend '의존하다' + [?] 형용사형 어미", hint: "아래로 매달려 있는", meaning: "의존하는", pos: "adj." },
+      { word: "dependence", roots: "depend '의존하다' + [?] 명사형 어미", hint: "의존하는 상태", meaning: "의존(성)", pos: "n." },
+      { word: "apparent", roots: "appear '나타나다, 보이다' + [?] 형용사형 어미", hint: "밖으로 나타나고 있는", meaning: "분명한, 명백한", pos: "adj." },
+      { word: "confident", roots: "con '강하게' + fid '믿다' + [?] 형용사형 어미", hint: "강하게 믿고 있는", meaning: "자신감 있는", pos: "adj." },
+      { word: "confidence", roots: "con '강하게' + fid '믿다' + [?] 명사형 어미", hint: "강하게 믿는 상태", meaning: "자신감", pos: "n." },
+      { word: "equivalent", roots: "equi '같은' + val '가치' + [?] 형용사형 어미", hint: "같은 가치를 가지는", meaning: "(가치가) 같은, 등가물", pos: "adj./n." },
+      { word: "obedient", roots: "ob '~에' + ed/audi '듣다' + [?] 형용사형 어미", hint: "(말을) 잘 듣고 있는", meaning: "순종하는", pos: "adj." },
       { word: "constant", roots: "consta- '변함없는, 일관된' + [?] 형용사형 어미", hint: "굳게 변하지 않고 서있는", meaning: "끊임없는, 변함없는", pos: "adj.", extraHint: "<b>con</b> '함께, 강조' + <b>sta-</b> '서있다' → 단단히 고정된, 변함없는" },
-      { word: "pleasant", roots: "pleas (기쁘게 하다) + ant", hint: "기쁘게 하고 있는", meaning: "유쾌한, 기분좋은", pos: "adj." },
+      { word: "pleasant", roots: "please '기쁘게 만들다' + [?] 형용사형 어미", hint: "기쁘게 하고 있는", meaning: "유쾌한, 기분좋은", pos: "adj." },
       { word: "vacant", roots: "vac '비어있는' + [?] 형용사형 어미", hint: "비어 있는", meaning: "비어 있는, 공석의", pos: "adj." },
-      { word: "tolerant", roots: "toler (참다) + ant", hint: "참아내고 있는", meaning: "잘 견디는, 관대한", pos: "adj." },
-      { word: "dominant", roots: "domin (지배) + ant", hint: "지배하고 있는", meaning: "지배적인, 우세한", pos: "adj." },
-      { word: "resistant", roots: "re (다시) + sist (서다) + ant", hint: "맞서 서 있는", meaning: "저항하는", pos: "adj." },
+      { word: "tolerant", roots: "toler '참다' + [?] 형용사형 어미", hint: "참아내고 있는", meaning: "잘 견디는, 관대한", pos: "adj." },
+      { word: "dominant", roots: "domin '지배' + [?] 형용사형 어미", hint: "지배하고 있는", meaning: "지배적인, 우세한", pos: "adj." },
+      { word: "resistant", roots: "resist '저항하다' + [?] 형용사형 어미", hint: "맞서 서 있는", meaning: "저항하는", pos: "adj." },
       { word: "resistance", roots: "resist '저항하다' + [?] 명사형 어미", hint: "맞서 서있는 상태", meaning: "저항(력)", pos: "n." },
       { word: "persistent", roots: "persist- '계속 존재하다' + [?] 형용사형 어미", hint: "계속 서 있는", meaning: "끊임없이 지속하는", pos: "adj.", extraHint: "<b>per</b> '계속, 영구적' + <b>sta-</b> '서있다' → 끊임없이 고정된, 영구적인" },
       { word: "persistence", roots: "persist- '계속 존재하다' + [?] 명사형 어미", hint: "계속 서있는 상태", meaning: "고집, 지속(성)", pos: "n.", extraHint: "<b>per</b> '계속, 영구적' + <b>sta-</b> '서있다' → 고집, 끈기, 인내" },
       { word: "efficient", roots: "e(x) '밖으로' + fac/fec/fic '만들어내다' + [?] 형용사형 어미", hint: "밖으로 잘 만들어 내는", meaning: "효율적인", pos: "adj.", extraHint: "<b>e(x)</b> '밖으로' + <b>fac/fec/fic</b> '만들어내다' → (성과를) 내는, 효율적인" },
-      { word: "efficiency", roots: "efficient의 명사형 (-ency)", hint: "효율적인 상태", meaning: "효율(성)", pos: "n." },
+      { word: "efficiency", roots: "e(x) '밖으로' + fac/fec/fic '만들어내다' + [?] 명사형 어미", hint: "효율적인 상태", meaning: "효율(성)", pos: "n." },
       { word: "independence", roots: "in '부정' + depend '의존하다' + [?] 명사형 어미", hint: "의존하지 않는 상태", meaning: "독립(성)", pos: "n.", extraHint: "<b>in</b> '부정' + <b>depend</b> '의존하다' → 의존하지 않음, 독립(성)" },
       { word: "excellent", roots: "excel '뛰어나다' + [?] 형용사형 어미", hint: "밖으로 두드러지게 뛰어난", meaning: "뛰어난, 훌륭한", pos: "adj." },
       { word: "excellence", roots: "excel '뛰어나다' + [?] 명사형 어미", hint: "뛰어난 상태", meaning: "뛰어남, 우수성", pos: "n." },
-      { word: "presence", roots: "pre (앞에) + s(es) (있다) + ence", hint: "앞에 있는 상태", meaning: "참석, 존재", pos: "n." },
+      { word: "presence", roots: "pre '앞에' + esse '있다' + [?] 명사형 어미", hint: "앞에 있는 상태", meaning: "참석, 존재", pos: "n." },
       { word: "proficient", roots: "profic + [?] 형용사형 어미", hint: "앞서서 잘 만들어 내는", meaning: "능숙한, 유창한", pos: "adj.", extraHint: "<b>pro</b> '앞으로' + <b>fic/fac/fect</b> '만들다' → 앞으로 만들어나가는 → 진보된, 숙련된, 유창한" },
-      { word: "proficiency", roots: "proficient의 명사형", hint: "능숙한 상태", meaning: "능숙함, 숙련", pos: "n." },
-      { word: "applicant", roots: "apply의 행위자 (-ant)", hint: "지원하고 있는 사람", meaning: "지원자", pos: "n." },
+      { word: "proficiency", roots: "profic '앞으로 만들어나가는, 진보된, 숙련된, 유창한' + [?] 명사형 어미", hint: "능숙한 상태", meaning: "능숙함, 숙련", pos: "n." },
+      { word: "applicant", roots: "apply '지원, 적용하다' + [?] ~하는 주체", hint: "지원하고 있는 사람", meaning: "지원자", pos: "n." },
       { word: "application", roots: "apply '지원, 적용하다' + [?] 명사형 어미", hint: "지원하는 행위/적용 사례", meaning: "지원(서), 적용, 응용", pos: "n.", extraHint: "<b>ap(ad)</b> '파생 접두어' + <b>ple</b> '접다, 붙이다, 적용하다' cf. fold (P&F의 관계) → 지원, 적용" },
-      { word: "attendance", roots: "attend + ance", hint: "참석하고 있는 상태", meaning: "참석, 출석(률)", pos: "n." },
-      { word: "attention", roots: "attend의 명사형 (-tion)", hint: "주의를 기울이는 상태", meaning: "주의, 관심", pos: "n." },
+      { word: "attendance", roots: "attend '~에 향하다, 참석하다' + [?] 명사형 어미", hint: "참석하고 있는 상태", meaning: "참석, 출석(률)", pos: "n." },
+      { word: "attention", roots: "attend '~에 향하다, 신경쓰다' + [?] 명사형 어미", hint: "주의를 기울이는 상태", meaning: "주의, 관심", pos: "n." },
       { word: "observance", roots: "observe '지켜보다' + [?] 명사형 어미", hint: "지키는 행위", meaning: "(법·규칙의) 준수", pos: "n.", extraHint: "<b>observe</b> '지키다 + 보다' → (법, 규칙 등을) 지키다, 준수하다" },
       { word: "observation", roots: "observe '지켜보다' + [?] 명사형 어미", hint: "관찰하는 행위", meaning: "관찰", pos: "n.", extraHint: "<b>observe</b> '지키다 + 보다' → 보는 행위, 관찰" },
       { word: "emergence", roots: "emerge + [?] 명사형 어미", hint: "(밖으로) 나타나는 것", meaning: "출현, 등장", pos: "n.", extraHint: "<b>e(x)</b> '밖으로' + <b>merge</b> '물에 들어가 섞이다' → 물 밖으로 갑자기 나오다 → (예측하지 못한) 등장, 출현" },
       { word: "emergency", roots: "emerge + [?] 명사형 어미", hint: "갑자기 나타나는 상황", meaning: "비상(사태)", pos: "n.", extraHint: "<b>e(x)</b> '밖으로' + <b>merge</b> '물에 들어가 섞이다' → 물 밖으로 갑자기 나오다 → 준비/예측되지 않은 상황" },
-      { word: "accountable", roots: "account + able", hint: "(상황을) 설명할 수 있는", meaning: "(설명할) 책임이 있는", pos: "adj." },
+      { word: "accountable", roots: "account '(출납 등을) 세다, 기록하다' + [?] ~할 수 있는", hint: "(상황을) 설명할 수 있는", meaning: "(설명할) 책임이 있는", pos: "adj." },
       { word: "accountant", roots: "account '(출납 등을) 세다, 기록하다' + [?] ~하는 주체", hint: "장부를 다루는 사람", meaning: "회계사", pos: "n.", extraHint: "<b>ac(ad)</b> '파생 접두어' + <b>account</b> '(출납 등을) 세다, 기록하다' → 회계사" }
     ],
     examples: [
