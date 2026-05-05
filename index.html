@@ -617,6 +617,10 @@ body {
       <div class="sentence-box" id="example-sentence"></div>
       <div class="translation-box" id="example-translation"></div>
       <div class="word-slots" id="example-slots"></div>
+      <button type="button" class="extra-hint-btn hidden" id="example-extra-hint-btn" onclick="toggleExampleExtraHint()" style="margin-top:10px;">
+        🔍 어원 힌트 보기
+      </button>
+      <div class="extra-hint hidden" id="example-extra-hint" style="margin-top:10px;"></div>
       <input type="text" class="answer-input" id="example-input"
              placeholder="빈칸에 들어갈 단어를 입력" autocomplete="off"
              autocapitalize="off" spellcheck="false">
@@ -890,26 +894,27 @@ const VOCA_DATA = {
       { word: "enormous", roots: "e (밖으로) + norm (보통)", hint: "보통 밖으로 벗어난", meaning: "거대한, 엄청난", pos: "adj.", extraHint: "<b>normal</b> '보통'" }
     ],
     examples: [
-      { sentence: "People on low ____s often struggle to afford basic necessities.", answer: "income", translation: "소득이 낮은 사람들은 종종 기본 필수품을 구입하는 데 어려움을 겪는다." },
-      { sentence: "The firm ____s 150 people in the local area.", answer: "employs", translation: "그 회사는 그 지역에서 150명의 사람들을 고용한다." },
-      { sentence: "There is no evidence that the virus can ____ humans directly.", answer: "infect", translation: "그 바이러스가 인간을 직접 감염시킬 수 있다는 증거는 없다." },
+      { sentence: "People on low ____s often struggle to afford basic necessities.", answer: "income", translation: "소득이 낮은 사람들은 종종 기본 필수품을 구입하는 데 어려움을 겪는다.", extraHint: "<b>in</b> '안으로' + <b>come</b> '오다' → 수입, 소득" },
+      { sentence: "The firm ____ 150 people in the local area.", answer: "employ", translation: "그 회사는 그 지역에서 150명의 사람들을 고용한다.", extraHint: "<b>in/en/em</b> '안으로' + <b>ple</b> '접다, 붙이다, 적용하다' cf. fold (P&F의 관계) → 안으로 끌어와 목적에 맞게 적용하다" },
+      { sentence: "There is no evidence that the virus can ____ humans directly.", answer: "infect", translation: "그 바이러스가 인간을 직접 감염시킬 수 있다는 증거는 없다.", extraHint: "<b>in</b> '안으로' + <b>fac/fect</b> '(영향을) 만들다 cf. factory' → 감염시키다" },
       { sentence: "The foundation will ____ five million dollars in the project.", answer: "invest", translation: "그 재단은 그 프로젝트에 5백만 달러를 투자할 것이다." },
       { sentence: "He has already ____d to us his intention to retire.", answer: "intimate", translation: "그는 이미 우리에게 은퇴 의사를 시사했다." },
-      { sentence: "The movie ____d both their minds and eyes throughout.", answer: "engage", translation: "그 영화는 그들의 마음과 눈 모두를 사로잡았다." },
-      { sentence: "She has the ability to ____ with young minds easily.", answer: "engage", translation: "그녀는 젊은이들과 관계를 맺는 능력이 있다." },
-      { sentence: "The country's main ____ is agricultural products.", answer: "export", translation: "그 국가의 주요 수출품은 농산물이다." },
-      { sentence: "The company's profits ____ expectations for the quarter.", answer: "exceed", translation: "그 회사의 이익이 분기 기대실적을 초과한다." },
-      { sentence: "We need to ____ the deadline to allow more time for completion.", answer: "extend", translation: "완성에 더 많은 시간을 할애하기 위해 마감기한을 연장할 필요가 있다." },
-      { sentence: "Authorities ordered residents to ____ the area due to the hurricane.", answer: "evacuate", translation: "당국은 허리케인 때문에 주민들에게 그 지역에서 대피하라고 명령했다." },
-      { sentence: "The puddles began to ____ under the hot sun.", answer: "evaporate", translation: "물웅덩이가 뜨거운 태양 아래서 증발하기 시작했다." },
+      { sentence: "The movie ____d both their minds and eyes throughout.", answer: "engage", translation: "그 영화는 그들의 마음과 눈 모두를 사로잡았다.", extraHint: "<b>in/en</b> '안으로' + <b>gage/wage</b> '맞물리게 하다' → 깊이 관여시키다" },
+      { sentence: "She has the ability to ____ with young minds easily.", answer: "engage", translation: "그녀는 젊은이들과 관계를 맺는 능력이 있다.", extraHint: "<b>in/en</b> '안으로' + <b>gage/wage</b> '맞물리게 하다' → 깊이 관여시키다" },
+      { sentence: "The country's main ____ is agricultural products.", answer: "export", translation: "그 국가의 주요 수출품은 농산물이다.", extraHint: "<b>e(x)</b> '밖으로' + <b>port</b> '항구' → 수출하다, 수출품" },
+      { sentence: "The company's profits ____ expectations for the quarter.", answer: "exceed", translation: "그 회사의 이익이 분기 기대실적을 초과한다.", extraHint: "<b>e(x)</b> '밖으로' + <b>ceed/cess</b> '가다 (go)' → 초과하다" },
+      { sentence: "We need to ____ the deadline to allow more time for completion.", answer: "extend", translation: "완성에 더 많은 시간을 할애하기 위해 마감기한을 연장할 필요가 있다.", extraHint: "<b>e(x)</b> '밖으로' + <b>tend/tens</b> '뻗다 (stretch)' → 확대시키다, 연장하다" },
+      { sentence: "Authorities ordered residents to ____ the area due to the hurricane.", answer: "evacuate", translation: "당국은 허리케인 때문에 주민들에게 그 지역에서 대피하라고 명령했다.", extraHint: "<b>e(x)</b> '밖으로' + <b>vac</b> '빈 (empty)' → 비워서 밖으로 나가다" },
+      { sentence: "The puddles began to ____ under the hot sun.", answer: "evaporate", translation: "물웅덩이가 뜨거운 태양 아래서 증발하기 시작했다.", extraHint: "<b>e(x)</b> '밖으로' + <b>vapor</b> '수증기' → 증발시키다" },
       { sentence: "She tends to ____ her accomplishments to impress others.", answer: "exaggerate", translation: "그녀는 다른 사람을 감동시키기 위해 자신의 업적을 과장하는 경향이 있다." },
-      { sentence: "Please ____ your contact information in the application form.", answer: "include", translation: "지원서에 당신의 연락처 정보를 포함하세요." },
-      { sentence: "The doctor advised him to reduce his daily ____ of sugar.", answer: "intake", translation: "의사는 그에게 하루 설탕 섭취량을 줄이라고 조언했다." },
+      { sentence: "Please ____ your contact information in the application form.", answer: "include", translation: "지원서에 당신의 연락처 정보를 포함하세요.", extraHint: "<b>in</b> '안에 넣고' + <b>clud</b> '닫다 (close)' → 포함시키다" },
+      { sentence: "The doctor advised him to reduce his daily ____ of sugar.", answer: "intake", translation: "의사는 그에게 하루 설탕 섭취량을 줄이라고 조언했다.", extraHint: "<b>in</b> '안으로' + <b>take</b> '취하다' → 섭취하다" },
       { sentence: "Her motivation to succeed was purely ____, driven by rewards.", answer: "extrinsic", translation: "그녀의 성공 동기는 순전히 외적인 것이었고, 보상에 이끌렸다." },
       { sentence: "She experienced ____ bleeding after the car accident.", answer: "internal", translation: "그녀는 교통사고 후 내부 출혈을 겪었다." },
-      { sentence: "The volcano can ____ ash and gases during an eruption.", answer: "emit", translation: "화산은 폭발 시 화산재와 가스를 배출할 수 있다." },
+      { sentence: "The volcano can ____ ash and gases during an eruption.", answer: "emit", translation: "화산은 폭발 시 화산재와 가스를 배출할 수 있다.", extraHint: "<b>e(x)</b> '밖으로' + <b>mis/mit</b> '보내다' → 분출하다" },
       { sentence: "After the marathon, he felt completely ____ed.", answer: "exhaust", translation: "마라톤 후 그는 완전히 기진맥진했다." },
-      { sentence: "The prisoner managed to ____ from the high-security prison.", answer: "escape", translation: "그 죄수는 보안이 강력한 감옥에서 탈출하는 데 성공했다." }
+      { sentence: "The prisoner managed to ____ from the high-security prison.", answer: "escape", translation: "그 죄수는 보안이 강력한 감옥에서 탈출하는 데 성공했다.", extraHint: "<b>e(x)</b> '밖으로' + <b>cap</b> '뚜껑, 커버' → 경계 밖, 탈출하다" },
+      { sentence: "The price does not ____ tax and service charges.", answer: "exclude", translation: "그 가격은 세금과 서비스료를 포함하지 않는다(제외한다).", extraHint: "<b>ex</b> '밖으로 빼고' + <b>clud</b> '닫다 (close)' → 제외시키다" }
     ]
   },
 
@@ -1753,6 +1758,19 @@ function renderExample() {
     slots.appendChild(slot);
   }
 
+  // 어원 힌트 더 보기 (해당 예문에만 있음)
+  const exExtraBtn = $('example-extra-hint-btn');
+  const exExtraBox = $('example-extra-hint');
+  if (q.extraHint) {
+    exExtraBtn.classList.remove('hidden', 'opened');
+    exExtraBtn.textContent = '🔍 어원 힌트 보기';
+    exExtraBox.classList.add('hidden');
+    exExtraBox.innerHTML = q.extraHint;
+  } else {
+    exExtraBtn.classList.add('hidden');
+    exExtraBox.classList.add('hidden');
+  }
+
   const input = $('example-input');
   input.value = '';
   input.disabled = false;
@@ -1844,6 +1862,22 @@ function toggleExtraHint() {
     box.classList.add('hidden');
     btn.classList.remove('opened');
     btn.textContent = '🔍 어원 힌트 더 보기';
+  } else {
+    box.classList.remove('hidden');
+    btn.classList.add('opened');
+    btn.textContent = '🔼 힌트 닫기';
+  }
+}
+
+// 예문 어원 힌트 더 보기 토글
+function toggleExampleExtraHint() {
+  const btn = $('example-extra-hint-btn');
+  const box = $('example-extra-hint');
+  const isOpen = !box.classList.contains('hidden');
+  if (isOpen) {
+    box.classList.add('hidden');
+    btn.classList.remove('opened');
+    btn.textContent = '🔍 어원 힌트 보기';
   } else {
     box.classList.remove('hidden');
     btn.classList.add('opened');
