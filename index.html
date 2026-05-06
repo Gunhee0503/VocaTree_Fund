@@ -428,6 +428,56 @@ body {
   border-radius:4px;
 }
 
+/* ======= Choice options (Part 03) ======= */
+#choice-english u {
+  text-decoration: underline;
+  text-decoration-thickness: 2px;
+  text-underline-offset: 3px;
+  font-weight: 800;
+  color: #1e293b;
+}
+.choice-options {
+  display:flex; flex-direction:column; gap:10px;
+  margin-top:14px;
+}
+.choice-option {
+  display:flex; align-items:center; gap:12px;
+  background:#fff; border:2px solid var(--border); border-radius:12px;
+  padding:14px 16px; cursor:pointer;
+  transition:all 0.2s; font-family:inherit;
+  text-align:left; width:100%;
+  font-size:15px; color:#1e293b; font-weight:500;
+}
+.choice-option:hover {
+  border-color: var(--primary);
+  background:#f8fafc;
+}
+.choice-option .num {
+  display:flex; align-items:center; justify-content:center;
+  flex-shrink:0;
+  width:30px; height:30px;
+  border-radius:50%;
+  background:#f1f5f9; color:#475569;
+  font-weight:800; font-size:14px;
+}
+.choice-option .text { flex:1; }
+.choice-option:disabled { cursor:default; }
+.choice-option.correct {
+  background:#d1fae5; border-color: var(--accent); color: var(--accent-dark);
+}
+.choice-option.correct .num {
+  background:var(--accent); color:#fff;
+}
+.choice-option.wrong {
+  background:#fee2e2; border-color: var(--error); color: var(--error);
+}
+.choice-option.wrong .num {
+  background:var(--error); color:#fff;
+}
+.choice-option.dim {
+  opacity:0.5;
+}
+
 /* ======= Example sentence (Part 02) ======= */
 .sentence-box {
   background: #f8fafc; border:2px solid var(--border);
@@ -693,6 +743,11 @@ body {
         <div class="title">예문 빈칸</div>
         <div class="desc">영어 예문 속<br>빈칸에 단어 채우기</div>
       </button>
+      <button class="part-btn hidden" id="part-btn-3" onclick="startPart(3)">
+        <div class="label">PART 03</div>
+        <div class="title">어휘 추리력</div>
+        <div class="desc">영어 문장의 의미를<br>객관식으로 추리</div>
+      </button>
     </div>
   </div>
 
@@ -757,6 +812,21 @@ body {
       <div id="example-feedback"></div>
       <button class="btn btn-primary" id="example-submit" style="margin-top:14px;">제출하기</button>
       <div class="btn-row hidden" id="example-next-row">
+        <button class="btn btn-primary" style="flex:1;" onclick="nextQuestion()">다음 →</button>
+      </div>
+    </div>
+
+    <div id="view-choice" class="hidden">
+      <div class="sentence-box" id="choice-english"></div>
+      <div class="translation-box" id="choice-korean"></div>
+      <button type="button" class="extra-hint-btn hidden" id="choice-extra-hint-btn" onclick="toggleChoiceExtraHint()" style="margin-top:10px; margin-bottom:4px;">
+        <span class="icon"><svg viewBox="0 0 16 16" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="3,6 8,11 13,6"/></svg></span>
+        <span class="label-text">파생 과정 보기</span>
+      </button>
+      <div class="extra-hint hidden" id="choice-extra-hint" style="margin-top:8px; margin-bottom:14px;"></div>
+      <div class="choice-options" id="choice-options"></div>
+      <div id="choice-feedback"></div>
+      <div class="btn-row hidden" id="choice-next-row" style="margin-top:14px;">
         <button class="btn btn-primary" style="flex:1;" onclick="nextQuestion()">다음 →</button>
       </div>
     </div>
@@ -1045,6 +1115,88 @@ const VOCA_DATA = {
       { sentence: "After the marathon, he felt completely ____ed.", answer: "exhaust", translation: "마라톤 후 그는 완전히 기진맥진했다." },
       { sentence: "The prisoner managed to ____ from the high-security prison.", answer: "escape", translation: "그 죄수는 보안이 강력한 감옥에서 탈출하는 데 성공했다.", extraHint: "<b>e(x)</b> '밖으로' + <b>cap</b> '뚜껑, 커버' → 경계 밖, 탈출하다" },
       { sentence: "The price does not ____ tax and service charges.", answer: "exclude", translation: "그 가격은 세금과 서비스료를 포함하지 않는다(제외한다).", extraHint: "<b>ex</b> '밖으로 빼고' + <b>clud</b> '닫다 (close)' → 제외시키다" }
+    ],
+    choices: [
+      {
+        english: "Please <u>include</u> your contact information in the application form.",
+        korean: "지원서에 당신의 연락처 정보를 [   ] 하세요.",
+        options: ["수정하다", "제외하다", "포함하다", "추가하다"],
+        answer: 2,
+        word: "include",
+        extraHint: "<b>in</b> '안에 넣고' + <b>clud</b> '닫다 (close)' → 안쪽에 가두어 두다 = 포함하다"
+      },
+      {
+        english: "<u>Exhale</u> slowly to help relax your muscles.",
+        korean: "당신의 근육이 이완되는 것을 돕기 위해 숨을 천천히 [   ] 세요.",
+        options: ["들이마시다", "내뱉다", "참다", "추가하다"],
+        answer: 1,
+        word: "exhale",
+        extraHint: "<b>ex</b> '밖으로' + <b>hale</b> '숨쉬다 (breathe)' → 숨을 밖으로 내쉬다"
+      },
+      {
+        english: "Her motivation to succeed was purely <u>extrinsic</u>, driven by the rewards she would receive.",
+        korean: "그녀의 성공하고자 하는 동기는 순전히 [   ] 것이었고, 그녀가 받을 보상에 이끌렸습니다.",
+        options: ["개인적인", "열정적인", "내재적인", "외적인"],
+        answer: 3,
+        word: "extrinsic",
+        extraHint: "<b>extr-</b> '바깥의' + <b>insic</b> '안의' → 바깥쪽에서 오는, 외적인"
+      },
+      {
+        english: "The doctor advised him to reduce his daily <u>intake</u> of sugar.",
+        korean: "그 의사는 그에게 하루 설탕 [   ] 을(를) 줄이라고 조언했습니다.",
+        options: ["양(량)", "허용치", "섭취", "공급"],
+        answer: 2,
+        word: "intake",
+        extraHint: "<b>in</b> '안으로' + <b>take</b> '취하다' → 안으로 받아들임 = 섭취(량)"
+      },
+      {
+        english: "The school may <u>expel</u> students who cheat on exams.",
+        korean: "학교는 시험에서 부정행위를 하는 학생들을 [   ] 할 수 있습니다.",
+        options: ["입학시키다", "정학시키다", "퇴학시키다", "처벌하다"],
+        answer: 2,
+        word: "expel",
+        extraHint: "<b>ex</b> '밖으로' + <b>pel</b> '밀다 (push)' → 밖으로 밀어내다 = 퇴학시키다"
+      },
+      {
+        english: "As an <u>introvert</u>, she prefers being at home.",
+        korean: "[   ] 으로서 그녀는 집에 있는 것을 선호합니다.",
+        options: ["실패한 사람", "우울한 사람", "내성적인 사람", "외향적인 사람"],
+        answer: 2,
+        word: "introvert",
+        extraHint: "<b>intro</b> '안쪽으로' + <b>vert</b> '돌리다 (turn)' → 안쪽으로 향하는 사람 = 내성적인 사람"
+      },
+      {
+        english: "The teacher used the activities to <u>engage</u> her students in the subject.",
+        korean: "그 선생님은 학생들을 그 과목에(을) [   ] 시키기 위해 그 활동들을 사용했습니다.",
+        options: ["집중, 몰입시키다", "이해시키다", "흥미를 주다", "유지하다"],
+        answer: 0,
+        word: "engage",
+        extraHint: "<b>en(in)</b> '안에' + <b>gage/wage</b> '깊이 관여하다' → 안으로 끌어들이다 = 집중, 몰입시키다"
+      },
+      {
+        english: "She experienced <u>internal</u> bleeding after the car accident.",
+        korean: "그녀는 교통사고 후 [   ] 출혈을 경험했습니다.",
+        options: ["심한", "광범위한", "내적인", "외적인"],
+        answer: 2,
+        word: "internal",
+        extraHint: "<b>intern-</b> '안쪽의' + <b>-al</b> (형용사형 어미) → 안쪽의, 내부의 = 내적인"
+      },
+      {
+        english: "The airplane's emergency system will <u>eject</u> the pilot's seat if needed.",
+        korean: "비행기의 비상 시스템은 필요한 경우 조종사의 좌석을 [   ] 합니다.",
+        options: ["보호하다", "탈출시키다", "분리시키다", "유지시키다"],
+        answer: 1,
+        word: "eject",
+        extraHint: "<b>e(x)</b> '밖으로' + <b>ject</b> '던지다 (throw)' → 밖으로 튕겨내다 = 탈출시키다"
+      },
+      {
+        english: "The volcano can <u>emit</u> ash and gases during an eruption.",
+        korean: "화산은 화산 폭발 시 화산재와 가스를 [   ] 할 수 있습니다.",
+        options: ["흡수시키다", "변화시키다", "녹이다", "배출시키다"],
+        answer: 3,
+        word: "emit",
+        extraHint: "<b>e(x)</b> '밖으로' + <b>mis/mit</b> '보내다' → 밖으로 보내다 = 분출/배출하다"
+      }
     ]
   },
 
@@ -1068,7 +1220,7 @@ const VOCA_DATA = {
       { word: "confident", roots: "con '강하게' + fid '믿다' → 형용사형", hint: "강하게 믿고 있는", meaning: "자신감 있는", pos: "adj." },
       { word: "confidence", roots: "con '강하게' + fid '믿다' → 명사형", hint: "강하게 믿는 상태", meaning: "자신감", pos: "n." },
       { word: "equivalent", roots: "equi '같은' + val '가치' + [?] 형용사형 어미", hint: "같은 가치를 가지는", meaning: "(가치가) 같은, 등가물", pos: "adj./n." },
-      { word: "obedient", roots: "ob '~에' + ed/audi '듣다' + [?] 형용사형 어미", hint: "(말을) 잘 듣고 있는", meaning: "순종하는", pos: "adj." },
+      { word: "obedient", roots: "obey '복종하다 / 따르다 / 순종하다' + [?] 형용사형 어미", hint: "(말을) 잘 듣고 있는", meaning: "순종하는", pos: "adj." },
       { word: "constant", roots: "consta- '변함없는, 일관된' + [?] 형용사형 어미", hint: "굳게 변하지 않고 서있는", meaning: "끊임없는, 변함없는", pos: "adj.", extraHint: "<b>con</b> '함께, 강조' + <b>sta-</b> '서있다' → 단단히 고정된, 변함없는" },
       { word: "pleasant", roots: "please '기쁘게 만들다' + [?] 형용사형 어미", hint: "기쁘게 하고 있는", meaning: "유쾌한, 기분좋은", pos: "adj." },
       { word: "vacant", roots: "vac '비어있는' + [?] 형용사형 어미", hint: "비어 있는", meaning: "비어 있는, 공석의", pos: "adj." },
@@ -1111,13 +1263,95 @@ const VOCA_DATA = {
       { sentence: "Successful ____ for this job will receive notification within the week.", answer: "applicant", translation: "이 일자리에 합격한 지원자는 한 주 내로 통보받을 것이다.", extraHint: "<b>apply</b> '적용, 지원하다' + ~하는 주체 → 명사형" },
       { sentence: "The invention would have a wide range of ____s in industry.", answer: "application", translation: "그 발명품은 산업에서 광범위한 응용 분야를 갖게 될 것이다." },
       { sentence: "____ at these lectures is not compulsory.", answer: "Attendance", translation: "이 강의의 출석은 의무가 아니다.", extraHint: "<b>attend</b> '~(물리적, 정신적으로) 향하다, 참석/출석하다' → 명사형" },
-      { sentence: "I tried not to draw ____ to the weak points in my argument.", answer: "attention", translation: "나는 내 주장의 약점들에 주의가 쏠리지 않게 하려고 노력했다.", extraHint: "<b>attend</b> '~(물리적, 정신적으로) 향하다, 참석/출석하다' → 명사형" },
+      { sentence: "I tried not to draw ____ to the weak points in my argument.", answer: "attention", translation: "나는 내 주장의 약점들에 주의가 쏠리지 않게 하려고 노력했다.", extraHint: "<b>attend</b> '~(물리적, 정신적으로) 향하다, ~에 신경쓰다' → 명사형" },
       { sentence: "Strict ____ of the rules is required at all times.", answer: "observance", translation: "규칙의 엄격한 준수가 항상 요구된다.", extraHint: "<b>observe</b> '지키다, 준수하다' → 명사형" },
       { sentence: "In hospital she'll be under ____ all the time.", answer: "observation", translation: "병원에서 그녀는 항상 관찰 대상이 될 것이다.", extraHint: "<b>observe</b> '관찰하다' → 명사형" },
       { sentence: "The ____ of new technologies is changing our lives.", answer: "emergence", translation: "새로운 기술들의 출현이 우리의 삶을 바꾸고 있다.", extraHint: "<b>emerge</b> '물 밖으로 갑자기 나오다, 등장/출현하다' → 명사형" },
       { sentence: "The government has declared a state of ____ following the earthquake.", answer: "emergency", translation: "정부는 지진 후 비상사태를 선포했다.", extraHint: "<b>emerge</b> '물 밖으로 갑자기 나오다, 예측하지 못한 긴급상황' → 명사형" },
       { sentence: "The state spends taxpayers' money and should be held ____.", answer: "accountable", translation: "국가는 납세자의 돈을 사용하므로 책임을 져야 한다.", extraHint: "<b>account</b> '(출납을) 기록, 책임지다' + ~할 수 있는 → 형용사형" },
       { sentence: "An ____ is a person whose job is to keep financial records.", answer: "accountant", translation: "회계사는 재정 기록을 관리하는 직업을 가진 사람이다.", extraHint: "<b>account</b> '(출납을) 기록하다' + ~하는 주체 → 명사형" }
+    ],
+    choices: [
+      {
+        english: "The police kept the name of the <u>informant</u> secret to ensure his safety.",
+        korean: "경찰은 그의 안전을 보장하기 위해 ______의 이름을 비밀로 유지했다.",
+        options: ["범죄자", "정보 제공자", "판사", "목격자", "변호사"],
+        answer: 1,
+        word: "informant",
+        extraHint: "<b>inform</b> '정보를 제공하다' + ~하는 주체"
+      },
+      {
+        english: "In this sentence, the word \"it\" has no clear <u>referent</u>.",
+        korean: "이 문장에서 \"it\"은 분명한 ______가 없다.",
+        options: ["문장 구조", "지시 대상", "동사 시제", "문법 규칙", "주어"],
+        answer: 1,
+        word: "referent",
+        extraHint: "<b>refer</b> '참고, 관련, 연결하다 (link)' + ~하는 대상"
+      },
+      {
+        english: "Her <u>tendency</u> to worry about small things makes her stressed.",
+        korean: "사소한 것들을 걱정하는 그녀의 ______이 그녀를 스트레스 받게 한다.",
+        options: ["책임", "경향", "선택", "기회", "목적"],
+        answer: 1,
+        word: "tendency",
+        extraHint: "<b>tend</b> '방향, ~로 향하는 이미지' + <b>ency</b> (명사형 어미)"
+      },
+      {
+        english: "We need to reduce the <u>frequency</u> of errors in this process.",
+        korean: "우리는 이 과정에서 오류의 ______을 줄여야 한다.",
+        options: ["크기", "빈도", "원인", "방식", "영향"],
+        answer: 1,
+        word: "frequency",
+        extraHint: "<b>frequent</b> '자주 일어나는, 종종의, 빈번한' (형용사) + <b>ency</b> (명사형 어미)"
+      },
+      {
+        english: "There is a lack of <u>consistency</u> in his statements.",
+        korean: "그의 진술에는 ______이 부족하다.",
+        options: ["정확성", "일관성", "신뢰성", "논리성", "중요성"],
+        answer: 1,
+        word: "consistency",
+        extraHint: "<b>persist</b> '계속, 꾸준하게 존재하다' (동사) + <b>ency</b> (명사형 어미)"
+      },
+      {
+        english: "Three <u>dependants</u> relied on him entirely.",
+        korean: "세 명의 ______이 전적으로 그에게 의지했다.",
+        options: ["경쟁자", "부양가족", "동료", "고용주", "투자자"],
+        answer: 1,
+        word: "dependants",
+        extraHint: "<b>depend</b> '의존하다' + <b>ant</b> ~하는 주체 (명사)"
+      },
+      {
+        english: "The country celebrated its <u>independence</u> with a national holiday.",
+        korean: "그 나라는 국가 공휴일로 ______을 기념했다.",
+        options: ["통합", "독립", "발전", "평화", "전쟁"],
+        answer: 1,
+        word: "independence",
+        extraHint: "<b>in</b> '부정' + <b>depend</b> '의존하다' + <b>ence</b> (명사형 어미)"
+      },
+      {
+        english: "The building was evacuated, and all <u>occupants</u> were asked to leave immediately.",
+        korean: "그 건물은 대피되었고, 모든 ______은 즉시 떠나라는 요청을 받았다.",
+        options: ["방문객", "거주자", "관리자", "건축가", "투자자"],
+        answer: 1,
+        word: "occupants",
+        extraHint: "<b>occupy</b> '차지하다, 거주하다' + <b>ant</b> ~하는 주체 (명사)"
+      },
+      {
+        english: "The king was accompanied by a loyal <u>servant</u>.",
+        korean: "왕은 충성스러운 ______과 함께 있었다.",
+        options: ["병사", "하인", "장군", "귀족", "상인"],
+        answer: 1,
+        word: "servant",
+        extraHint: "<b>serve</b> '봉사하다, 섬기다' + <b>ant</b> ~하는 주체 (명사)"
+      },
+      {
+        english: "He was completely <u>ignorant</u> of the rules and made several mistakes.",
+        korean: "그는 규칙에 대해 완전히 ______ 상태였고 여러 실수를 했다.",
+        options: ["능숙한", "무지한", "신중한", "책임감 있는", "정직한"],
+        answer: 1,
+        word: "ignorant",
+        extraHint: "<b>ignore</b> '알지 못하다' + <b>ant</b> ~하는 상태의 (형용사)"
+      }
     ]
   },
 
@@ -1651,6 +1885,12 @@ function selectLesson(key) {
   $('part-lesson-label').textContent = lesson.title.split('.')[0].toUpperCase();
   $('part-lesson-title').textContent = lesson.title.replace(/^Lesson \d+\.\s*/,'');
   $('part-lesson-desc').textContent = lesson.description;
+  // PART 03(객관식)은 lesson.choices가 있을 때만 노출
+  const part3Btn = $('part-btn-3');
+  if (part3Btn) {
+    if (lesson.choices && lesson.choices.length > 0) part3Btn.classList.remove('hidden');
+    else part3Btn.classList.add('hidden');
+  }
   // 강의 선택 시 먼저 개념 요약 화면으로
   showConcept();
 }
@@ -1687,7 +1927,10 @@ function startPart(part) {
   state.part = part;
   state.isReview = false;
   const lesson = VOCA_DATA[state.lessonKey];
-  const source = part === 1 ? lesson.bridge : lesson.examples;
+  let source;
+  if (part === 1) source = lesson.bridge;
+  else if (part === 2) source = lesson.examples;
+  else source = lesson.choices || [];
   state.questions = shuffle(source).slice(0, Math.min(15, source.length));
   state.current = 0;
   state.correct = 0;
@@ -1696,7 +1939,9 @@ function startPart(part) {
   state.startTime = Date.now();
 
   $('quiz-lesson-label').textContent = lesson.title.split(':')[0].split('(')[0].trim();
-  $('quiz-mode-label').textContent = part === 1 ? '단어 브릿지 (어원 → 단어)' : '예문 빈칸 채우기';
+  if (part === 1) $('quiz-mode-label').textContent = '단어 브릿지 (어원 → 단어)';
+  else if (part === 2) $('quiz-mode-label').textContent = '예문 빈칸 채우기';
+  else $('quiz-mode-label').textContent = '어휘 추리력 (객관식)';
   $('quiz-header').classList.remove('review-mode');
 
   showScreen('screen-quiz');
@@ -1712,7 +1957,10 @@ function startReviewQuiz() {
 
   // 틀린 단어들로부터 원본 문제 객체 다시 찾기
   const lesson = VOCA_DATA[state.lessonKey];
-  const source = state.part === 1 ? lesson.bridge : lesson.examples;
+  let source;
+  if (state.part === 1) source = lesson.bridge;
+  else if (state.part === 2) source = lesson.examples;
+  else source = lesson.choices || [];
 
   const reviewQuestions = [];
   // 중복 제거: 같은 단어를 여러 번 틀렸어도 1번만 출제
@@ -1727,9 +1975,12 @@ function startReviewQuiz() {
     if (state.part === 1) {
       // bridge: word 필드로 매칭
       q = source.find(item => (item.word || '').toLowerCase() === wordKey);
-    } else {
+    } else if (state.part === 2) {
       // example: answer 필드로 매칭
       q = source.find(item => (item.answer || '').toLowerCase() === wordKey);
+    } else {
+      // choice: word 필드로 매칭
+      q = source.find(item => (item.word || '').toLowerCase() === wordKey);
     }
     if (q) reviewQuestions.push(q);
   });
@@ -1770,12 +2021,14 @@ function renderQuestion() {
   $('progress-fill').style.width = `${((cur+1)/total)*100}%`;
 
   if (state.part === 1) renderBridge();
-  else renderExample();
+  else if (state.part === 2) renderExample();
+  else renderChoice();
 }
 
 function renderBridge() {
   $('view-bridge').classList.remove('hidden');
   $('view-example').classList.add('hidden');
+  $('view-choice').classList.add('hidden');
 
   const q = state.questions[state.current];
   const maskedHTML = maskRoots(q.roots).replace(/_+/g, '<span class="mask">?</span>');
@@ -1879,6 +2132,7 @@ function submitBridge() {
 function renderExample() {
   $('view-bridge').classList.add('hidden');
   $('view-example').classList.remove('hidden');
+  $('view-choice').classList.add('hidden');
 
   const q = state.questions[state.current];
 
@@ -1990,6 +2244,89 @@ function submitExample() {
   }
 }
 
+// ======= Part 03: 객관식 =======
+function renderChoice() {
+  $('view-bridge').classList.add('hidden');
+  $('view-example').classList.add('hidden');
+  $('view-choice').classList.remove('hidden');
+
+  const q = state.questions[state.current];
+  $('choice-english').innerHTML = q.english;
+  $('choice-korean').innerHTML = `🇰🇷 ${esc(q.korean)}`;
+
+  // 어원 힌트 더 보기
+  const cBtn = $('choice-extra-hint-btn');
+  const cBox = $('choice-extra-hint');
+  if (q.extraHint) {
+    cBtn.classList.remove('hidden', 'opened');
+    const lbl = cBtn.querySelector('.label-text');
+    if (lbl) lbl.textContent = '파생 과정 보기';
+    cBox.classList.add('hidden');
+    cBox.innerHTML = q.extraHint;
+  } else {
+    cBtn.classList.add('hidden');
+    cBox.classList.add('hidden');
+  }
+
+  // 선택지 렌더
+  const optsBox = $('choice-options');
+  optsBox.innerHTML = '';
+  q.options.forEach((opt, idx) => {
+    const btn = document.createElement('button');
+    btn.type = 'button';
+    btn.className = 'choice-option';
+    btn.dataset.index = idx;
+    btn.innerHTML = `<span class="num">${idx+1}</span><span class="text">${esc(opt)}</span>`;
+    btn.onclick = () => submitChoice(idx);
+    optsBox.appendChild(btn);
+  });
+
+  $('choice-feedback').innerHTML = '';
+  $('choice-next-row').classList.add('hidden');
+}
+
+function submitChoice(selected) {
+  if (state.answered) return;
+  state.answered = true;
+
+  const q = state.questions[state.current];
+  const isCorrect = selected === q.answer;
+  if (isCorrect) state.correct++;
+  else state.mistakes.push({ word: q.word || ('Q' + (state.current+1)), meaning: q.korean, userAnswer: q.options[selected], sentence: q.english });
+
+  const opts = $('choice-options').querySelectorAll('.choice-option');
+  opts.forEach((b, i) => {
+    b.disabled = true;
+    if (i === q.answer) b.classList.add('correct');
+    else if (i === selected) b.classList.add('wrong');
+    else b.classList.add('dim');
+  });
+
+  const fb = $('choice-feedback');
+  if (isCorrect) {
+    fb.innerHTML = `<div class="feedback correct" style="margin-top:14px;">✅ 정답입니다!</div>`;
+  } else {
+    fb.innerHTML = `<div class="feedback error" style="margin-top:14px;">❌ 정답: <span class="answer">${q.answer+1}. ${esc(q.options[q.answer])}</span></div>`;
+  }
+  $('choice-next-row').classList.remove('hidden');
+}
+
+function toggleChoiceExtraHint() {
+  const btn = $('choice-extra-hint-btn');
+  const box = $('choice-extra-hint');
+  const lbl = btn.querySelector('.label-text');
+  const isOpen = !box.classList.contains('hidden');
+  if (isOpen) {
+    box.classList.add('hidden');
+    btn.classList.remove('opened');
+    if (lbl) lbl.textContent = '파생 과정 보기';
+  } else {
+    box.classList.remove('hidden');
+    btn.classList.add('opened');
+    if (lbl) lbl.textContent = '닫기';
+  }
+}
+
 function nextQuestion() {
   state.current++;
   if (state.current >= state.questions.length) showResult();
@@ -2053,10 +2390,16 @@ async function showResult() {
   else { emoji='🌱'; detail='기초부터 차근차근 다시 학습해봅시다.'; }
 
   $('result-emoji').textContent = emoji;
+  const partLabel = state.part === 1 ? 'PART 01 · 단어 브릿지'
+                  : state.part === 2 ? 'PART 02 · 예문 빈칸'
+                  : 'PART 03 · 어휘 추리력';
+  const partShort = state.part === 1 ? 'PART 01'
+                  : state.part === 2 ? 'PART 02'
+                  : 'PART 03';
   if (state.isReview) {
-    $('result-mode-label').textContent = '🔁 오답 재시험 · ' + (state.part === 1 ? 'PART 01' : 'PART 02');
+    $('result-mode-label').textContent = '🔁 오답 재시험 · ' + partShort;
   } else {
-    $('result-mode-label').textContent = state.part === 1 ? 'PART 01 · 단어 브릿지' : 'PART 02 · 예문 빈칸';
+    $('result-mode-label').textContent = partLabel;
   }
   $('result-score').textContent = `${score} / ${total}`;
   $('result-detail').textContent = `정답률 ${pct}% · 소요시간 ${fmtDuration(elapsedSec)} · ${detail}`;
