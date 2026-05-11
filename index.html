@@ -1511,6 +1511,10 @@ body {
           <input type="text" id="login-grade" placeholder="예: 1학년" maxlength="10">
         </div>
       </div>
+      <div class="input-group">
+        <label>생년월일 4자리 <span style="color:var(--text-light); font-weight:500; font-size:11px;">(예: 3월 15일 → 0315)</span></label>
+        <input type="tel" id="login-birth" placeholder="MMDD (4자리 숫자)" maxlength="4" inputmode="numeric" pattern="[0-9]*">
+      </div>
       <button class="btn btn-primary" onclick="loginStudent()">시작하기</button>
       <div id="login-error" style="color:var(--error); font-size:13px; text-align:center;"></div>
     </div>
@@ -2942,12 +2946,19 @@ function loginStudent() {
   const name = $('login-name').value.trim();
   const school = $('login-school').value.trim();
   const grade = $('login-grade').value.trim();
+  const birth = $('login-birth').value.trim();
   const err = $('login-error');
   if (!name) { err.textContent = '이름을 입력하세요.'; return; }
   if (!school) { err.textContent = '학교를 입력하세요.'; return; }
   if (!grade) { err.textContent = '학년을 입력하세요.'; return; }
+  if (!birth) { err.textContent = '생년월일 4자리를 입력하세요.'; return; }
+  if (!/^\d{4}$/.test(birth)) { err.textContent = '생년월일은 숫자 4자리(MMDD)로 입력하세요. 예) 3월 15일 → 0315'; return; }
+  const mm = parseInt(birth.slice(0,2), 10);
+  const dd = parseInt(birth.slice(2,4), 10);
+  if (mm < 1 || mm > 12) { err.textContent = '월(앞 2자리)이 올바르지 않습니다. (01~12)'; return; }
+  if (dd < 1 || dd > 31) { err.textContent = '일(뒤 2자리)이 올바르지 않습니다. (01~31)'; return; }
   err.textContent = '';
-  state.user = { name, school, grade };
+  state.user = { name, school, grade, birth };
   try { sessionStorage.setItem('voca_user', JSON.stringify(state.user)); } catch(e) {}
   goHome();
 }
@@ -2987,7 +2998,7 @@ function init() {
   renderLessonGrid();
 
   // Enter key for login forms
-  ['login-name','login-school','login-grade'].forEach(id => {
+  ['login-name','login-school','login-grade','login-birth'].forEach(id => {
     $(id).addEventListener('keydown', e => { if (e.key === 'Enter') loginStudent(); });
   });
   $('teacher-password').addEventListener('keydown', e => { if (e.key === 'Enter') loginTeacher(); });
@@ -3689,11 +3700,23 @@ async function showResult() {
 }
 
 // ====== Lesson 전체 완료 추적 ======
-const LESSON_SCORES_KEY = 'vocaTreeLessonScores';
+// 학생별로 분리된 localStorage 키 (이름+학교+학년+생년월일 기반)
+function getUserKey() {
+  if (!state.user) return null;
+  const { name, school, grade, birth } = state.user;
+  // 공백·특수문자 제거하여 키 안전화
+  const sanitize = s => (s || '').replace(/[\s:|]/g, '_');
+  return `${sanitize(name)}|${sanitize(school)}|${sanitize(grade)}|${sanitize(birth || '')}`;
+}
+
+function getLessonScoresKey() {
+  const uk = getUserKey();
+  return uk ? `vocaTreeLessonScores::${uk}` : 'vocaTreeLessonScores';
+}
 
 function getLessonScores() {
   try {
-    return JSON.parse(localStorage.getItem(LESSON_SCORES_KEY) || '{}');
+    return JSON.parse(localStorage.getItem(getLessonScoresKey()) || '{}');
   } catch (e) { return {}; }
 }
 
@@ -3704,7 +3727,7 @@ function saveLessonPartScore(lessonKey, part, pct) {
     // 최고 점수만 저장 (시도 중 가장 높은 점수)
     const prev = scores[lessonKey][part] || 0;
     if (pct > prev) scores[lessonKey][part] = pct;
-    localStorage.setItem(LESSON_SCORES_KEY, JSON.stringify(scores));
+    localStorage.setItem(getLessonScoresKey(), JSON.stringify(scores));
   } catch (e) { /* localStorage 사용 불가 시 무시 */ }
 }
 
@@ -3928,17 +3951,20 @@ function getTotalLearnedWords() {
   return total;
 }
 
-// localStorage에서 누적 학습 시간 가져오기 (각 응시 시 누적되어야 함)
-const LEARNING_TIME_KEY = 'vocaTreeTotalLearningTime';
+// localStorage에서 누적 학습 시간 가져오기 (학생별 분리)
+function getLearningTimeKey() {
+  const uk = getUserKey();
+  return uk ? `vocaTreeTotalLearningTime::${uk}` : 'vocaTreeTotalLearningTime';
+}
 function getTotalLearningTime() {
   try {
-    return parseInt(localStorage.getItem(LEARNING_TIME_KEY) || '0', 10);
+    return parseInt(localStorage.getItem(getLearningTimeKey()) || '0', 10);
   } catch (e) { return 0; }
 }
 function addLearningTime(seconds) {
   try {
     const current = getTotalLearningTime();
-    localStorage.setItem(LEARNING_TIME_KEY, String(current + seconds));
+    localStorage.setItem(getLearningTimeKey(), String(current + seconds));
   } catch (e) {}
 }
 
