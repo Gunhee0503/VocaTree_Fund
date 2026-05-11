@@ -268,6 +268,211 @@ body {
 .section-title { font-size:13px; font-weight:700; color:var(--text-light); letter-spacing:1px; }
 .section-heading { font-size:18px; font-weight:800; margin-top:4px; }
 
+/* ======= Vision Card (로그인 화면 비전 메시지) ======= */
+.vision-card {
+  background: linear-gradient(135deg, #f0fdf4 0%, #ecfccb 100%);
+  border: 2px solid #86efac;
+  border-radius: 16px;
+  padding: 22px 20px;
+  margin-bottom: 22px;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 4px 14px rgba(34, 197, 94, 0.12);
+}
+.vision-card::before {
+  content: '';
+  position: absolute;
+  top: -50px;
+  right: -50px;
+  width: 150px;
+  height: 150px;
+  background: radial-gradient(circle, rgba(34,197,94,0.15) 0%, transparent 70%);
+  border-radius: 50%;
+  pointer-events: none;
+}
+.vision-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 52px; height: 52px;
+  background: linear-gradient(135deg, #22c55e, #16a34a);
+  color: #fff;
+  border-radius: 14px;
+  margin-bottom: 12px;
+  box-shadow: 0 4px 10px rgba(34, 197, 94, 0.35);
+}
+.vision-title {
+  font-size: 13px;
+  font-weight: 800;
+  color: #166534;
+  letter-spacing: 1.2px;
+  margin-bottom: 4px;
+}
+.vision-headline {
+  font-size: 19px;
+  font-weight: 800;
+  color: #14532d;
+  line-height: 1.45;
+  margin-bottom: 14px;
+}
+.vision-headline .hl {
+  background: linear-gradient(transparent 60%, #fef08a 60%);
+  padding: 0 2px;
+}
+.vision-body {
+  background: #fff;
+  border-radius: 12px;
+  padding: 14px 16px;
+  border: 1px solid #bbf7d0;
+}
+.vision-body > p {
+  font-size: 12px;
+  font-weight: 800;
+  color: #166534;
+  letter-spacing: 0.8px;
+  margin: 0 0 10px;
+  text-transform: uppercase;
+}
+.vision-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.vision-list li {
+  padding: 8px 0;
+  border-bottom: 1px dashed #d1fae5;
+  font-size: 13.5px;
+  color: #1f2937;
+  line-height: 1.6;
+}
+.vision-list li:last-child { border-bottom: none; }
+.vision-list li b { color: #166534; font-weight: 800; margin-right: 4px; }
+.vision-list li u { text-decoration: none; background: #fef08a; padding: 0 4px; border-radius: 3px; font-weight: 700; color: #78350f; }
+.vision-footer {
+  margin-top: 14px;
+  text-align: center;
+  font-size: 13px;
+  font-weight: 700;
+  color: #166534;
+  font-style: italic;
+}
+
+/* ======= Lesson Completion Card (전체 완료시 축하 카드) ======= */
+.lesson-completion-card {
+  margin-top: 20px;
+  padding: 24px 22px;
+  background: linear-gradient(135deg, #fff 0%, #fafafa 100%);
+  border: 3px solid var(--tier-color, #f59e0b);
+  border-radius: 18px;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.08), 0 0 0 6px color-mix(in srgb, var(--tier-color, #f59e0b) 12%, transparent);
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  animation: lc-pop 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+.lesson-completion-card::before {
+  content: '';
+  position: absolute;
+  top: -80px; right: -80px;
+  width: 200px; height: 200px;
+  background: radial-gradient(circle, color-mix(in srgb, var(--tier-color, #f59e0b) 18%, transparent) 0%, transparent 70%);
+  border-radius: 50%;
+  pointer-events: none;
+}
+@keyframes lc-pop {
+  0% { opacity: 0; transform: scale(0.85) translateY(20px); }
+  100% { opacity: 1; transform: scale(1) translateY(0); }
+}
+.lc-emoji {
+  font-size: 48px;
+  line-height: 1;
+  margin-bottom: 8px;
+  filter: drop-shadow(0 2px 4px rgba(0,0,0,0.1));
+}
+.lc-tier {
+  display: inline-block;
+  font-size: 14px;
+  font-weight: 800;
+  color: #fff;
+  background: var(--tier-color, #f59e0b);
+  padding: 4px 14px;
+  border-radius: 99px;
+  letter-spacing: 0.5px;
+  margin-bottom: 10px;
+  box-shadow: 0 2px 8px color-mix(in srgb, var(--tier-color, #f59e0b) 40%, transparent);
+}
+.lc-title {
+  font-size: 20px;
+  font-weight: 900;
+  color: #111827;
+  margin-bottom: 4px;
+  line-height: 1.3;
+}
+.lc-subtitle {
+  font-size: 14px;
+  color: var(--tier-color, #f59e0b);
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+.lc-avg {
+  font-size: 13px;
+  color: #6b7280;
+  margin-bottom: 16px;
+}
+.lc-avg b {
+  font-size: 16px;
+  color: var(--tier-color, #f59e0b);
+  font-weight: 800;
+}
+.lc-section {
+  background: #fff;
+  border-radius: 12px;
+  padding: 14px 16px;
+  border: 1px solid #e5e7eb;
+  text-align: left;
+  margin-bottom: 14px;
+}
+.lc-section-title {
+  font-size: 13px;
+  font-weight: 800;
+  color: #111827;
+  margin-bottom: 10px;
+  letter-spacing: 0.3px;
+}
+.lc-skills {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.lc-skills li {
+  padding: 7px 0 7px 22px;
+  position: relative;
+  font-size: 13.5px;
+  color: #374151;
+  line-height: 1.55;
+  border-bottom: 1px dashed #f3f4f6;
+}
+.lc-skills li:last-child { border-bottom: none; }
+.lc-skills li::before {
+  content: '✓';
+  position: absolute;
+  left: 0;
+  top: 7px;
+  width: 16px; height: 16px;
+  color: var(--tier-color, #f59e0b);
+  font-weight: 900;
+}
+.lc-next {
+  padding: 12px 14px;
+  background: color-mix(in srgb, var(--tier-color, #f59e0b) 10%, white);
+  border-radius: 10px;
+  font-size: 13.5px;
+  color: #1f2937;
+  font-weight: 600;
+  line-height: 1.5;
+  border-left: 3px solid var(--tier-color, #f59e0b);
+}
+
 /* ======= Quiz ======= */
 .quiz-header {
   display:flex; justify-content:space-between; align-items:center;
@@ -294,11 +499,48 @@ body {
   padding:16px 18px; border-radius:12px; margin-bottom:14px;
 }
 .hint-box .label { font-size:11px; font-weight:700; color:#92400e; letter-spacing:1px; }
-.hint-box .roots { font-size:16px; font-weight:700; margin-top:6px; color:#451a03; line-height:1.6; }
+.hint-box .roots { font-size:16px; font-weight:700; margin-top:6px; color:#451a03; line-height:1.8; }
 .hint-box .roots .mask {
-  display:inline-block; min-width:36px; padding:1px 8px;
-  background:#fbbf24; color:#fff; border-radius:6px; font-weight:800;
-  letter-spacing:1px; margin:0 2px; font-size:14px;
+  display:inline-block;
+  min-width:34px;
+  padding:4px 14px;
+  background:linear-gradient(135deg, #fbbf24 0%, #f59e0b 50%, #ea580c 100%);
+  color:#fff;
+  border-radius:99px;
+  font-weight:900;
+  letter-spacing:1px;
+  margin:0 5px;
+  font-size:17px;
+  box-shadow:
+    0 0 0 3px rgba(251, 191, 36, 0.25),
+    0 3px 8px rgba(234, 88, 12, 0.4),
+    inset 0 1px 0 rgba(255,255,255,0.3);
+  text-shadow:0 1px 2px rgba(0,0,0,0.2);
+  border:2px solid rgba(255, 255, 255, 0.5);
+  animation:qmark-pulse 1.5s ease-in-out infinite;
+  vertical-align:middle;
+  position:relative;
+}
+@keyframes qmark-pulse {
+  0%, 100% {
+    box-shadow:
+      0 0 0 3px rgba(251, 191, 36, 0.25),
+      0 3px 8px rgba(234, 88, 12, 0.4),
+      inset 0 1px 0 rgba(255,255,255,0.3);
+    transform:scale(1);
+  }
+  50% {
+    box-shadow:
+      0 0 0 6px rgba(251, 191, 36, 0.15),
+      0 4px 14px rgba(234, 88, 12, 0.6),
+      inset 0 1px 0 rgba(255,255,255,0.4);
+    transform:scale(1.08);
+  }
+}
+/* 기존 @keyframes pulse 사용처 호환 */
+@keyframes pulse {
+  0%, 100% { box-shadow:0 2px 6px rgba(234, 88, 12, 0.35); transform:scale(1); }
+  50% { box-shadow:0 3px 10px rgba(234, 88, 12, 0.55); transform:scale(1.05); }
 }
 .hint-box .image { font-size:14px; color:#78350f; margin-top:6px; }
 .hint-box .extra-hint-btn,
@@ -496,6 +738,37 @@ body {
   padding:12px 16px; border-radius:10px; margin-bottom:18px;
   font-size:14px; color:#78350f; line-height:1.5;
 }
+#choice-korean b {
+  display:inline-block;
+  background:#fef08a;
+  color:#92400e;
+  font-weight:800;
+  padding:1px 8px;
+  margin:0 2px;
+  border-radius:4px;
+  font-size:14.5px;
+}
+
+/* 정답 후 정답 해설 노트 */
+.choice-note {
+  margin-top:10px;
+  padding:12px 14px;
+  background:#fef3c7;
+  border-left:3px solid #f59e0b;
+  border-radius:8px;
+  color:#78350f;
+  font-size:13.5px;
+  line-height:1.7;
+  animation:fade-in 0.4s ease-out;
+}
+.choice-note b {
+  color:#9a3412;
+  font-weight:800;
+}
+@keyframes fade-in {
+  from { opacity:0; transform:translateY(-4px); }
+  to { opacity:1; transform:translateY(0); }
+}
 
 /* ======= Buttons ======= */
 .btn {
@@ -671,6 +944,27 @@ body {
 
   <!-- ============ STUDENT LOGIN ============ -->
   <div id="screen-login" class="card hidden">
+    <!-- 비전 메시지 카드 -->
+    <div class="vision-card">
+      <div class="vision-icon">
+        <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M12 22c5-3 7-7 7-12V5l-7-3-7 3v5c0 5 2 9 7 12z"/>
+          <path d="M9 12l2 2 4-4"/>
+        </svg>
+      </div>
+      <div class="vision-title">VOCA TREE · 보카트리</div>
+      <div class="vision-headline">영단어가 <span class="hl">나무처럼 자라나는</span> 어휘학습</div>
+      <div class="vision-body">
+        <p>이 앱을 통해 학습하게 될 것</p>
+        <ul class="vision-list">
+          <li><b>🌱 어원 학습</b> — 단어를 외우는 것이 아니라, 단어가 <u>만들어지는 원리</u>를 이해합니다</li>
+          <li><b>🌳 파생력</b> — 한 단어를 알면 <u>열 단어가 보이는</u> 어휘력의 뿌리를 키웁니다</li>
+          <li><b>🍃 추리력</b> — 모르는 단어를 만나도 <u>의미를 추리</u>할 수 있는 진짜 어휘력을 만듭니다</li>
+        </ul>
+      </div>
+      <div class="vision-footer">한 단어를 알면 열 단어가 보입니다 🌿</div>
+    </div>
+
     <div class="section-title">학생 정보 입력</div>
     <div class="section-heading">시작하기 전에 알려주세요</div>
     <div class="login-form">
@@ -733,20 +1027,20 @@ body {
     </div>
 
     <div class="part-grid" style="margin-top:18px;">
-      <button class="part-btn" onclick="startPart(1)">
+      <button class="part-btn hidden" id="part-btn-3" onclick="startPart(3)">
         <div class="label">PART 01</div>
+        <div class="title">어휘 추리력</div>
+        <div class="desc">영어 문장의 의미를<br>객관식으로 추리</div>
+      </button>
+      <button class="part-btn" onclick="startPart(1)">
+        <div class="label">PART 02</div>
         <div class="title">단어 브릿지</div>
         <div class="desc">어원과 의미 힌트로<br>단어를 유추해 입력</div>
       </button>
       <button class="part-btn" onclick="startPart(2)">
-        <div class="label">PART 02</div>
+        <div class="label">PART 03</div>
         <div class="title">예문 빈칸</div>
         <div class="desc">영어 예문 속<br>빈칸에 단어 채우기</div>
-      </button>
-      <button class="part-btn hidden" id="part-btn-3" onclick="startPart(3)">
-        <div class="label">PART 03</div>
-        <div class="title">어휘 추리력</div>
-        <div class="desc">영어 문장의 의미를<br>객관식으로 추리</div>
       </button>
     </div>
   </div>
@@ -1119,7 +1413,7 @@ const VOCA_DATA = {
     choices: [
       {
         english: "Please <u>include</u> your contact information in the application form.",
-        korean: "지원서에 당신의 연락처 정보를 [   ] 하세요.",
+        korean: "지원서에 당신의 연락처 정보를 ______ 하세요.",
         options: ["수정하다", "제외하다", "추가하다", "포함하다"],
         answer: 3,
         word: "include",
@@ -1127,7 +1421,7 @@ const VOCA_DATA = {
       },
       {
         english: "<u>Exhale</u> slowly to help relax your muscles.",
-        korean: "당신의 근육이 이완되는 것을 돕기 위해 숨을 천천히 [   ] 세요.",
+        korean: "당신의 근육이 이완되는 것을 돕기 위해 숨을 천천히 ______ 세요.",
         options: ["참다", "추가하다", "들이마시다", "내뱉다"],
         answer: 3,
         word: "exhale",
@@ -1135,7 +1429,7 @@ const VOCA_DATA = {
       },
       {
         english: "Her motivation to succeed was purely <u>extrinsic</u>, driven by the rewards she would receive.",
-        korean: "그녀의 성공하고자 하는 동기는 순전히 [   ] 것이었고, 그녀가 받을 보상에 이끌렸습니다.",
+        korean: "그녀의 성공하고자 하는 동기는 순전히 ______ 것이었고, 그녀가 받을 보상에 이끌렸습니다.",
         options: ["열정적인", "내재적인", "외적인", "개인적인"],
         answer: 2,
         word: "extrinsic",
@@ -1143,7 +1437,7 @@ const VOCA_DATA = {
       },
       {
         english: "The doctor advised him to reduce his daily <u>intake</u> of sugar.",
-        korean: "그 의사는 그에게 하루 설탕 [   ] 을(를) 줄이라고 조언했습니다.",
+        korean: "그 의사는 그에게 하루 설탕 ______ 을(를) 줄이라고 조언했습니다.",
         options: ["섭취", "허용치", "공급", "양(량)"],
         answer: 0,
         word: "intake",
@@ -1151,7 +1445,7 @@ const VOCA_DATA = {
       },
       {
         english: "The school may <u>expel</u> students who cheat on exams.",
-        korean: "학교는 시험에서 부정행위를 하는 학생들을 [   ] 할 수 있습니다.",
+        korean: "학교는 시험에서 부정행위를 하는 학생들을 ______ 할 수 있습니다.",
         options: ["정학시키다", "퇴학시키다", "입학시키다", "처벌하다"],
         answer: 1,
         word: "expel",
@@ -1159,7 +1453,7 @@ const VOCA_DATA = {
       },
       {
         english: "As an <u>introvert</u>, she prefers being at home.",
-        korean: "[   ] 으로서 그녀는 집에 있는 것을 선호합니다.",
+        korean: "______ 으로서 그녀는 집에 있는 것을 선호합니다.",
         options: ["실패한 사람", "우울한 사람", "내성적인 사람", "외향적인 사람"],
         answer: 2,
         word: "introvert",
@@ -1167,7 +1461,7 @@ const VOCA_DATA = {
       },
       {
         english: "The teacher used the activities to <u>engage</u> her students in the subject.",
-        korean: "그 선생님은 학생들을 그 과목에(을) [   ] 시키기 위해 그 활동들을 사용했습니다.",
+        korean: "그 선생님은 학생들을 그 과목에(을) ______ 시키기 위해 그 활동들을 사용했습니다.",
         options: ["유지하다", "집중, 몰입시키다", "흥미를 주다", "이해시키다"],
         answer: 1,
         word: "engage",
@@ -1175,7 +1469,7 @@ const VOCA_DATA = {
       },
       {
         english: "She experienced <u>internal</u> bleeding after the car accident.",
-        korean: "그녀는 교통사고 후 [   ] 출혈을 경험했습니다.",
+        korean: "그녀는 교통사고 후 ______ 출혈을 경험했습니다.",
         options: ["내적인", "심한", "광범위한", "외적인"],
         answer: 0,
         word: "internal",
@@ -1183,7 +1477,7 @@ const VOCA_DATA = {
       },
       {
         english: "The airplane's emergency system will <u>eject</u> the pilot's seat if needed.",
-        korean: "비행기의 비상 시스템은 필요한 경우 조종사의 좌석을 [   ] 합니다.",
+        korean: "비행기의 비상 시스템은 필요한 경우 조종사의 좌석을 ______ 합니다.",
         options: ["탈출시키다", "분리시키다", "유지시키다", "보호하다"],
         answer: 0,
         word: "eject",
@@ -1191,7 +1485,7 @@ const VOCA_DATA = {
       },
       {
         english: "The volcano can <u>emit</u> ash and gases during an eruption.",
-        korean: "화산은 화산 폭발 시 화산재와 가스를 [   ] 할 수 있습니다.",
+        korean: "화산은 화산 폭발 시 화산재와 가스를 ______ 할 수 있습니다.",
         options: ["흡수시키다", "배출시키다", "변화시키다", "녹이다"],
         answer: 1,
         word: "emit",
@@ -1365,30 +1659,30 @@ const VOCA_DATA = {
         { label: "유음화 (자음동화)", desc: "ad- 뒤에 오는 자음에 따라 <b>d</b>가 다음 자음에 흡수됨. 발음을 부드럽게 만들기 위한 자연스러운 변화" },
         { label: "변화 패턴", desc: "ad + f → <b>af</b>ford<br>ad + p → <b>ap</b>ply, <b>ap</b>proach<br>ad + s → <b>as</b>sociate, <b>as</b>sume<br>ad + c → <b>ac</b>cept, <b>ac</b>cumulate<br>ad + t → <b>at</b>tend, <b>at</b>tract" },
         { label: "🌱 어원 이해", desc: "ad-는 기본적으로 '<span style='color:#dc2626; font-weight:800;'>~쪽으로 (to, toward)</span>'라는 의미를 가지며, <span style='background:#fef08a; color:#dc2626; font-weight:800; padding:1px 4px; border-radius:3px;'>타동사로 쓰일 때는 목적어 쪽으로 '가서 붙는' 느낌</span>에서 '<b>참여하다, 다루다, 영향을 주다</b>' 등의 의미로 확장된다.<br><br>예: <b>attend</b> the meeting (회의에 참석하다)" },
-        { label: "🎯 핵심", desc: "<b>a(d)-</b> 계열 접두사는 '<span style='color:#dc2626; font-weight:800;'>~쪽으로 (to, toward)</span>'라는 기본 의미를 가지며, <span style='background:#fef08a; color:#dc2626; font-weight:800; padding:1px 4px; border-radius:3px;'>뒤에 오는 단어의 첫소리에 따라 af-, ap-, as-, ac-, at- 등으로 형태가 변한다.</span><br><br>이 접두사는 원형 단어와 결합하여 '<b style='color:#dc2626;'>접근, 추가, 변화, 강화</b>' 등의 다양한 의미로 확장된다.<br><br><span style='display:inline-block; margin-top:8px; padding:6px 10px; background:#fef08a; color:#dc2626; font-weight:800; border-radius:6px; border-left:3px solid #dc2626;'>→ ad/af/ap/as/ac/at으로 시작하는 단어를 보면 '<u>~를 향해</u>'라는 방향성 이미지를 떠올려보자!</span>" }
+        { label: "🎯 핵심", desc: "<b>a(d)-</b> 계열 접두사는 '<span style='color:#dc2626; font-weight:800;'>~쪽으로 (to, toward)</span>'라는 기본 의미를 가지며, <span style='background:#fef08a; color:#dc2626; font-weight:800; padding:1px 4px; border-radius:3px;'>뒤에 오는 단어의 첫소리에 따라 af-, ap-, as-, ac-, at- 등으로 형태가 변한다.</span><br><br>이 접두사는 <span style='background:#fef08a; color:#dc2626; font-weight:800; padding:1px 4px; border-radius:3px;'>원형 단어</span>와 결합하여 '<b style='color:#dc2626;'>접근, 추가, 변화, 강화</b>' 등의 <span style='background:#fef08a; color:#dc2626; font-weight:800; padding:1px 4px; border-radius:3px;'>다양한 의미</span>로 확장된다.<br><br><span style='display:inline-block; margin-top:8px; padding:8px 12px; background:#fef08a; color:#7c2d12; font-weight:600; border-radius:8px; border-left:3px solid #dc2626; line-height:1.6;'>→ <b style='color:#dc2626;'>a(d)/af/ap/as/ac/at</b>으로 시작하는 단어는 그냥 외우는 게 아니라, '<b style='color:#dc2626;'>어떤 단어에 붙어서 만들어졌는지</b>'와 '<b style='color:#dc2626;'>그 단어의 근본 이미지가 무엇인지</b>'를 먼저 보면 훨씬 쉽게 이해된다.<br>이렇게 <u style='color:#dc2626; font-weight:800;'>파생 과정을 따라가며 배우는 것</u>이 가장 효율적이다.</span>" }
       ]
     },
     bridge: [
-      { word: "afford", roots: "af (~로) + ford (앞으로 내놓다)", hint: "앞으로 내어놓을 여유가 되다", meaning: "(금전·시간적) 여유가 되다, 제공하다", pos: "v." },
-      { word: "adopt", roots: "ad (~로) + opt (선택하다)", hint: "~ 쪽으로 선택해 들이다", meaning: "입양하다, 채택하다", pos: "v." },
-      { word: "adapt", roots: "ad (~에) + apt (맞다)", hint: "~ 에 맞추다", meaning: "맞추다, 적응하다, 각색하다", pos: "v." },
-      { word: "apply", roots: "ap (~에) + ply (붙이다)", hint: "~ 에 붙이다", meaning: "신청하다, 적용하다, 바르다", pos: "v." },
-      { word: "associate", roots: "as (~로) + soci (무리) + ate", hint: "~ 와 그룹으로 연결하다", meaning: "연관시키다, 어울리다", pos: "v." },
-      { word: "accept", roots: "ac (~로) + cept (취하다)", hint: "~ 쪽으로 받아들이다", meaning: "받아들이다", pos: "v." },
+      { word: "afford", roots: "ad (~로) + ? (앞에 내어놓다, 마련하다)", hint: "앞으로 내어놓을 여유가 되다", meaning: "(금전·시간적) 여유가 되다, 제공하다", pos: "v.", extraHint: "<b>ford</b> (cf. forward): 앞에 내어놓다, 마련하다" },
+      { word: "adopt", roots: "ad (~로) + opt (선택하다)", hint: "~ 쪽으로 선택해 들이다", meaning: "입양하다, 채택하다", pos: "v.", extraHint: "<b>opt</b> (cf. option): choose (고르다, 선택하다)" },
+      { word: "adapt", roots: "ad (~에) + apt (맞다)", hint: "~ 에 맞추다", meaning: "맞추다, 적응하다, 각색하다", pos: "v.", extraHint: "<b>apt</b> (cf. adapter): fit (주변 상황에 맞추다)" },
+      { word: "apply", roots: "ad (~로) + ? (붙이다)", hint: "~ 에 붙이다", meaning: "신청하다, 적용하다, 바르다", pos: "v.", extraHint: "<b>ple</b> (=fold cf. F&P의 관계): 접다, 붙이다, 내용을 넣다" },
+      { word: "associate", roots: "ad (~로) + ? (그룹으로 묶다) + ate (동사, 형용사 어미)", hint: "~ 와 그룹으로 연결하다", meaning: "연관시키다, 어울리다", pos: "v.", extraHint: "<b>society</b>: group (그룹으로 묶다)" },
+      { word: "accept", roots: "ad (~로) + ? (받다, 수용하다)", hint: "~ 쪽으로 받아들이다", meaning: "받아들이다", pos: "v.", extraHint: "<b>cept</b> (cf. receipt, receive): 받다, 수용하다" },
       { word: "aspect", roots: "a (~ 쪽을) + spect (보다)", hint: "~ 쪽에서 보는 면", meaning: "측면, 양상", pos: "n." },
-      { word: "address", roots: "ad (~ 로) + dress (방향)", hint: "~ 로 방향을 정하다", meaning: "주소(를 쓰다), 연설하다, (문제를) 다루다", pos: "n./v." },
-      { word: "attend", roots: "at (~ 로) + tend (뻗다)", hint: "~ 로 (몸·마음을) 뻗다", meaning: "참석하다, 주의를 기울이다, 수반하다", pos: "v." },
-      { word: "attendant", roots: "attend + ant", hint: "참석하고 있는 사람", meaning: "안내원, 종업원; 수반되는", pos: "n./adj." },
-      { word: "attract", roots: "at (~ 로) + tract (끌다)", hint: "~ 로 끌어당기다", meaning: "끌어당기다, 유혹하다", pos: "v." },
-      { word: "approach", roots: "ap (~ 로) + proach (가까이)", hint: "~ 에 가까이 가다", meaning: "다가가다, 접근하다", pos: "v./n." },
-      { word: "assimilate", roots: "as (~로) + simil (비슷한) + ate", hint: "~ 와 비슷하게 만들다", meaning: "동화시키다, 흡수하다", pos: "v." },
-      { word: "acknowledge", roots: "ac (~로) + knowledge (지식)", hint: "~ 를 알고 있음을 인정하다", meaning: "인정하다", pos: "v." },
-      { word: "assure", roots: "as (~로) + sure (확실한)", hint: "~ 에게 확실하게 하다", meaning: "확신시키다, 보장하다", pos: "v." },
-      { word: "advocate", roots: "ad (~로) + voc (말) + ate", hint: "~ 를 위해 말하다", meaning: "옹호하다, 지지하다", pos: "v." },
-      { word: "assume", roots: "as (~로) + sume (취하다)", hint: "~ 라고 받아들이다", meaning: "추정하다, (책임을) 떠맡다", pos: "v." },
-      { word: "accumulate", roots: "ac (~로) + cumul (쌓다) + ate", hint: "~ 위에 쌓아올리다", meaning: "쌓이다, 모으다", pos: "v." },
-      { word: "accustom", roots: "ac (~ 로) + custom (관습)", hint: "~ 에 익숙하게 만들다", meaning: "익숙해지게 하다, 적응시키다", pos: "v." },
-      { word: "administer", roots: "ad (~로) + minister (시중들다)", hint: "~ 를 위해 일을 처리하다", meaning: "관리하다, 집행하다, 투여하다", pos: "v." },
+      { word: "address", roots: "ad (~로) + ? (방향, 향하다)", hint: "~ 로 방향을 정하다", meaning: "주소(를 쓰다), 연설하다, (문제를) 다루다", pos: "n./v.", extraHint: "<b>dress</b>: direct (방향, 향하다)" },
+      { word: "attend", roots: "ad (~로) + ? (가다, 신경쓰다)", hint: "~ 로 (몸·마음을) 뻗다", meaning: "참석하다, 주의를 기울이다, 수반하다", pos: "v.", extraHint: "<b>tend</b> (cf. bar tender 바를 신경써주는 사람): (물리적으로) 향하다, (정신적으로) 향하다" },
+      { word: "attendant", roots: "? ((물리적, 정신적으로) ~로 향하고 있는) + ant (~하고 있는 상태의, ~하는 주체)", hint: "참석하고 있는 사람", meaning: "안내원, 종업원; 수반되는", pos: "n./adj." },
+      { word: "attract", roots: "ad (~로) + ? (이끌다, 당기다)", hint: "~ 로 끌어당기다", meaning: "끌어당기다, 유혹하다", pos: "v.", extraHint: "<b>tract</b>: pull, draw (이끌다, 당기다)" },
+      { word: "approach", roots: "ad (~로) + ? (가까이 가다)", hint: "~ 에 가까이 가다", meaning: "다가가다, 접근하다", pos: "v./n." },
+      { word: "assimilate", roots: "ad (~로) + ? (비슷한) + ate (동사, 형용사 어미)", hint: "~ 와 비슷하게 만들다", meaning: "동화시키다, 흡수하다", pos: "v.", extraHint: "<b>similar</b>: 비슷한" },
+      { word: "acknowledge", roots: "ad (~로) + ? (아는 것, 지식)", hint: "~ 를 알고 있음을 인정하다", meaning: "인정하다", pos: "v.", extraHint: "<b>knowledge</b> (cf. know=gno): 아는 것, 지식" },
+      { word: "assure", roots: "ad (~로) + ? (확실하게 하다)", hint: "~ 에게 확실하게 하다", meaning: "확신시키다, 보장하다", pos: "v.", extraHint: "<b>sure</b>: 확실한" },
+      { word: "advocate", roots: "ad (~를 향해) + ? (말하다, 주장하다) + ate (동사, 형용사 어미)", hint: "~ 를 위해 말하다", meaning: "옹호하다, 지지하다", pos: "v.", extraHint: "<b>voca</b>: (말하다, 주장하다)" },
+      { word: "assume", roots: "ad (~로) + ? (받아들이다, 취하다)", hint: "~ 라고 받아들이다", meaning: "추정하다, (책임을) 떠맡다", pos: "v.", extraHint: "<b>sume</b>: take (물리적, 정신적으로) 받아들이다, 취하다" },
+      { word: "accumulate", roots: "ad (~로) + ? (쌓다) + ate (동사, 형용사 어미)", hint: "~ 위에 쌓아올리다", meaning: "쌓이다, 모으다", pos: "v.", extraHint: "<b>cum</b>: heap (쌓다)" },
+      { word: "accustom", roots: "ad (~로) + ? (관습, 익숙함, 습관)", hint: "~ 에 익숙하게 만들다", meaning: "익숙해지게 하다, 적응시키다", pos: "v.", extraHint: "<b>custom</b>: 관습, 익숙함, 습관" },
+      { word: "administer", roots: "ad (~로) + ? (세부적으로 신경써서 처리하다)", hint: "~ 를 위해 일을 처리하다", meaning: "관리하다, 집행하다, 투여하다", pos: "v.", extraHint: "<b>minister</b>: 작은 사람 (시중 드는 사람), 세부적인 잡무를 신경써서 처리하다. cf) minister: 장관 (오늘날 특정 부서의 장관이라는 의미로 확장)" },
       { word: "add", roots: "ad (~ 로) + d (더하다)", hint: "~ 에 더하다", meaning: "더하다, 추가하다", pos: "v." }
     ],
     examples: [
@@ -1416,7 +1710,7 @@ const VOCA_DATA = {
     choices: [
       {
         english: "All three teams <u>adopted</u> different approaches to the problem.",
-        korean: "세 팀 모두 문제에 대해 다른 접근 방식을 [  ] 했습니다.",
+        korean: "세 팀 모두 문제에 대해 다른 접근 방식을 ______ 했습니다.",
         options: ["분석하다", "논의하다", "채택하다", "주장하다"],
         answer: 2,
         word: "adopted",
@@ -1424,7 +1718,7 @@ const VOCA_DATA = {
       },
       {
         english: "The immigrants worked hard to <u>assimilate</u> by learning the language and customs.",
-        korean: "이민자들은 언어와 관습을 배우며 [  ] 위해 열심히 노력했습니다.",
+        korean: "이민자들은 언어와 관습을 배우며 ______ 위해 열심히 노력했습니다.",
         options: ["성공하다", "동화되다", "경쟁하다", "생존하다"],
         answer: 1,
         word: "assimilate",
@@ -1432,7 +1726,7 @@ const VOCA_DATA = {
       },
       {
         english: "The professor <u>acknowledged</u> the student's effort in improving their grades over the semester.",
-        korean: "교수님은 한 학기 동안 성적 향상을 위한 학생들의 노력을 [  ] 하셨습니다.",
+        korean: "교수님은 한 학기 동안 성적 향상을 위한 학생들의 노력을 ______ 하셨습니다.",
         options: ["보상하다", "인정하다", "축하하다", "부정하다"],
         answer: 1,
         word: "acknowledged",
@@ -1440,7 +1734,7 @@ const VOCA_DATA = {
       },
       {
         english: "I <u>assure</u> you that the project will be completed on time.",
-        korean: "프로젝트가 제 시간에 완료될 것이라고 [  ] 합니다.",
+        korean: "프로젝트가 제 시간에 완료될 것이라고 ______ 합니다.",
         options: ["확신하다", "예상하다", "발표하다", "보고하다"],
         answer: 0,
         word: "assure",
@@ -1448,7 +1742,7 @@ const VOCA_DATA = {
       },
       {
         english: "Many people wrongly <u>associate</u> certain stereotypes with different cultural groups.",
-        korean: "많은 사람들이 특정 고정관념을 다른 문화 집단과 잘못 [  ] 합니다.",
+        korean: "많은 사람들이 특정 고정관념을 다른 문화 집단과 잘못 ______ 합니다.",
         options: ["구분하다", "연관시키다", "학습하다", "혼동하다"],
         answer: 1,
         word: "associate",
@@ -1456,7 +1750,7 @@ const VOCA_DATA = {
       },
       {
         english: "Animals must <u>adapt</u> to changing environments to survive in the wild.",
-        korean: "동물들은 야생에서 살아남기 위해 변화하는 환경에 [  ] 해야 합니다.",
+        korean: "동물들은 야생에서 살아남기 위해 변화하는 환경에 ______ 해야 합니다.",
         options: ["예측하다", "맞서 싸우다", "유지하다", "적응하다"],
         answer: 3,
         word: "adapt",
@@ -1464,7 +1758,7 @@ const VOCA_DATA = {
       },
       {
         english: "She <u>advocates</u> a balanced approach to diet and exercise.",
-        korean: "그녀는 식단과 운동에 대한 균형 잡힌 접근을 [  ] 합니다.",
+        korean: "그녀는 식단과 운동에 대한 균형 잡힌 접근을 ______ 합니다.",
         options: ["실행하다", "옹호하다", "계획하다", "추구하다"],
         answer: 1,
         word: "advocates",
@@ -1472,7 +1766,7 @@ const VOCA_DATA = {
       },
       {
         english: "She <u>assumed</u> that the invitation was for everyone, not just for her.",
-        korean: "그녀는 초대가 자신만의 것이 아니라 모두를 위한 것이라고 [  ] 했습니다.",
+        korean: "그녀는 초대가 자신만의 것이 아니라 모두를 위한 것이라고 ______ 했습니다.",
         options: ["의심하다", "주장하다", "추정하다", "발표하다"],
         answer: 2,
         word: "assumed",
@@ -1480,7 +1774,7 @@ const VOCA_DATA = {
       },
       {
         english: "Dust tends to <u>accumulate</u>.",
-        korean: "먼지가 [  ] 경향이 있습니다.",
+        korean: "먼지가 ______ 경향이 있습니다.",
         options: ["쌓이다", "모이다", "가라앉다", "흩어지다"],
         answer: 0,
         word: "accumulate",
@@ -1488,7 +1782,7 @@ const VOCA_DATA = {
       },
       {
         english: "Farmers must <u>accustom</u> their animals to the cold winter weather.",
-        korean: "농부들은 추운 겨울 날씨에 동물들을 [  ] 합니다.",
+        korean: "농부들은 추운 겨울 날씨에 동물들을 ______ 합니다.",
         options: ["적응시키다", "훈련시키다", "버티다", "산책시키다"],
         answer: 0,
         word: "accustom",
@@ -1503,50 +1797,50 @@ const VOCA_DATA = {
     concept: {
       headline: "추상명사 어미와 언어의 계급",
       points: [
-        { label: "추상명사 어미", desc: "구체적 사물이 아닌 <b>성질·상태</b>를 나타내는 명사를 만드는 어미" },
-        { label: "게르만계 (일상적·비격식)", desc: "<b>-ness</b>, <b>-hood</b><br>예: dark<b>ness</b>, kind<b>ness</b>, mother<b>hood</b>, child<b>hood</b>" },
-        { label: "라틴계 (격식적·문어체)", desc: "<b>-ity</b>, <b>-tion</b>, <b>-ence</b>, <b>-ance</b><br>예: simplic<b>ity</b>, creativ<b>ity</b>, generos<b>ity</b>" },
-        { label: "기타 어미", desc: "<b>-al</b> 행위/관련(arriv<b>al</b>, approv<b>al</b>)<br><b>-ary</b> 관련된(volunt<b>ary</b>, ordin<b>ary</b>)<br><b>-able</b> 할 수 있는(reason<b>able</b>, predict<b>able</b>)" },
-        { label: "언어의 계급", desc: "영국이 프랑스에 정복당한 후, 일상어(게르만계)와 격식어(라틴/프랑스계)가 공존하게 됨<br>예: ask(일상) / question(공식) / interrogate(전문)" }
+        { label: "🏰 언어의 계급 (Language Hierarchy)", desc: "프랑스 출신 정복자 <b>윌리엄 (William the Conqueror)</b>이 영국을 지배했을 때, 지배국과 피지배국의 관계에 따라 <span style='background:#fef08a; color:#dc2626; font-weight:800; padding:1px 4px; border-radius:3px;'>프랑스계 단어는 공식적이고 세련된 언어로</span>, <span style='background:#dbeafe; color:#1e40af; font-weight:800; padding:1px 4px; border-radius:3px;'>게르만계 영어단어는 천하고 상스러운 언어로</span> 인식되었다.<br><br>피지배국의 하층계급 사람들이 도축하는 돼지는 게르만 단어인 <b>pig</b>로, 지배국의 귀족들이 대접받는 돼지요리는 <b>pork</b>로 구분해서 표현할 정도였다.<br><br><span style='display:block; margin-top:10px; padding:10px 12px; background:#f8fafc; border-left:3px solid #64748b; border-radius:6px; line-height:1.7;'>※ 역사적으로 지배국과 피지배국의 두 언어가 통합되어 가면서, <b style='color:#dc2626;'>지배국의 언어는 '고급스러움'</b>을 나타내는 반면, <b style='color:#1e40af;'>피지배국의 언어는 다소 경시되는 경우</b>가 일반적이다.<br><br>우리나라에서도 순우리말보다는 <u>한자어</u>를 쓰는 것이 조금 더 지적으로 세련되었다는 인상을 주는 시기가 있었다.</span>" },
+        { label: "🌳 언어 계급별 뉘앙스 차이", desc: "같은 '<b>묻다</b>'라는 의미라도 어원에 따라 무게가 다르다.<br><br><span style='display:block; padding:8px 12px; background:#eff6ff; border-radius:6px; margin-bottom:6px;'><b style='color:#1e40af;'>게르만 (앵글로색슨)</b> — 일상적, 비격식, humble한 느낌<br>→ <b>ask</b> (그냥 물어보다)</span><span style='display:block; padding:8px 12px; background:#fef3c7; border-radius:6px; margin-bottom:6px;'><b style='color:#92400e;'>프랑스 (라틴계)</b> — 격식, 문어체, buttoned-up한 느낌<br>→ <b>question</b> (조심스럽게 질문하다)</span><span style='display:block; padding:8px 12px; background:#fee2e2; border-radius:6px;'><b style='color:#991b1b;'>라틴 (학술적)</b> — 매우 격식체, 전문적<br>→ <b>interrogate</b> (심문하다)</span><br><span style='display:block; margin-top:10px; padding:10px 12px; background:#f8fafc; border-left:3px solid #64748b; border-radius:6px; line-height:1.7;'>'<b>변하다, 바꾸다</b>'의 뉘앙스 차이:<br>· 게르만 <b>change</b> — 일상언어, 회화<br>· 라틴 <b>trans-</b> — 격식, 문어체<br>· 그리스 <b>meta-</b> — 전문 용어 (수학·의학·철학)</span>" },
+        { label: "🌱 추상화 접미사 -hood", desc: "<div style='text-align:center; margin:8px 0 14px;'><img src='data:image/jpeg;base64,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' alt='motherhood' style='max-width:240px; width:100%; height:auto; border-radius:12px; box-shadow:0 2px 8px rgba(0,0,0,0.1);' /><div style='margin-top:6px; font-size:12px; color:#64748b; font-style:italic;'>mother·hood = 엄마와 관련된 모든 키워드의 그릇</div></div><b>mother</b>가 단순히 '엄마'라는 <span style='color:#1e40af; font-weight:800;'>개별적 존재</span>를 가리킨다면, <b>mother·hood</b>는 '엄마라는 존재가 지니는 <span style='background:#fef08a; color:#dc2626; font-weight:800; padding:1px 4px; border-radius:3px;'>역할, 감정, 책임 등 다양한 속성</span>'을 포괄하는 보다 <b style='color:#dc2626;'>추상적이고 종합적인 개념</b>이다.<br><br><span style='display:block; padding:10px 12px; background:#fffbeb; border-radius:8px; border:1px solid #fcd34d; line-height:1.8;'>예시) <b>출산, 육아, 사랑, 가정, 교육, 관심</b> — '엄마의 연관 키워드' 전체를 한 단어로 통째로 묶어주는 <span style='color:#dc2626; font-weight:800;'>그릇</span>이 바로 <b style='color:#dc2626;'>-hood</b>다.</span><br><br><span style='display:block; padding:10px 12px; background:#f0fdf4; border-radius:8px; border-left:3px solid #16a34a; line-height:1.7;'>종합적이고 추상적인 개념화를 만드는 접미사:<br>· <b style='color:#1e40af;'>게르만어</b>에 <b>-hood, -ness</b><br>· <b style='color:#92400e;'>라틴어</b>에 <b>-tion, -ity, -ence, -ance</b></span>" },
+        { label: "🎯 이것만은 꼭 기억하자!", desc: "추상명사를 만드는 어미는 출신 계열에 따라 나뉜다.<br><br><span style='display:block; padding:10px 12px; background:#eff6ff; border-radius:8px; border:1px solid #bfdbfe; margin-bottom:8px;'><b style='color:#1e40af;'>① 게르만계 (일상, 친근함)</b><br><b>-ness, -hood</b><br>예: dark<b>ness</b>, kind<b>ness</b>, mother<b>hood</b>, child<b>hood</b></span><span style='display:block; padding:10px 12px; background:#fef3c7; border-radius:8px; border:1px solid #fcd34d; margin-bottom:8px;'><b style='color:#92400e;'>② 라틴계 (격식, 학술적)</b><br><b>-ity, -tion, -ence, -ance</b><br>예: simplic<b>ity</b>, creativ<b>ity</b>, generos<b>ity</b></span><span style='display:block; padding:10px 12px; background:#f3e8ff; border-radius:8px; border:1px solid #d8b4fe;'><b style='color:#6b21a8;'>③ 기타 접미사</b><br>· <b>-al</b> 행위/관련 → arriv<b>al</b>, approv<b>al</b><br>· <b>-ary</b> 관련된 → volunt<b>ary</b>, ordin<b>ary</b><br>· <b>-able</b> 할 수 있는 → reason<b>able</b>, predict<b>able</b></span><br><span style='display:inline-block; margin-top:8px; padding:8px 12px; background:#fef08a; color:#7c2d12; font-weight:600; border-radius:8px; border-left:3px solid #dc2626; line-height:1.6;'>→ 같은 의미라도 어떤 어미가 붙느냐에 따라 <b style='color:#dc2626;'>일상적인 단어</b>가 되기도, <b style='color:#dc2626;'>격식 있는 단어</b>가 되기도 한다는 것을 기억하자!</span>" }
       ]
     },
     bridge: [
-      { word: "simplicity", roots: "simple + ity (라틴계 명사)", hint: "단순한 상태", meaning: "단순함", pos: "n." },
-      { word: "creativity", roots: "creative + ity", hint: "창의적인 상태", meaning: "창의력, 창조성", pos: "n." },
-      { word: "darkness", roots: "dark + ness (게르만계 명사)", hint: "어두운 상태", meaning: "어둠", pos: "n." },
-      { word: "complexity", roots: "complex + ity", hint: "복잡한 상태", meaning: "복잡성", pos: "n." },
-      { word: "awareness", roots: "aware + ness", hint: "인식하고 있는 상태", meaning: "인식, 의식", pos: "n." },
-      { word: "kindness", roots: "kind + ness", hint: "친절한 상태", meaning: "친절(함)", pos: "n." },
-      { word: "generosity", roots: "generous + ity", hint: "관대한 상태", meaning: "관대함", pos: "n." },
-      { word: "stability", roots: "stable + ity", hint: "안정된 상태", meaning: "안정(성)", pos: "n." },
-      { word: "integrity", roots: "integr (완전한) + ity", hint: "온전한 상태", meaning: "진실성, 완전함, 통합", pos: "n." },
-      { word: "objectivity", roots: "objective + ity", hint: "객관적인 상태", meaning: "객관성", pos: "n." },
-      { word: "individuality", roots: "individual + ity", hint: "개인적인 상태", meaning: "개성, 개별성", pos: "n." },
-      { word: "motherhood", roots: "mother + hood (게르만계)", hint: "어머니인 상태", meaning: "모성, 어머니임", pos: "n." },
-      { word: "childhood", roots: "child + hood", hint: "아이인 시기", meaning: "어린 시절", pos: "n." },
-      { word: "neighborhood", roots: "neighbor + hood", hint: "이웃들의 상태/지역", meaning: "근처, 동네", pos: "n." },
-      { word: "arrival", roots: "arrive + al (라틴계)", hint: "도착하는 행동", meaning: "도착", pos: "n." },
-      { word: "approval", roots: "approve + al", hint: "승인하는 행동", meaning: "승인, 인정", pos: "n." },
-      { word: "survival", roots: "survive + al", hint: "살아남는 것", meaning: "생존", pos: "n." },
-      { word: "trial", roots: "try + al", hint: "시도해 보는 것", meaning: "재판, 시험, 시련", pos: "n." },
-      { word: "predictable", roots: "predict + able", hint: "예측할 수 있는", meaning: "예측 가능한", pos: "adj." },
-      { word: "reasonable", roots: "reason + able", hint: "이성으로 받아들일 수 있는", meaning: "합리적인, 적당한", pos: "adj." },
-      { word: "acceptable", roots: "accept + able", hint: "받아들일 수 있는", meaning: "받아들일 만한", pos: "adj." },
-      { word: "capable", roots: "cap (잡다) + able", hint: "잡을 능력이 있는", meaning: "~ 할 수 있는, 유능한", pos: "adj." },
-      { word: "valuable", roots: "value + able", hint: "가치를 가질 만한", meaning: "귀중한, 가치있는", pos: "adj." },
-      { word: "imaginary", roots: "imagine + ary", hint: "상상과 관련된", meaning: "상상의, 가상의", pos: "adj." },
-      { word: "voluntary", roots: "volunt (자발적) + ary", hint: "자발적인 의지와 관련된", meaning: "자발적인", pos: "adj." },
-      { word: "ordinary", roots: "ord (질서) + inary", hint: "일반적 질서와 관련된", meaning: "보통의, 평범한", pos: "adj." },
-      { word: "solitary", roots: "sol (혼자) + itary", hint: "혼자와 관련된", meaning: "혼자의, 고독한", pos: "adj." },
-      { word: "monetary", roots: "monet (돈) + ary", hint: "돈과 관련된", meaning: "통화의, 금전(상)의", pos: "adj." },
-      { word: "annual", roots: "ann (해, 년) + ual (= al)", hint: "한 해와 관련된", meaning: "연간의, 매년의", pos: "adj." },
+      { word: "simplicity", roots: "simple '단순한' + ? (단순한 성질, 개념)", hint: "단순한 상태", meaning: "단순함", pos: "n.", extraHint: "<b>라틴계 명사형 어미</b>" },
+      { word: "creativity", roots: "create '창조하다' + ? (창조하다 라는 성질, 개념)", hint: "창의적인 상태", meaning: "창의력, 창조성", pos: "n.", extraHint: "<b>라틴계 명사형 어미</b>" },
+      { word: "darkness", roots: "dark '어두운' + ? (어두운 성질, 개념)", hint: "어두운 상태", meaning: "어둠", pos: "n.", extraHint: "<b>게르만계 명사형 어미</b>" },
+      { word: "complexity", roots: "complex '복잡한' + ? (복잡한 성질, 개념)", hint: "복잡한 상태", meaning: "복잡성", pos: "n.", extraHint: "<b>라틴계 명사형 어미</b>" },
+      { word: "awareness", roots: "aware '인지하는' + ? (인지, 의식하는 개념)", hint: "인식하고 있는 상태", meaning: "인식, 의식", pos: "n.", extraHint: "<b>게르만계 명사형 어미</b>" },
+      { word: "kindness", roots: "kind '친절한' + ?", hint: "친절한 상태", meaning: "친절(함)", pos: "n.", extraHint: "<b>게르만계 명사형 어미</b>" },
+      { word: "generosity", roots: "generous '관대한, 너그러운' + ? (관대하고 너그러운 성질, 개념)", hint: "관대한 상태", meaning: "관대함", pos: "n.", extraHint: "<b>라틴계 명사형 어미</b>" },
+      { word: "stability", roots: "stable '안정적인' + ? (안정적인 성질, 개념)", hint: "안정된 상태", meaning: "안정(성)", pos: "n.", extraHint: "<b>라틴계 명사형 어미</b>" },
+      { word: "integrity", roots: "integral '온전한' + ? (온전한, 통합된, 때묻지 않은 상태, 개념)", hint: "온전한 상태", meaning: "진실성, 완전함, 통합", pos: "n.", extraHint: "<b>라틴계 명사형 어미</b>" },
+      { word: "objectivity", roots: "objective '객관적인' + ? (객관적인 성질, 개념)", hint: "객관적인 상태", meaning: "객관성", pos: "n.", extraHint: "<b>라틴계 명사형 어미</b>" },
+      { word: "individuality", roots: "individual '개별적인' + ? (개별적인 성질)", hint: "개인적인 상태", meaning: "개성, 개별성", pos: "n.", extraHint: "<b>라틴계 명사형 어미</b>" },
+      { word: "motherhood", roots: "mother '엄마' + ? (어머니라는 성질, 개념)", hint: "어머니인 상태", meaning: "모성, 어머니임", pos: "n.", extraHint: "<b>게르만계 명사형 어미</b>" },
+      { word: "maternity", roots: "mater '어머니 (라틴어)' + ? (어머니라는 성질, 개념)", hint: "어머니의 라틴어 어근 + 추상명사", meaning: "어머니임, 출산", pos: "n.", extraHint: "<b>라틴계 명사형 어미</b>" },
+      { word: "childhood", roots: "child '어린이' + ? (어린이라는 성질, 과정, 개념)", hint: "아이인 시기", meaning: "어린 시절", pos: "n.", extraHint: "<b>게르만계 명사형 어미</b>" },
+      { word: "neighborhood", roots: "neighbor '이웃' + ? (이웃하는 성질, 개념)", hint: "이웃들의 상태/지역", meaning: "근처, 동네", pos: "n.", extraHint: "<b>게르만계 명사형 어미</b>" },
+      { word: "arrival", roots: "arrive '도착하다' + ? (명사형 어미)", hint: "도착하는 행동", meaning: "도착", pos: "n.", extraHint: "<b>라틴 -alis</b> 명사형 어미" },
+      { word: "approval", roots: "approve '승인하다' + ? (승인, 인정하는 개념)", hint: "승인하는 행동", meaning: "승인, 인정", pos: "n.", extraHint: "<b>라틴 -alis</b> 명사형 어미" },
+      { word: "survival", roots: "survive '생존하다' + ? (생존하는 상태, 개념)", hint: "살아남는 것", meaning: "생존", pos: "n.", extraHint: "<b>라틴 -alis</b> 명사형 어미" },
+      { word: "trial", roots: "try + ? (시험, 도전, 검증하는 개념)", hint: "시도해 보는 것", meaning: "재판, 시험, 시련", pos: "n.", extraHint: "<b>라틴 -alis</b> 명사형 어미" },
+      { word: "predictable", roots: "predict '예측하다' + ? (예상할 수 있는)", hint: "예측할 수 있는", meaning: "예측 가능한", pos: "adj.", extraHint: "<b>~할 수 있는</b> (형용사)" },
+      { word: "reasonable", roots: "reason '이유, 이성' + ? (이해, 유추가 되는)", hint: "이성으로 받아들일 수 있는", meaning: "합리적인, 적당한", pos: "adj.", extraHint: "<b>~할 수 있는</b> (형용사)" },
+      { word: "acceptable", roots: "accept '받아들이다' + ? (받아들일 수 있는)", hint: "받아들일 수 있는", meaning: "받아들일 만한", pos: "adj.", extraHint: "<b>~할 수 있는</b> (형용사)" },
+      { word: "capable", roots: "cap + ? (할 수 있는 능력이 있는)", hint: "잡을 능력이 있는", meaning: "~ 할 수 있는, 유능한", pos: "adj.", extraHint: "<b>~할 수 있는</b> (형용사) cf. <b>capacity</b>: 능력, 수용력" },
+      { word: "valuable", roots: "value '가치' + ? (가치를 가질 만한)", hint: "가치를 가질 만한", meaning: "귀중한, 가치있는", pos: "adj.", extraHint: "<b>~할 수 있는</b> (형용사)" },
+      { word: "imaginary", roots: "imagine '상상하다' + ? (상상과 관련된)", hint: "상상과 관련된", meaning: "상상의, 가상의", pos: "adj.", extraHint: "<b>라틴 -arius</b> 형용사형 어미" },
+      { word: "voluntary", roots: "volunteer '자원봉사자' + ? (자발적인, 자진(자원)적인)", hint: "자발적인 의지와 관련된", meaning: "자발적인", pos: "adj.", extraHint: "<b>라틴 -arius</b> 형용사형 어미" },
+      { word: "ordinary", roots: "order '질서' + ? (질서 속에 있는, 특별하지 않은, 평범한)", hint: "질서 속에 있는, 특별하지 않은, 평범한", meaning: "보통의, 평범한", pos: "adj.", extraHint: "<b>라틴 -arius</b> 형용사형 어미" },
+      { word: "solitary", roots: "solo '혼자' + ?", hint: "혼자와 관련된", meaning: "혼자의, 고독한", pos: "adj.", extraHint: "<b>라틴 -arius</b> 형용사형 어미" },
+      { word: "monetary", roots: "money '돈' + ? (돈과 관련된)", hint: "돈과 관련된", meaning: "통화의, 금전(상)의", pos: "adj.", extraHint: "<b>라틴 -arius</b> 형용사형 어미" },
+      { word: "annual", roots: "anni- '해, 년 (해마다, 연마다)' + ?", hint: "한 해와 관련된", meaning: "연간의, 매년의", pos: "adj.", extraHint: "<b>라틴 -alis</b> 형용사형 어미 cf. anniversary: 1년마다 돌아오는 기념일" },
       { word: "rational", roots: "ratio (이성) + nal (= al)", hint: "이성과 관련된", meaning: "합리적인, 이성적인", pos: "adj." },
-      { word: "logical", roots: "logic + al", hint: "논리와 관련된", meaning: "논리적인", pos: "adj." },
-      { word: "unanimity", roots: "un (하나) + anim (마음) + ity", hint: "마음이 하나인 상태", meaning: "만장일치, 합의", pos: "n." },
-      { word: "anonymity", roots: "an (없는) + onym (이름) + ity", hint: "이름이 없는 상태", meaning: "익명(성)", pos: "n." },
-      { word: "disparity", roots: "dis (아닌) + par (같은) + ity", hint: "같지 않은 상태", meaning: "불평등, 차이", pos: "n." },
-      { word: "withdrawal", roots: "withdraw + al", hint: "철수하는 행위", meaning: "철수, 인출, 중단", pos: "n." },
-      { word: "ambiguity", roots: "ambi (양쪽) + gu + ity", hint: "양쪽으로 해석되는 상태", meaning: "모호함, 애매함", pos: "n." }
+      { word: "logical", roots: "logic '논리' + ?", hint: "논리와 관련된", meaning: "논리적인", pos: "adj.", extraHint: "<b>라틴 -alis</b> 형용사형 어미" },
+      { word: "unanimity", roots: "uni '하나의' + nym 'name (이름)' + ? (하나로 통일되는 개념)", hint: "마음이 하나인 상태", meaning: "만장일치, 합의", pos: "n.", extraHint: "<b>라틴계 명사형 어미</b>" },
+      { word: "anonymity", roots: "a(n)- '없는' + nym 'name (이름)' + ? (이름이 없는, 무명인 상태, 개념)", hint: "이름이 없는 상태", meaning: "익명(성)", pos: "n.", extraHint: "<b>라틴계 명사형 어미</b>" },
+      { word: "disparity", roots: "dis '부정, 아닌' + par '같은, 동등한' + ?", hint: "같지 않은 상태", meaning: "불평등, 차이", pos: "n.", extraHint: "<b>라틴계 명사형 어미</b> cf. <b>par</b> 골프 par(파): 기준 타수와 같음, pair 같은 수준, 짝" },
+      { word: "withdrawal", roots: "withdraw '회수하다' + ? (명사형 어미, 다시 회수하는 행동, 과정)", hint: "철수하는 행위", meaning: "철수, 인출, 중단", pos: "n.", extraHint: "<b>라틴 -alis</b> 명사형 어미" },
+      { word: "ambiguity", roots: "ambi- '양쪽의' + gu '몰다' + ? (왔다 갔다하는, 둘 다, 양 쪽의, 한 곳에 정해지지 않은)", hint: "양쪽으로 해석되는 상태", meaning: "모호함, 애매함", pos: "n.", extraHint: "<b>라틴계 명사형 어미</b>" }
     ],
     examples: [
       { sentence: "The beauty of the design lies in its ____.", answer: "simplicity", translation: "디자인의 아름다움은 단순함에 있다." },
@@ -1569,6 +1863,88 @@ const VOCA_DATA = {
       { sentence: "The scandal led to her ____ from politics altogether.", answer: "withdrawal", translation: "그 스캔들은 그녀가 정계에서 완전히 물러나게 했다." },
       { sentence: "There is a clear ____ between the rich and the poor in this region.", answer: "disparity", translation: "이 지역에는 부자와 가난한 사람들 사이에 분명한 격차가 있다." },
       { sentence: "Each person is a unique ____ with their own thoughts and feelings.", answer: "individual", translation: "각 사람은 자신만의 생각과 감정을 가진 고유한 개인이다." }
+    ],
+    choices: [
+      {
+        english: "<u>____</u> is essential for solving complex problems.",
+        korean: "<b>창의성</b>은 복잡한 문제를 해결하는 데 필수적이다.",
+        options: ["createness", "create", "creativity", "creative"],
+        answer: 2,
+        word: "creativity",
+        extraHint: "<b>create</b>: 창조하다 (동사) → 명사형 어미는?"
+      },
+      {
+        english: "The room was filled with <u>____</u> after the lights went out.",
+        korean: "불이 꺼진 후 방은 <b>어둠</b>으로 가득 찼다.",
+        options: ["darkity", "darkness", "darkable", "dark"],
+        answer: 1,
+        word: "darkness",
+        extraHint: "<b>dark</b>: 어두운 (형용사) → 게르만계 추상명사 어미는?"
+      },
+      {
+        english: "This level of risk is not <u>____</u> in this situation.",
+        korean: "이러한 수준의 위험은 이 상황에서 <b>허용될</b> 수 없다.",
+        options: ["acceptance", "acceptable", "acceptary", "accept"],
+        answer: 1,
+        word: "acceptable",
+        extraHint: "<b>accept</b>: 허용하다 (동사) → '~할 수 있는'을 의미하는 어미는?"
+      },
+      {
+        english: "Journalists must maintain <u>____</u> when reporting the news.",
+        korean: "기자는 뉴스를 보도할 때 <b>객관성</b>을 유지해야 한다.",
+        options: ["objectary", "object", "objectivity", "objective"],
+        answer: 2,
+        word: "objectivity",
+        extraHint: "<b>objective</b>: 객관적인 (형용사) → 라틴계 추상명사 어미는?"
+      },
+      {
+        english: "Art often involves a high degree of <u>____</u>.",
+        korean: "예술은 종종 높은 수준의 <b>주관성</b>을 포함한다.",
+        options: ["subjectable", "subject", "subjective", "subjectivity"],
+        answer: 3,
+        word: "subjectivity",
+        extraHint: "<b>subjective</b>: 주관적인 (형용사) → 라틴계 추상명사 어미는?"
+      },
+      {
+        english: "Clean water is essential for human <u>____</u>.",
+        korean: "깨끗한 물은 인간의 <b>생존</b>에 필수적이다.",
+        options: ["survival", "surviving", "survive", "survivor"],
+        answer: 0,
+        word: "survival",
+        extraHint: "<b>survive</b>: 생존하다 (동사) → 명사형 어미는?", note: "💡비교: <b>survival</b> 생존 (개념) vs <b>surviving</b> 살아남는 행위 (과정)"
+      },
+      {
+        english: "The company suffered significant <u>____</u> losses.",
+        korean: "그 회사는 상당한 <b>금전적인</b> 손실을 입었다.",
+        options: ["monetable", "monetary", "money", "monetize"],
+        answer: 1,
+        word: "monetary",
+        extraHint: "<b>money</b>: 돈, 금전 (명사) → '~와 관련된'을 의미하는 형용사 어미는?"
+      },
+      {
+        english: "The <u>____</u> of the air caused my skin to crack.",
+        korean: "공기의 <b>건조함</b> 때문에 내 피부가 갈라졌다.",
+        options: ["dryness", "drying", "dry", "drity"],
+        answer: 0,
+        word: "dryness",
+        extraHint: "<b>dry</b>: 건조한, 마른 (형용사) → 게르만계 추상명사 어미는?", note: "💡비교: <b>dryness</b> 건조함 (개념) vs <b>drying</b> 건조시키는 행위 (과정)"
+      },
+      {
+        english: "The school encourages students to express their <u>____</u>.",
+        korean: "그 학교는 학생들이 <b>개성(개별성)</b>을 표현하도록 장려한다.",
+        options: ["individual", "individualistic", "individualness", "individuality"],
+        answer: 3,
+        word: "individuality",
+        extraHint: "<b>individual</b>: 개별적인 (형용사) → 라틴계 추상명사 어미는?", note: "💡참고: <b>individualness</b>처럼 라틴계열 어근과 게르만계열 접미사의 결합은 일반적이지 않다. (신조어나 학술적 파생어 예외 가능)"
+      },
+      {
+        english: "Participation in the program is <u>____</u>.",
+        korean: "그 프로그램 참여는 <b>자발적</b>이다.",
+        options: ["volunteer", "voluntary", "voluntarity", "volunteering"],
+        answer: 1,
+        word: "voluntary",
+        extraHint: "<b>volunteer</b>: 자원봉사자 (명사), 자발적으로 지원하다 (동사) → 형용사 어미는?", note: "💡비교: <b>voluntary</b> 자발적인 (성질, 개념) vs <b>volunteering</b> 자원봉사와 관련된 (행동, 과정)"
+      }
     ]
   }
 };
@@ -2082,7 +2458,10 @@ function startReviewQuiz() {
   state.startTime = Date.now();
 
   $('quiz-lesson-label').textContent = '🔁 오답 재시험';
-  $('quiz-mode-label').textContent = (state.part === 1 ? '단어 브릿지' : '예문 빈칸') + ` · ${reviewQuestions.length}문제`;
+  const reviewModeLabel = state.part === 1 ? '단어 브릿지'
+                        : state.part === 2 ? '예문 빈칸'
+                        : '어휘 추리력';
+  $('quiz-mode-label').textContent = reviewModeLabel + ` · ${reviewQuestions.length}문제`;
   $('quiz-header').classList.add('review-mode');
 
   showScreen('screen-quiz');
@@ -2113,7 +2492,12 @@ function renderBridge() {
   $('view-choice').classList.add('hidden');
 
   const q = state.questions[state.current];
-  const maskedHTML = maskRoots(q.roots).replace(/_+/g, '<span class="mask">?</span>');
+  let maskedHTML = maskRoots(q.roots).replace(/_+/g, '<span class="mask">?</span>');
+  // [?] 대괄호 형식 강조 (예: Lesson 2의 "depend '의존하다' + [?] → 형용사형")
+  maskedHTML = maskedHTML.replace(/\[\?\]/g, '<span class="mask">?</span>');
+  // 새 형식 데이터의 단독 ? 마커도 강조 (예: "ad (~로) + ? (의미)")
+  // 따옴표 안의 ?(예: "what?")는 제외하기 위해 단어 경계로 매칭
+  maskedHTML = maskedHTML.replace(/(^|[\s(])\?(?=[\s)+]|$)/g, '$1<span class="mask">?</span>');
   $('bridge-roots').innerHTML = maskedHTML;
   $('bridge-image').textContent = q.hint;
   $('bridge-pos').textContent = q.pos;
@@ -2334,7 +2718,7 @@ function renderChoice() {
 
   const q = state.questions[state.current];
   $('choice-english').innerHTML = q.english;
-  $('choice-korean').innerHTML = `🇰🇷 ${esc(q.korean)}`;
+  $('choice-korean').innerHTML = `🇰🇷 ${q.korean}`;
 
   // 어원 힌트 더 보기
   const cBtn = $('choice-extra-hint-btn');
@@ -2385,11 +2769,17 @@ function submitChoice(selected) {
   });
 
   const fb = $('choice-feedback');
+  let feedbackHTML;
   if (isCorrect) {
-    fb.innerHTML = `<div class="feedback correct" style="margin-top:14px;">✅ 정답입니다!</div>`;
+    feedbackHTML = `<div class="feedback correct" style="margin-top:14px;">✅ 정답입니다!</div>`;
   } else {
-    fb.innerHTML = `<div class="feedback error" style="margin-top:14px;">❌ 정답: <span class="answer">${q.answer+1}. ${esc(q.options[q.answer])}</span></div>`;
+    feedbackHTML = `<div class="feedback error" style="margin-top:14px;">❌ 정답: <span class="answer">${q.answer+1}. ${esc(q.options[q.answer])}</span></div>`;
   }
+  // 정답 해설 노트 (note 필드가 있으면 표시)
+  if (q.note) {
+    feedbackHTML += `<div class="choice-note">${q.note}</div>`;
+  }
+  fb.innerHTML = feedbackHTML;
   $('choice-next-row').classList.remove('hidden');
 }
 
@@ -2472,11 +2862,11 @@ async function showResult() {
   else { emoji='🌱'; detail='기초부터 차근차근 다시 학습해봅시다.'; }
 
   $('result-emoji').textContent = emoji;
-  const partLabel = state.part === 1 ? 'PART 01 · 단어 브릿지'
-                  : state.part === 2 ? 'PART 02 · 예문 빈칸'
-                  : 'PART 03 · 어휘 추리력';
-  const partShort = state.part === 1 ? 'PART 01'
-                  : state.part === 2 ? 'PART 02'
+  const partLabel = state.part === 3 ? 'PART 01 · 어휘 추리력'
+                  : state.part === 1 ? 'PART 02 · 단어 브릿지'
+                  : 'PART 03 · 예문 빈칸';
+  const partShort = state.part === 3 ? 'PART 01'
+                  : state.part === 1 ? 'PART 02'
                   : 'PART 03';
   if (state.isReview) {
     $('result-mode-label').textContent = '🔁 오답 재시험 · ' + partShort;
@@ -2508,6 +2898,15 @@ async function showResult() {
     return;
   }
 
+  // ===== Lesson 전체 완료 추적 =====
+  // 각 Part의 최고 점수를 localStorage에 저장
+  saveLessonPartScore(state.lessonKey, state.part, pct);
+  // Lesson 전체 완료 여부 + 평균 점수 체크
+  const lessonStatus = checkLessonCompletion(state.lessonKey);
+  if (lessonStatus.allCompleted) {
+    showLessonCompletionCard(state.lessonKey, lessonStatus.avgPct);
+  }
+
   // Submit to storage
   $('submit-status').innerHTML = '<div class="submit-status" style="background:#e0f2fe; color:#075985;">⏳ 결과 제출 중...</div>';
   const attemptData = {
@@ -2527,6 +2926,148 @@ async function showResult() {
     $('submit-status').innerHTML = '<div class="submit-status success">✅ 결과가 선생님께 제출되었어요!</div>';
   } else {
     $('submit-status').innerHTML = `<div class="submit-status error">⚠️ 결과 제출에 실패했어요 (${esc(result.error||'unknown')})</div>`;
+  }
+}
+
+// ====== Lesson 전체 완료 추적 ======
+const LESSON_SCORES_KEY = 'vocaTreeLessonScores';
+
+function getLessonScores() {
+  try {
+    return JSON.parse(localStorage.getItem(LESSON_SCORES_KEY) || '{}');
+  } catch (e) { return {}; }
+}
+
+function saveLessonPartScore(lessonKey, part, pct) {
+  try {
+    const scores = getLessonScores();
+    if (!scores[lessonKey]) scores[lessonKey] = {};
+    // 최고 점수만 저장 (시도 중 가장 높은 점수)
+    const prev = scores[lessonKey][part] || 0;
+    if (pct > prev) scores[lessonKey][part] = pct;
+    localStorage.setItem(LESSON_SCORES_KEY, JSON.stringify(scores));
+  } catch (e) { /* localStorage 사용 불가 시 무시 */ }
+}
+
+function checkLessonCompletion(lessonKey) {
+  const scores = getLessonScores();
+  const lessonScores = scores[lessonKey] || {};
+  const lesson = VOCA_DATA[lessonKey];
+  // lesson이 가진 Part 종류 (bridge, examples, choices가 있는지)
+  const availableParts = [];
+  if (lesson.bridge && lesson.bridge.length > 0) availableParts.push(1);
+  if (lesson.examples && lesson.examples.length > 0) availableParts.push(2);
+  if (lesson.choices && lesson.choices.length > 0) availableParts.push(3);
+  // 모든 Part가 완료(점수 있음)되어야 allCompleted
+  const completedParts = availableParts.filter(p => lessonScores[p] !== undefined);
+  const allCompleted = completedParts.length === availableParts.length;
+  // 평균 점수
+  let avgPct = 0;
+  if (completedParts.length > 0) {
+    const sum = completedParts.reduce((s, p) => s + lessonScores[p], 0);
+    avgPct = Math.round(sum / completedParts.length);
+  }
+  return { allCompleted, avgPct, completedParts, availableParts };
+}
+
+// Lesson별 향상된 능력 메시지 (사용자 결정: 레슨별 맞춤형)
+const LESSON_ACHIEVEMENT = {
+  lesson1: {
+    title: 'Lesson 1 정복 완료!',
+    subtitle: 'in / ex (안과 밖) 마스터',
+    skills: [
+      'in / ex / intr- / em / a(d)- 접두사의 의미를 직관적으로 파악',
+      '안과 밖의 방향성으로 단어의 핵심 의미 추리',
+      '같은 어근에서 파생되는 단어 가족(family) 인식'
+    ],
+    next: 'Lesson 2의 추상명사 어미 (-ant/-ent, -ence/-ance)에 도전해보세요!'
+  },
+  lesson2: {
+    title: 'Lesson 2 정복 완료!',
+    subtitle: '추상명사 어미 마스터',
+    skills: [
+      '-ant/-ent로 형용사와 명사(주체)를 구분하는 능력',
+      '-ence/-ance, -ency/-ancy 추상명사 어미 패턴 인식',
+      '동사/형용사/명사 사이의 파생 관계 추리'
+    ],
+    next: 'Lesson 3의 ad- 유음화 패턴 (af-, ap-, as- 등)에 도전해보세요!'
+  },
+  lesson3: {
+    title: 'Lesson 3 정복 완료!',
+    subtitle: 'ad- 유음화 마스터',
+    skills: [
+      'ad-가 af-, ap-, as-, ac-, at-로 변하는 자음동화 패턴 이해',
+      '"~를 향해"라는 방향성으로 타동사의 의미 추리',
+      '원형 단어와 결합한 파생 과정 따라가기'
+    ],
+    next: 'Lesson 4의 라틴계/게르만계 어미 (-ity, -ness, -hood)에 도전해보세요!'
+  },
+  lesson4: {
+    title: 'Lesson 4 정복 완료!',
+    subtitle: '언어의 계급과 추상화 어미 마스터',
+    skills: [
+      '게르만계 (-ness, -hood) vs 라틴계 (-ity, -tion) 구분',
+      '같은 의미의 일상어/격식어 어휘 짝꿍 인식 (ask/question/interrogate 등)',
+      '어미 종류로 단어의 격(register)을 판단하는 안목'
+    ],
+    next: '축하합니다! 보카트리의 모든 레슨을 정복하셨어요! 🎉'
+  }
+};
+
+function showLessonCompletionCard(lessonKey, avgPct) {
+  const achievement = LESSON_ACHIEVEMENT[lessonKey];
+  if (!achievement) return;
+
+  // 평균 점수 등급 (사용자 결정: 90/70/50 기준)
+  let tier, tierEmoji, tierText, tierColor;
+  if (avgPct >= 90) {
+    tier = 'excellent';
+    tierEmoji = '🏆';
+    tierText = '탁월합니다!';
+    tierColor = '#dc2626'; // 빨강
+  } else if (avgPct >= 70) {
+    tier = 'good';
+    tierEmoji = '👍';
+    tierText = '좋아요!';
+    tierColor = '#f59e0b'; // 주황
+  } else if (avgPct <= 50) {
+    tier = 'starter';
+    tierEmoji = '🌱';
+    tierText = '기초부터 차근차근';
+    tierColor = '#10b981'; // 초록
+  } else {
+    // 50~70 사이는 격려만
+    tier = 'progress';
+    tierEmoji = '💪';
+    tierText = '조금만 더!';
+    tierColor = '#3b82f6'; // 파랑
+  }
+
+  // 카드 HTML
+  const skillsHtml = achievement.skills.map(s => `<li>${s}</li>`).join('');
+  const cardHTML = `
+    <div class="lesson-completion-card" style="--tier-color:${tierColor};">
+      <div class="lc-emoji">${tierEmoji}</div>
+      <div class="lc-tier">${tierText}</div>
+      <div class="lc-title">${achievement.title}</div>
+      <div class="lc-subtitle">${achievement.subtitle}</div>
+      <div class="lc-avg">평균 점수 <b>${avgPct}%</b></div>
+      <div class="lc-section">
+        <div class="lc-section-title">✨ 향상된 능력</div>
+        <ul class="lc-skills">${skillsHtml}</ul>
+      </div>
+      <div class="lc-next">${achievement.next}</div>
+    </div>
+  `;
+
+  // 결과 화면의 mistake-section 위에 삽입
+  const fb = $('submit-status');
+  if (fb) {
+    // 기존 lesson-completion-card 제거 (재진입 시 중복 방지)
+    const existing = document.querySelector('.lesson-completion-card');
+    if (existing) existing.remove();
+    // submit-status 다음에 삽입
+    fb.insertAdjacentHTML('afterend', cardHTML);
   }
 }
 
@@ -2711,12 +3252,12 @@ function renderLessons() {
         </div>
         <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px;">
           <div style="background:#fff; padding:10px; border-radius:8px; border-left:3px solid var(--primary);">
-            <div style="font-size:11px; color:var(--text-light); font-weight:700;">PART 01 단어 브릿지</div>
+            <div style="font-size:11px; color:var(--text-light); font-weight:700;">PART 02 단어 브릿지</div>
             <div style="font-size:14px; margin-top:4px;">${p1.count}회 응시 · 평균 <strong>${p1Avg}%</strong></div>
             <div style="font-size:11px; color:var(--text-light);">평균 ${fmtDuration(p1Time)}</div>
           </div>
           <div style="background:#fff; padding:10px; border-radius:8px; border-left:3px solid var(--accent);">
-            <div style="font-size:11px; color:var(--text-light); font-weight:700;">PART 02 예문 빈칸</div>
+            <div style="font-size:11px; color:var(--text-light); font-weight:700;">PART 03 예문 빈칸</div>
             <div style="font-size:14px; margin-top:4px;">${p2.count}회 응시 · 평균 <strong>${p2Avg}%</strong></div>
             <div style="font-size:11px; color:var(--text-light);">평균 ${fmtDuration(p2Time)}</div>
           </div>
