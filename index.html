@@ -473,6 +473,360 @@ body {
   border-left: 3px solid var(--tier-color, #f59e0b);
 }
 
+/* ======= 성장 리포트 ======= */
+/* 홈 화면 진입 버튼 */
+.report-cta {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  margin-top: 18px;
+  padding: 16px 18px;
+  background: linear-gradient(135deg, #f1f5f9, #e2e8f0);
+  border: 2px solid #cbd5e1;
+  border-radius: 14px;
+  cursor: not-allowed;
+  opacity: 0.55;
+  transition: all 0.3s;
+  text-align: left;
+}
+.report-cta:not(:disabled) {
+  background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+  border: 2px solid #f59e0b;
+  cursor: pointer;
+  opacity: 1;
+  box-shadow: 0 4px 14px rgba(245, 158, 11, 0.25);
+  animation: report-glow 2s ease-in-out infinite;
+}
+.report-cta:not(:disabled):hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(245, 158, 11, 0.35);
+}
+@keyframes report-glow {
+  0%, 100% { box-shadow: 0 4px 14px rgba(245, 158, 11, 0.25); }
+  50% { box-shadow: 0 4px 20px rgba(245, 158, 11, 0.45); }
+}
+.report-cta-icon {
+  font-size: 28px;
+  filter: grayscale(60%);
+}
+.report-cta:not(:disabled) .report-cta-icon {
+  filter: none;
+}
+.report-cta-text { flex: 1; }
+.report-cta-title {
+  font-size: 15px;
+  font-weight: 800;
+  color: #475569;
+  margin-bottom: 2px;
+}
+.report-cta:not(:disabled) .report-cta-title {
+  color: #92400e;
+}
+.report-cta-subtitle {
+  font-size: 12px;
+  color: #64748b;
+  line-height: 1.4;
+}
+.report-cta:not(:disabled) .report-cta-subtitle {
+  color: #b45309;
+  font-weight: 600;
+}
+.report-cta-arrow {
+  font-size: 22px;
+  font-weight: 800;
+  color: #cbd5e1;
+}
+.report-cta:not(:disabled) .report-cta-arrow {
+  color: #f59e0b;
+}
+
+/* 리포트 화면 */
+#screen-report {
+  padding: 0;
+  background: transparent;
+}
+#report-content {
+  background: #fff;
+  border-radius: 16px;
+  padding: 28px 22px;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+}
+
+/* 헤더 */
+.report-header {
+  text-align: center;
+  padding-bottom: 22px;
+  border-bottom: 3px double #cbd5e1;
+  margin-bottom: 24px;
+}
+.report-logo {
+  font-size: 44px;
+  line-height: 1;
+  margin-bottom: 8px;
+}
+.report-brand {
+  font-size: 13px;
+  font-weight: 800;
+  color: #16a34a;
+  letter-spacing: 1.5px;
+  margin-bottom: 4px;
+}
+.report-title {
+  font-size: 26px;
+  font-weight: 900;
+  color: #111827;
+  letter-spacing: -0.3px;
+  margin-bottom: 2px;
+}
+.report-subtitle {
+  font-size: 11px;
+  color: #94a3b8;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+}
+
+/* 섹션 공통 */
+.report-section {
+  margin-bottom: 22px;
+}
+.rs-heading {
+  font-size: 15px;
+  font-weight: 800;
+  color: #111827;
+  margin-bottom: 12px;
+  padding-bottom: 6px;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+/* 학생 정보 */
+.student-info .rs-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px 16px;
+  padding: 12px 14px;
+  background: #f8fafc;
+  border-radius: 10px;
+  border-left: 4px solid #16a34a;
+}
+.rs-item { display: flex; flex-direction: column; gap: 2px; }
+.rs-label {
+  font-size: 11px;
+  font-weight: 700;
+  color: #64748b;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+.rs-value {
+  font-size: 15px;
+  font-weight: 700;
+  color: #111827;
+}
+
+/* 전체 평균 */
+.overall-score {
+  background: linear-gradient(135deg, #fffbeb 0%, #fef3c7 100%);
+  border: 2px solid #fcd34d;
+  border-radius: 14px;
+  padding: 20px;
+}
+.overall-display {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  justify-content: center;
+  margin-bottom: 16px;
+}
+.overall-emoji { font-size: 52px; line-height: 1; }
+.overall-num { text-align: left; }
+.overall-pct {
+  font-size: 42px;
+  font-weight: 900;
+  color: #92400e;
+  line-height: 1;
+}
+.overall-tier {
+  font-size: 14px;
+  font-weight: 700;
+  color: #b45309;
+  margin-top: 4px;
+}
+.progress-bar {
+  height: 14px;
+  background: #fff;
+  border-radius: 99px;
+  overflow: hidden;
+  border: 1px solid #fcd34d;
+}
+.progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #f59e0b, #ea580c);
+  border-radius: 99px;
+  transition: width 1s ease-out;
+}
+
+/* Lesson별 점수 카드 */
+.lesson-score-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+.lesson-score-card {
+  background: #fff;
+  border: 1.5px solid #e5e7eb;
+  border-radius: 10px;
+  padding: 12px;
+  border-left: 4px solid var(--lc-color, #94a3b8);
+}
+.lsc-num {
+  font-size: 11px;
+  font-weight: 800;
+  color: #64748b;
+  letter-spacing: 1px;
+  margin-bottom: 2px;
+}
+.lsc-title {
+  font-size: 13px;
+  font-weight: 800;
+  color: #111827;
+  margin-bottom: 8px;
+  line-height: 1.3;
+}
+.lsc-score-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+.lsc-emoji { font-size: 22px; }
+.lsc-pct {
+  font-size: 20px;
+  font-weight: 900;
+  color: var(--lc-color, #111827);
+}
+
+/* 향상된 능력 */
+.skill-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+.skill-box {
+  background: #f0fdf4;
+  border: 1.5px solid #bbf7d0;
+  border-radius: 10px;
+  padding: 12px;
+}
+.sb-title {
+  font-size: 12px;
+  font-weight: 800;
+  color: #166534;
+  margin-bottom: 8px;
+  padding-bottom: 6px;
+  border-bottom: 1px dashed #bbf7d0;
+}
+.sb-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.sb-list li {
+  position: relative;
+  padding: 4px 0 4px 18px;
+  font-size: 12px;
+  color: #1f2937;
+  line-height: 1.5;
+}
+.sb-list li::before {
+  content: '✓';
+  position: absolute;
+  left: 0;
+  top: 4px;
+  color: #16a34a;
+  font-weight: 900;
+  font-size: 13px;
+}
+
+/* 학습 통계 */
+.stat-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+.stat-box {
+  background: linear-gradient(135deg, #eff6ff, #dbeafe);
+  border: 1.5px solid #93c5fd;
+  border-radius: 12px;
+  padding: 16px;
+  text-align: center;
+}
+.stat-icon { font-size: 28px; margin-bottom: 4px; }
+.stat-num {
+  font-size: 24px;
+  font-weight: 900;
+  color: #1e40af;
+  margin-bottom: 2px;
+}
+.stat-label {
+  font-size: 11px;
+  font-weight: 700;
+  color: #1e3a8a;
+  letter-spacing: 0.5px;
+}
+
+/* 격려 메시지 */
+.encouragement {
+  background: linear-gradient(135deg, #f0fdf4, #ecfccb);
+  border: 2px solid #86efac;
+  border-radius: 14px;
+  padding: 20px;
+  text-align: center;
+}
+.enc-quote {
+  font-size: 15px;
+  font-weight: 800;
+  color: #14532d;
+  font-style: italic;
+  margin-bottom: 12px;
+}
+.enc-message {
+  font-size: 13px;
+  color: #166534;
+  line-height: 1.7;
+  margin-bottom: 14px;
+}
+.enc-footer {
+  font-size: 12px;
+  font-weight: 700;
+  color: #16a34a;
+  border-top: 1px dashed #86efac;
+  padding-top: 10px;
+}
+
+/* 액션 버튼 */
+.report-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 20px;
+}
+
+/* 인쇄 친화 CSS */
+@media print {
+  body { background: #fff; padding: 0; margin: 0; }
+  .container { max-width: 100%; padding: 0; }
+  .no-print { display: none !important; }
+  #screen-report { padding: 0; }
+  #report-content {
+    box-shadow: none;
+    border-radius: 0;
+    padding: 16px 12px;
+  }
+  .report-section { page-break-inside: avoid; }
+  .lesson-completion-card { display: none !important; }
+  .skill-grid { grid-template-columns: 1fr 1fr; }
+}
+
 /* ======= Quiz ======= */
 .quiz-header {
   display:flex; justify-content:space-between; align-items:center;
@@ -993,6 +1347,98 @@ body {
     <div class="section-title">STEP 1</div>
     <div class="section-heading">강의를 선택하세요</div>
     <div class="lesson-grid" id="lesson-grid"></div>
+
+    <!-- 성장 리포트 진입 버튼 (4개 Lesson 모든 Part 완료 시 활성화) -->
+    <button class="report-cta" id="report-cta-btn" disabled onclick="showGrowthReport()">
+      <div class="report-cta-icon">📊</div>
+      <div class="report-cta-text">
+        <div class="report-cta-title">나의 성장 리포트</div>
+        <div class="report-cta-subtitle" id="report-cta-subtitle">4개 Lesson 모든 Part를 완료하면 열립니다</div>
+      </div>
+      <div class="report-cta-arrow">→</div>
+    </button>
+  </div>
+
+  <!-- ============ 성장 리포트 ============ -->
+  <div id="screen-report" class="card hidden">
+    <button class="back-btn no-print" onclick="goHome()">← 강의 다시 선택</button>
+
+    <div id="report-content">
+      <!-- 리포트 헤더 -->
+      <div class="report-header">
+        <div class="report-logo">🌳</div>
+        <div class="report-brand">VOCA TREE · 보카트리</div>
+        <div class="report-title">종합 성장 리포트</div>
+        <div class="report-subtitle">Comprehensive Growth Report</div>
+      </div>
+
+      <!-- 1. 학생 정보 -->
+      <div class="report-section student-info">
+        <div class="rs-row">
+          <div class="rs-item"><span class="rs-label">이름</span><span class="rs-value" id="rpt-name">-</span></div>
+          <div class="rs-item"><span class="rs-label">학교</span><span class="rs-value" id="rpt-school">-</span></div>
+          <div class="rs-item"><span class="rs-label">학년</span><span class="rs-value" id="rpt-grade">-</span></div>
+          <div class="rs-item"><span class="rs-label">완료일</span><span class="rs-value" id="rpt-date">-</span></div>
+        </div>
+      </div>
+
+      <!-- 2. 전체 평균 + 진행도 바 -->
+      <div class="report-section overall-score">
+        <div class="rs-heading">📊 전체 성취도</div>
+        <div class="overall-display">
+          <div class="overall-emoji" id="rpt-overall-emoji">🏆</div>
+          <div class="overall-num">
+            <div class="overall-pct" id="rpt-overall-pct">0%</div>
+            <div class="overall-tier" id="rpt-overall-tier">탁월합니다!</div>
+          </div>
+        </div>
+        <div class="progress-bar">
+          <div class="progress-fill" id="rpt-progress-fill" style="width:0%"></div>
+        </div>
+      </div>
+
+      <!-- 3. Lesson별 점수 카드 -->
+      <div class="report-section">
+        <div class="rs-heading">📚 Lesson별 성취도</div>
+        <div class="lesson-score-grid" id="rpt-lesson-scores"></div>
+      </div>
+
+      <!-- 4. 향상된 12가지 능력 -->
+      <div class="report-section">
+        <div class="rs-heading">✨ 학습으로 향상된 능력</div>
+        <div class="skill-grid" id="rpt-skills"></div>
+      </div>
+
+      <!-- 5. 학습 통계 -->
+      <div class="report-section">
+        <div class="rs-heading">🌳 나의 어휘 나무 성장</div>
+        <div class="stat-grid">
+          <div class="stat-box">
+            <div class="stat-icon">⏱️</div>
+            <div class="stat-num" id="rpt-total-time">0분</div>
+            <div class="stat-label">총 학습 시간</div>
+          </div>
+          <div class="stat-box">
+            <div class="stat-icon">🌳</div>
+            <div class="stat-num" id="rpt-total-words">0</div>
+            <div class="stat-label">학습한 단어 수</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 6. 격려 메시지 -->
+      <div class="report-section encouragement">
+        <div class="enc-quote">“한 단어를 알면 열 단어가 보입니다”</div>
+        <div class="enc-message" id="rpt-encouragement"></div>
+        <div class="enc-footer">🌿 VOCA TREE — PIF Education</div>
+      </div>
+    </div>
+
+    <!-- 인쇄/저장 버튼 (인쇄 시 숨김) -->
+    <div class="report-actions no-print">
+      <button class="btn btn-primary" onclick="printReport()">🖨️ 리포트 인쇄/저장 (PDF)</button>
+      <button class="btn" onclick="goHome()" style="background:#f1f5f9; color:#475569;">← 닫기</button>
+    </div>
   </div>
 
   <!-- ============ 개념 요약 ============ -->
@@ -1990,6 +2436,7 @@ let state = {
 const $ = id => document.getElementById(id);
 const showScreen = id => {
   ['screen-login','screen-home','screen-concept','screen-part','screen-quiz','screen-result',
+   'screen-report',
    'screen-teacher-login','screen-teacher-dash','screen-setup-guide']
     .forEach(s => $(s).classList.add('hidden'));
   $(id).classList.remove('hidden');
@@ -2335,6 +2782,8 @@ function showHome() {
     <button class="logout" onclick="logoutStudent()">로그아웃</button>
   `;
   showScreen('screen-home');
+  // 리포트 버튼 상태 업데이트 (4개 Lesson 완료 여부 체크)
+  updateReportCtaState();
 }
 
 function selectLesson(key) {
@@ -2851,6 +3300,11 @@ async function showResult() {
   const pct = Math.round((score/total)*100);
   const elapsedSec = Math.round((Date.now() - state.startTime) / 1000);
 
+  // 학습 시간 누적 (재시험은 제외, 일반 응시만 누적)
+  if (!state.isReview) {
+    addLearningTime(elapsedSec);
+  }
+
   let emoji='', detail='';
   if (pct === 100) {
     emoji = state.isReview ? '🎯' : '🏆';
@@ -3069,6 +3523,179 @@ function showLessonCompletionCard(lessonKey, avgPct) {
     // submit-status 다음에 삽입
     fb.insertAdjacentHTML('afterend', cardHTML);
   }
+}
+
+// ====== 성장 리포트 ======
+
+// 모든 Lesson의 완료 여부와 점수를 집계
+function getAllLessonsStatus() {
+  const lessons = ['lesson1','lesson2','lesson3','lesson4'];
+  const results = {};
+  let allCompleted = true;
+  let totalAvg = 0;
+  let completedCount = 0;
+
+  lessons.forEach(key => {
+    if (!VOCA_DATA[key]) return;
+    const status = checkLessonCompletion(key);
+    results[key] = status;
+    if (!status.allCompleted) allCompleted = false;
+    if (status.allCompleted) {
+      totalAvg += status.avgPct;
+      completedCount++;
+    }
+  });
+
+  const overallAvg = completedCount > 0 ? Math.round(totalAvg / completedCount) : 0;
+  return { results, allCompleted, overallAvg, completedCount };
+}
+
+// 홈 화면 진입 시 리포트 버튼 상태 업데이트
+function updateReportCtaState() {
+  const btn = $('report-cta-btn');
+  const subtitle = $('report-cta-subtitle');
+  if (!btn) return;
+
+  const { allCompleted, completedCount } = getAllLessonsStatus();
+  if (allCompleted) {
+    btn.disabled = false;
+    subtitle.textContent = '4개 Lesson 모두 완료! 리포트가 준비되었어요 🎉';
+  } else {
+    btn.disabled = true;
+    subtitle.textContent = `Lesson ${completedCount}/4 완료 · 모든 Part를 완료하면 열립니다`;
+  }
+}
+
+// 학습한 단어 총 수 계산 (bridge + examples + choices의 단어 합)
+function getTotalLearnedWords() {
+  let total = 0;
+  ['lesson1','lesson2','lesson3','lesson4'].forEach(key => {
+    const lesson = VOCA_DATA[key];
+    if (!lesson) return;
+    if (lesson.bridge) total += lesson.bridge.length;
+    if (lesson.examples) total += lesson.examples.length;
+    if (lesson.choices) total += lesson.choices.length;
+  });
+  return total;
+}
+
+// localStorage에서 누적 학습 시간 가져오기 (각 응시 시 누적되어야 함)
+const LEARNING_TIME_KEY = 'vocaTreeTotalLearningTime';
+function getTotalLearningTime() {
+  try {
+    return parseInt(localStorage.getItem(LEARNING_TIME_KEY) || '0', 10);
+  } catch (e) { return 0; }
+}
+function addLearningTime(seconds) {
+  try {
+    const current = getTotalLearningTime();
+    localStorage.setItem(LEARNING_TIME_KEY, String(current + seconds));
+  } catch (e) {}
+}
+
+// 리포트 화면 표시
+function showGrowthReport() {
+  const status = getAllLessonsStatus();
+  if (!status.allCompleted) {
+    alert('아직 모든 Lesson을 완료하지 않았어요. 4개 Lesson의 모든 Part를 완료해주세요!');
+    return;
+  }
+
+  // 1. 학생 정보
+  $('rpt-name').textContent = state.user.name || '-';
+  $('rpt-school').textContent = state.user.school || '-';
+  $('rpt-grade').textContent = state.user.grade || '-';
+  const today = new Date();
+  $('rpt-date').textContent = `${today.getFullYear()}.${String(today.getMonth()+1).padStart(2,'0')}.${String(today.getDate()).padStart(2,'0')}`;
+
+  // 2. 전체 평균
+  const overall = status.overallAvg;
+  let overallEmoji, overallTier;
+  if (overall >= 90) { overallEmoji = '🏆'; overallTier = '탁월합니다!'; }
+  else if (overall >= 70) { overallEmoji = '👍'; overallTier = '좋아요!'; }
+  else if (overall >= 50) { overallEmoji = '💪'; overallTier = '조금만 더!'; }
+  else { overallEmoji = '🌱'; overallTier = '기초부터 차근차근'; }
+
+  $('rpt-overall-emoji').textContent = overallEmoji;
+  $('rpt-overall-pct').textContent = `${overall}%`;
+  $('rpt-overall-tier').textContent = overallTier;
+  // 진행 바 애니메이션
+  setTimeout(() => {
+    $('rpt-progress-fill').style.width = `${overall}%`;
+  }, 100);
+
+  // 3. Lesson별 점수
+  const lessonGrid = $('rpt-lesson-scores');
+  lessonGrid.innerHTML = '';
+  const lessonOrder = ['lesson1','lesson2','lesson3','lesson4'];
+  lessonOrder.forEach((key, idx) => {
+    const lesson = VOCA_DATA[key];
+    if (!lesson) return;
+    const lstatus = status.results[key];
+    const pct = lstatus.avgPct;
+    let emoji, color;
+    if (pct >= 90) { emoji = '🏆'; color = '#dc2626'; }
+    else if (pct >= 70) { emoji = '👍'; color = '#f59e0b'; }
+    else if (pct >= 50) { emoji = '💪'; color = '#3b82f6'; }
+    else { emoji = '🌱'; color = '#10b981'; }
+
+    const card = document.createElement('div');
+    card.className = 'lesson-score-card';
+    card.style.setProperty('--lc-color', color);
+    card.innerHTML = `
+      <div class="lsc-num">LESSON ${idx+1}</div>
+      <div class="lsc-title">${esc(lesson.title)}</div>
+      <div class="lsc-score-row">
+        <div class="lsc-emoji">${emoji}</div>
+        <div class="lsc-pct">${pct}%</div>
+      </div>
+    `;
+    lessonGrid.appendChild(card);
+  });
+
+  // 4. 향상된 능력 (Lesson별 3개씩)
+  const skillGrid = $('rpt-skills');
+  skillGrid.innerHTML = '';
+  lessonOrder.forEach((key, idx) => {
+    const achievement = LESSON_ACHIEVEMENT[key];
+    if (!achievement) return;
+    const box = document.createElement('div');
+    box.className = 'skill-box';
+    const skillsHtml = achievement.skills.map(s => `<li>${esc(s)}</li>`).join('');
+    box.innerHTML = `
+      <div class="sb-title">LESSON ${idx+1} · ${esc(achievement.subtitle)}</div>
+      <ul class="sb-list">${skillsHtml}</ul>
+    `;
+    skillGrid.appendChild(box);
+  });
+
+  // 5. 학습 통계
+  const totalSec = getTotalLearningTime();
+  const totalMin = Math.round(totalSec / 60);
+  $('rpt-total-time').textContent = totalMin >= 60
+    ? `${Math.floor(totalMin/60)}시간 ${totalMin%60}분`
+    : `${totalMin}분`;
+  $('rpt-total-words').textContent = getTotalLearnedWords();
+
+  // 6. 격려 메시지
+  let encouragementMsg;
+  if (overall >= 90) {
+    encouragementMsg = '놀라운 성취입니다! 이제 처음 보는 단어도 어원으로 추리할 수 있는 진짜 어휘력을 갖추셨어요. 영어 단어가 더 이상 두렵지 않을 거예요.';
+  } else if (overall >= 70) {
+    encouragementMsg = '꾸준한 노력으로 어휘력이 크게 자랐어요! 어근과 접미사의 패턴이 머리에 그려지기 시작했을 거예요. 이 감각을 유지하면 곧 한 단계 더 도약합니다.';
+  } else if (overall >= 50) {
+    encouragementMsg = '여기까지 온 것만으로도 큰 발전입니다! 보카트리의 4단계를 모두 완료했다는 사실이 중요해요. 이제 약한 부분을 다시 복습하며 점수를 끌어올려 봐요.';
+  } else {
+    encouragementMsg = '4개 레슨을 모두 마친 것에 박수를 보냅니다! 어원학습은 시간이 걸리는 학습이에요. 다시 도전하면서 점수를 차근차근 올려봐요. 기초가 탄탄해질수록 진짜 어휘력이 자라납니다.';
+  }
+  $('rpt-encouragement').textContent = encouragementMsg;
+
+  // 화면 전환
+  showScreen('screen-report');
+}
+
+function printReport() {
+  window.print();
 }
 
 function restartQuiz() {
