@@ -162,6 +162,7 @@ body {
   cursor:pointer;
   text-align:left;
   transition:all 0.2s;
+  position:relative;
 }
 .lesson-btn.selected {
   background: linear-gradient(135deg,#dbeafe,#bfdbfe);
@@ -169,9 +170,34 @@ body {
   transform: translateY(-2px);
   box-shadow: 0 6px 14px rgba(37,99,235,0.25);
 }
+.lesson-btn.completed {
+  background: linear-gradient(135deg, #f0fdf4, #dcfce7);
+  border-color: #86efac;
+}
+.lesson-btn .lesson-btn-head {
+  display:flex; align-items:center; justify-content:space-between; gap:8px;
+}
 .lesson-btn .num { font-size:12px; font-weight:700; color:var(--primary); letter-spacing:1px; }
 .lesson-btn .name { font-size:15px; font-weight:700; margin-top:6px; line-height:1.3; }
 .lesson-btn .desc { font-size:11px; color:var(--text-light); margin-top:4px; }
+
+/* 완료/미완료 뱃지 */
+.lesson-badge {
+  display:inline-flex; align-items:center;
+  font-size:10px; font-weight:800;
+  padding:3px 8px; border-radius:99px;
+  letter-spacing:0.5px;
+  white-space:nowrap;
+}
+.lesson-badge.done {
+  background:#16a34a; color:#fff;
+  box-shadow:0 2px 6px rgba(22,163,74,0.35);
+}
+.lesson-badge.todo {
+  background:#e2e8f0; color:#64748b;
+  border:1px solid #cbd5e1;
+}
+.lesson-btn.completed .num { color:#16a34a; }
 
 /* ======= Part Selector ======= */
 .part-grid { display:grid; grid-template-columns:repeat(2,1fr); gap:12px; margin-top:14px; }
@@ -202,9 +228,49 @@ body {
   padding:18px 14px; cursor:pointer; transition:all 0.2s; text-align:left;
 }
 .part-btn:hover { border-color:var(--primary); }
+.part-btn .part-btn-head {
+  display:flex; align-items:center; justify-content:space-between; gap:6px;
+  margin-bottom:4px;
+}
 .part-btn .label { font-size:11px; font-weight:700; color:var(--primary); letter-spacing:1px; }
 .part-btn .title { font-size:15px; font-weight:700; margin-top:4px; }
 .part-btn .desc { font-size:11px; color:var(--text-light); margin-top:6px; line-height:1.4; }
+
+/* Part 상태별 외형 */
+.part-btn.part-completed {
+  background: linear-gradient(135deg, #f0fdf4, #dcfce7);
+  border-color: #86efac;
+}
+.part-btn.part-completed .label { color: #16a34a; }
+.part-btn.part-failed {
+  background: linear-gradient(135deg, #fef2f2, #fee2e2);
+  border-color: #fca5a5;
+}
+.part-btn.part-failed .label { color: #dc2626; }
+
+/* Part 상태 뱃지 */
+.part-status {
+  display:inline-flex; align-items:center;
+  font-size:9.5px; font-weight:800;
+  padding:3px 7px; border-radius:99px;
+  letter-spacing:0.3px;
+  white-space:nowrap;
+}
+.part-status.status-todo {
+  background:#e2e8f0; color:#64748b;
+  border:1px solid #cbd5e1;
+}
+.part-status.status-done {
+  background:#16a34a; color:#fff;
+  box-shadow:0 1px 4px rgba(22,163,74,0.3);
+}
+.part-status.status-failed {
+  background:#dc2626; color:#fff;
+}
+.part-status.status-optional {
+  background:#fef3c7; color:#92400e;
+  border:1px solid #fcd34d;
+}
 
 /* ======= Study Guide (Part 선택 화면 가이드) ======= */
 .study-guide {
@@ -267,6 +333,115 @@ body {
 /* ======= Section Title ======= */
 .section-title { font-size:13px; font-weight:700; color:var(--text-light); letter-spacing:1px; }
 .section-heading { font-size:18px; font-weight:800; margin-top:4px; }
+
+/* 홈 헤딩 행 (좌: STEP1 강의, 우: 완료 기준 버튼) */
+.home-heading-row {
+  display:flex; align-items:flex-end; justify-content:space-between; gap:12px;
+  margin-bottom:4px;
+}
+.info-btn {
+  display:flex; align-items:center; gap:5px;
+  padding:7px 11px;
+  background:#fef3c7;
+  border:1px solid #fcd34d;
+  border-radius:99px;
+  font-size:12px;
+  font-weight:700;
+  color:#92400e;
+  cursor:pointer;
+  transition:all 0.2s;
+  white-space:nowrap;
+}
+.info-btn:hover {
+  background:#fde68a;
+  transform:translateY(-1px);
+  box-shadow:0 2px 6px rgba(245,158,11,0.25);
+}
+.info-btn .info-icon { font-size:14px; }
+
+/* 모달 */
+.modal-overlay {
+  position:fixed; inset:0;
+  background:rgba(15,23,42,0.55);
+  display:flex; align-items:center; justify-content:center;
+  z-index:1000;
+  padding:20px;
+  animation:modal-fade-in 0.2s ease-out;
+}
+@keyframes modal-fade-in {
+  from { opacity:0; }
+  to { opacity:1; }
+}
+.modal-content {
+  background:#fff;
+  border-radius:18px;
+  padding:24px 22px;
+  max-width:440px;
+  width:100%;
+  max-height:90vh;
+  overflow-y:auto;
+  box-shadow:0 20px 50px rgba(0,0,0,0.25);
+  animation:modal-pop 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+@keyframes modal-pop {
+  from { opacity:0; transform:scale(0.9) translateY(20px); }
+  to { opacity:1; transform:scale(1) translateY(0); }
+}
+.modal-header {
+  display:flex; align-items:center; gap:10px;
+  padding-bottom:14px;
+  border-bottom:1px solid #e5e7eb;
+  margin-bottom:14px;
+}
+.modal-icon { font-size:24px; }
+.modal-title { font-size:18px; font-weight:800; color:#111827; }
+.modal-body { font-size:13.5px; color:#374151; line-height:1.6; }
+
+.guide-section { margin-bottom:14px; }
+.guide-label {
+  display:inline-block;
+  font-size:11px; font-weight:800;
+  padding:3px 10px; border-radius:99px;
+  background:#fee2e2; color:#991b1b;
+  letter-spacing:0.5px;
+  margin-bottom:10px;
+}
+.guide-label.optional {
+  background:#f1f5f9; color:#475569;
+}
+.guide-row {
+  display:flex; gap:12px;
+  padding:12px 14px;
+  background:#f8fafc;
+  border-radius:10px;
+  margin-bottom:6px;
+  border-left:3px solid #ef4444;
+}
+.guide-section.optional .guide-row { border-left-color:#94a3b8; }
+.guide-part-num {
+  font-size:11px; font-weight:800;
+  color:#dc2626; letter-spacing:0.8px;
+  min-width:55px;
+  padding-top:2px;
+}
+.guide-section.optional .guide-part-num { color:#64748b; }
+.guide-part-content { flex:1; }
+.guide-part-title { font-size:14px; font-weight:800; color:#111827; }
+.guide-part-target { font-size:12px; color:#475569; margin-top:2px; }
+.guide-part-target b { color:#dc2626; }
+.guide-section.optional .guide-part-target b { color:#475569; }
+
+.guide-tip {
+  background:#eff6ff;
+  border:1px solid #bfdbfe;
+  border-radius:10px;
+  padding:10px 12px;
+  font-size:12.5px;
+  color:#1e40af;
+  line-height:1.6;
+  margin-top:12px;
+}
+.guide-tip b { color:#dc2626; font-weight:800; }
 
 /* ======= Vision Card (로그인 화면 비전 메시지) ======= */
 .vision-card {
@@ -1344,19 +1519,77 @@ body {
   <!-- ============ HOME : Lesson 선택 ============ -->
   <div id="screen-home" class="card hidden">
     <div class="user-badge" id="user-badge"></div>
-    <div class="section-title">STEP 1</div>
-    <div class="section-heading">강의를 선택하세요</div>
+    <div class="home-heading-row">
+      <div>
+        <div class="section-title">STEP 1</div>
+        <div class="section-heading">강의를 선택하세요</div>
+      </div>
+      <button class="info-btn" onclick="showCompletionGuide()" aria-label="완료 기준 안내">
+        <span class="info-icon">ℹ️</span>
+        <span class="info-text">완료 기준</span>
+      </button>
+    </div>
     <div class="lesson-grid" id="lesson-grid"></div>
 
-    <!-- 성장 리포트 진입 버튼 (4개 Lesson 모든 Part 완료 시 활성화) -->
+    <!-- 성장 리포트 진입 버튼 (4개 Lesson 모두 완료 시 활성화) -->
     <button class="report-cta" id="report-cta-btn" disabled onclick="showGrowthReport()">
       <div class="report-cta-icon">📊</div>
       <div class="report-cta-text">
         <div class="report-cta-title">나의 성장 리포트</div>
-        <div class="report-cta-subtitle" id="report-cta-subtitle">4개 Lesson 모든 Part를 완료하면 열립니다</div>
+        <div class="report-cta-subtitle" id="report-cta-subtitle">모든 Lesson을 완료하면 열립니다</div>
       </div>
       <div class="report-cta-arrow">→</div>
     </button>
+  </div>
+
+  <!-- ============ 완료 기준 안내 모달 ============ -->
+  <div id="completion-guide-modal" class="modal-overlay hidden" onclick="hideCompletionGuide(event)">
+    <div class="modal-content" onclick="event.stopPropagation()">
+      <div class="modal-header">
+        <div class="modal-icon">🎯</div>
+        <div class="modal-title">Lesson 완료 기준</div>
+      </div>
+      <div class="modal-body">
+        <div class="guide-section">
+          <div class="guide-label">필수 조건</div>
+          <div class="guide-row">
+            <div class="guide-part-num">PART 01</div>
+            <div class="guide-part-content">
+              <div class="guide-part-title">어휘 추리력</div>
+              <div class="guide-part-target">목표: <b>80% 이상</b></div>
+            </div>
+          </div>
+          <div class="guide-row">
+            <div class="guide-part-num">PART 02</div>
+            <div class="guide-part-content">
+              <div class="guide-part-title">단어 브릿지</div>
+              <div class="guide-part-target">목표: <b>80% 이상</b></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="guide-section optional">
+          <div class="guide-label optional">선택 조건</div>
+          <div class="guide-row">
+            <div class="guide-part-num">PART 03</div>
+            <div class="guide-part-content">
+              <div class="guide-part-title">예문 빈칸</div>
+              <div class="guide-part-target">자유 응시 (완료 판정에 영향 없음)</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="guide-tip">
+          💡 PART 01과 PART 02 두 가지 모두 <b>80% 이상</b>이면 Lesson 완료로 표시됩니다.<br>
+          미달 시 같은 Part를 다시 도전하여 점수를 올릴 수 있어요!
+        </div>
+
+        <div class="guide-tip" style="background:#fef3c7; border-color:#fcd34d;">
+          🎉 4개 Lesson을 모두 완료하면 <b>나의 성장 리포트</b>가 열립니다.
+        </div>
+      </div>
+      <button class="btn btn-primary" onclick="hideCompletionGuide()" style="margin-top:14px;">확인</button>
+    </div>
   </div>
 
   <!-- ============ 성장 리포트 ============ -->
@@ -1474,17 +1707,26 @@ body {
 
     <div class="part-grid" style="margin-top:18px;">
       <button class="part-btn hidden" id="part-btn-3" onclick="startPart(3)">
-        <div class="label">PART 01</div>
+        <div class="part-btn-head">
+          <div class="label">PART 01</div>
+          <span class="part-status" id="part-status-3">미응시</span>
+        </div>
         <div class="title">어휘 추리력</div>
         <div class="desc">영어 문장의 의미를<br>객관식으로 추리</div>
       </button>
-      <button class="part-btn" onclick="startPart(1)">
-        <div class="label">PART 02</div>
+      <button class="part-btn" id="part-btn-1" onclick="startPart(1)">
+        <div class="part-btn-head">
+          <div class="label">PART 02</div>
+          <span class="part-status" id="part-status-1">미응시</span>
+        </div>
         <div class="title">단어 브릿지</div>
         <div class="desc">어원과 의미 힌트로<br>단어를 유추해 입력</div>
       </button>
-      <button class="part-btn" onclick="startPart(2)">
-        <div class="label">PART 03</div>
+      <button class="part-btn" id="part-btn-2" onclick="startPart(2)">
+        <div class="part-btn-head">
+          <div class="label">PART 03</div>
+          <span class="part-status" id="part-status-2">미응시 (선택)</span>
+        </div>
         <div class="title">예문 빈칸</div>
         <div class="desc">영어 예문 속<br>빈칸에 단어 채우기</div>
       </button>
@@ -2741,20 +2983,8 @@ function init() {
     if (saved) state.user = JSON.parse(saved);
   } catch(e) {}
 
-  // Build lesson grid
-  const grid = $('lesson-grid');
-  Object.entries(VOCA_DATA).forEach(([key, lesson], idx) => {
-    const btn = document.createElement('button');
-    btn.className = 'lesson-btn';
-    btn.dataset.key = key;
-    btn.innerHTML = `
-      <div class="num">LESSON ${idx+1}</div>
-      <div class="name">${esc(lesson.title.replace(/^Lesson \d+\.\s*/,''))}</div>
-      <div class="desc">${esc(lesson.description)}</div>
-    `;
-    btn.onclick = () => selectLesson(key);
-    grid.appendChild(btn);
-  });
+  // Build lesson grid (호출은 renderLessonGrid 함수에서)
+  renderLessonGrid();
 
   // Enter key for login forms
   ['login-name','login-school','login-grade'].forEach(id => {
@@ -2765,6 +2995,33 @@ function init() {
   // Default screen
   if (state.user) showHome();
   else showScreen('screen-login');
+}
+
+// Lesson 카드 렌더링 (완료 상태 뱃지 포함, 매번 호출 가능)
+function renderLessonGrid() {
+  const grid = $('lesson-grid');
+  if (!grid) return;
+  grid.innerHTML = '';
+  Object.entries(VOCA_DATA).forEach(([key, lesson], idx) => {
+    const status = checkLessonCompletion(key);
+    const badge = status.allCompleted
+      ? '<span class="lesson-badge done">✓ 완료</span>'
+      : '<span class="lesson-badge todo">미완료</span>';
+
+    const btn = document.createElement('button');
+    btn.className = 'lesson-btn' + (status.allCompleted ? ' completed' : '');
+    btn.dataset.key = key;
+    btn.innerHTML = `
+      <div class="lesson-btn-head">
+        <div class="num">LESSON ${idx+1}</div>
+        ${badge}
+      </div>
+      <div class="name">${esc(lesson.title.replace(/^Lesson \d+\.\s*/,''))}</div>
+      <div class="desc">${esc(lesson.description)}</div>
+    `;
+    btn.onclick = () => selectLesson(key);
+    grid.appendChild(btn);
+  });
 }
 
 // ======= Home (Lesson select) =======
@@ -2782,6 +3039,8 @@ function showHome() {
     <button class="logout" onclick="logoutStudent()">로그아웃</button>
   `;
   showScreen('screen-home');
+  // Lesson 카드 다시 렌더링 (완료 뱃지 업데이트)
+  renderLessonGrid();
   // 리포트 버튼 상태 업데이트 (4개 Lesson 완료 여부 체크)
   updateReportCtaState();
 }
@@ -2798,8 +3057,51 @@ function selectLesson(key) {
     if (lesson.choices && lesson.choices.length > 0) part3Btn.classList.remove('hidden');
     else part3Btn.classList.add('hidden');
   }
+  // 각 Part의 완료 상태 뱃지 업데이트
+  updatePartStatusBadges(key);
   // 강의 선택 시 먼저 개념 요약 화면으로
   showConcept();
+}
+
+// Part 상태 뱃지 업데이트 (Part 선택 화면 + 카드 외형)
+function updatePartStatusBadges(lessonKey) {
+  const status = checkLessonCompletion(lessonKey);
+  const ps = status.partStatus;
+  const threshold = status.threshold;
+
+  // part === 3 (Part 01 어휘 추리력)
+  setPartBadge('part-status-3', 'part-btn-3', ps.part01, threshold, false);
+  // part === 1 (Part 02 단어 브릿지)
+  setPartBadge('part-status-1', 'part-btn-1', ps.part02, threshold, false);
+  // part === 2 (Part 03 예문 빈칸 - 선택사항)
+  setPartBadge('part-status-2', 'part-btn-2', ps.part03, threshold, true);
+}
+
+function setPartBadge(badgeId, btnId, partInfo, threshold, isOptional) {
+  const badge = $(badgeId);
+  const btn = $(btnId);
+  if (!badge || !btn) return;
+
+  // 기존 클래스 정리
+  btn.classList.remove('part-completed', 'part-pending', 'part-failed');
+  badge.className = 'part-status';
+
+  if (!partInfo.attempted) {
+    // 미응시
+    badge.textContent = isOptional ? '미응시 (선택)' : '미응시';
+    badge.classList.add('status-todo');
+    btn.classList.add('part-pending');
+  } else if (partInfo.pass) {
+    // 80% 이상 → 완료
+    badge.textContent = `✓ 완료 (${partInfo.score}%)`;
+    badge.classList.add('status-done');
+    btn.classList.add('part-completed');
+  } else {
+    // 응시했지만 80% 미만 → 재도전 필요
+    badge.textContent = isOptional ? `${partInfo.score}% (선택)` : `${partInfo.score}% (재도전)`;
+    badge.classList.add(isOptional ? 'status-optional' : 'status-failed');
+    btn.classList.add('part-failed');
+  }
 }
 
 // ======= 개념 요약 =======
@@ -3353,11 +3655,14 @@ async function showResult() {
   }
 
   // ===== Lesson 전체 완료 추적 =====
+  // 이번 응시 전의 완료 상태를 먼저 체크
+  const prevStatus = checkLessonCompletion(state.lessonKey);
   // 각 Part의 최고 점수를 localStorage에 저장
   saveLessonPartScore(state.lessonKey, state.part, pct);
-  // Lesson 전체 완료 여부 + 평균 점수 체크
+  // Lesson 전체 완료 여부 + 평균 점수 체크 (이번 응시 후)
   const lessonStatus = checkLessonCompletion(state.lessonKey);
-  if (lessonStatus.allCompleted) {
+  // 이번 응시로 "처음" 완료된 경우에만 축하 카드 표시
+  if (lessonStatus.allCompleted && !prevStatus.allCompleted) {
     showLessonCompletionCard(state.lessonKey, lessonStatus.avgPct);
   }
 
@@ -3407,21 +3712,56 @@ function checkLessonCompletion(lessonKey) {
   const scores = getLessonScores();
   const lessonScores = scores[lessonKey] || {};
   const lesson = VOCA_DATA[lessonKey];
-  // lesson이 가진 Part 종류 (bridge, examples, choices가 있는지)
+
+  // 사용 가능한 Part 확인
   const availableParts = [];
   if (lesson.bridge && lesson.bridge.length > 0) availableParts.push(1);
   if (lesson.examples && lesson.examples.length > 0) availableParts.push(2);
   if (lesson.choices && lesson.choices.length > 0) availableParts.push(3);
-  // 모든 Part가 완료(점수 있음)되어야 allCompleted
+
+  // 완료한 Part (점수 있음)
   const completedParts = availableParts.filter(p => lessonScores[p] !== undefined);
-  const allCompleted = completedParts.length === availableParts.length;
-  // 평균 점수
+
+  // ===== 새 완료 기준 =====
+  // 필수: Part 01 (어휘 추리력, part=3) + Part 02 (단어 브릿지, part=1) 모두 80% 이상
+  // Part 03 (예문 빈칸, part=2)은 선택사항
+  const COMPLETION_THRESHOLD = 80;
+  const part01Score = lessonScores[3]; // 어휘 추리력 = state.part === 3
+  const part02Score = lessonScores[1]; // 단어 브릿지 = state.part === 1
+  const part03Score = lessonScores[2]; // 예문 빈칸 = state.part === 2 (선택)
+
+  const part01Pass = part01Score !== undefined && part01Score >= COMPLETION_THRESHOLD;
+  const part02Pass = part02Score !== undefined && part02Score >= COMPLETION_THRESHOLD;
+
+  // Lesson에 Part 01(choices)이 있는지 여부 (없으면 Part 02만으로 판정)
+  const hasPart01 = availableParts.includes(3);
+  const hasPart02 = availableParts.includes(1);
+
+  let allCompleted;
+  if (hasPart01 && hasPart02) {
+    allCompleted = part01Pass && part02Pass;
+  } else if (hasPart02) {
+    // choices가 없는 lesson은 단어 브릿지만으로 완료 판정
+    allCompleted = part02Pass;
+  } else {
+    allCompleted = false;
+  }
+
+  // 평균 점수 (Part 03 포함 모든 응시한 Part의 평균)
   let avgPct = 0;
   if (completedParts.length > 0) {
     const sum = completedParts.reduce((s, p) => s + lessonScores[p], 0);
     avgPct = Math.round(sum / completedParts.length);
   }
-  return { allCompleted, avgPct, completedParts, availableParts };
+
+  // 각 Part별 상태 (완료/미완료/미응시)
+  const partStatus = {
+    part01: { score: part01Score, pass: part01Pass, attempted: part01Score !== undefined },
+    part02: { score: part02Score, pass: part02Pass, attempted: part02Score !== undefined },
+    part03: { score: part03Score, pass: part03Score !== undefined && part03Score >= COMPLETION_THRESHOLD, attempted: part03Score !== undefined }
+  };
+
+  return { allCompleted, avgPct, completedParts, availableParts, partStatus, threshold: COMPLETION_THRESHOLD };
 }
 
 // Lesson별 향상된 능력 메시지 (사용자 결정: 레슨별 맞춤형)
@@ -3550,6 +3890,15 @@ function getAllLessonsStatus() {
   return { results, allCompleted, overallAvg, completedCount };
 }
 
+// 완료 기준 안내 모달
+function showCompletionGuide() {
+  $('completion-guide-modal').classList.remove('hidden');
+}
+function hideCompletionGuide(event) {
+  // event가 있으면 overlay 클릭임 → 직접 닫기, event 없으면 버튼 클릭
+  $('completion-guide-modal').classList.add('hidden');
+}
+
 // 홈 화면 진입 시 리포트 버튼 상태 업데이트
 function updateReportCtaState() {
   const btn = $('report-cta-btn');
@@ -3559,10 +3908,10 @@ function updateReportCtaState() {
   const { allCompleted, completedCount } = getAllLessonsStatus();
   if (allCompleted) {
     btn.disabled = false;
-    subtitle.textContent = '4개 Lesson 모두 완료! 리포트가 준비되었어요 🎉';
+    subtitle.textContent = '🎉 모든 Lesson을 완료했어요! 리포트가 준비되었습니다';
   } else {
     btn.disabled = true;
-    subtitle.textContent = `Lesson ${completedCount}/4 완료 · 모든 Part를 완료하면 열립니다`;
+    subtitle.textContent = `Lesson ${completedCount}/4 완료 · 모든 Lesson을 완료하면 열립니다`;
   }
 }
 
@@ -3597,7 +3946,7 @@ function addLearningTime(seconds) {
 function showGrowthReport() {
   const status = getAllLessonsStatus();
   if (!status.allCompleted) {
-    alert('아직 모든 Lesson을 완료하지 않았어요. 4개 Lesson의 모든 Part를 완료해주세요!');
+    alert('아직 모든 Lesson을 완료하지 않았어요. 4개 Lesson을 완료해주세요!');
     return;
   }
 
